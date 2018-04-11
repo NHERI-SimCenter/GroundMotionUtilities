@@ -43,8 +43,10 @@ An earthquake rupture can be defined as a point source, using magnitude, locatio
 7.	Mean UCERF3 FM3.2
 
 Additionally, the following site providers are used to obtain site data, if available:
+
+---
 |Site Data Provider|Site Data Types|
-|------------------|:-------------|
+|:---|:---|
 |CGS/Wills VS30 Map (2015)|`Vs30` and `Vs30 measurement type`|
 |CGS/Wills Site Classification Map (2006)|`Vs30` and `Vs30 measurement type`|
 |Global Vs30 from Topographic Slope (Wald & Allen 2008)|`Vs30` and `Vs30 measurement type`|
@@ -56,7 +58,8 @@ Additionally, the following site providers are used to obtain site data, if avai
 |SCEC Community Velocity Model Version 4, Iteration 26, Vs30|`Vs30` and `Vs30 measurement type`|
 |SCEC Community Velocity Model Version 2 Basin Depth|`Depth to Vs = 2.5 km/sec`|
 |CGS/Wills Preliminary Site Classification Map (2000)|Wills Site Class|
--------------------------
+---
+
 It has to be noted that this is an ordered list of the providers according to preference, which is the default setting in OpenSHA library. If no site data is available, then the GMPE default values are used.
 
 The inputs for the EQScenario tool is in json format, and the output can be in json format or comma separated values(csv) format. Optionally, outputs in GeoJson format can be provided as well  to facilitate visualization in GIS application, as shown in the figure.
