@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 3.0.0)
+
+project (SelectGM VERSION 0.0.1)
+
+include_directories("include")
+include_directories("../include")
+
+file(GLOB SOURCES "src/*.cpp" "src/*.c")
+                    
+add_executable(SelectGM ${SOURCES})
+
+add_custom_command(TARGET SelectGM POST_BUILD 
+                    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/examples $<TARGET_FILE_DIR:SelectGM>
+                    COMMENT "Copying examples...")

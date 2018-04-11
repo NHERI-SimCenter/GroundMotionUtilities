@@ -1,0 +1,49 @@
+{
+  "EqRupture": {
+    "Type": "PointSource",
+    "Magnitude": 7.05,
+    "Location": {
+      "Latitude": 37.9,
+      "Longitude": -122.3,
+      "Depth": 0.0
+    },
+    "AverageRake": 0.0,
+    "AverageDip": 90.0
+  },
+  "GroundMotions": [
+    {
+      "Location": {
+        "Latitude": 37.8719,
+        "Longitude": -122.2585
+      },
+      "SiteData": [
+        {
+          "Type": "Vs30",
+          "Value": 733.4,
+          "Source": "CGS/Wills VS30 Map (2015)"
+        },
+        {
+          "Type": "Vs30 Type",
+          "Value": "Inferred",
+          "Source": "CGS/Wills VS30 Map (2015)"
+        },
+        {
+          "Type": "Depth 1.0 km/sec",
+          "Value": 15000.0,
+          "Source": "SCEC CCA, Iteration 6, Basin Depth"
+        },
+        {
+          "Type": "Depth 2.5 km/sec",
+          "Value": 15.0,
+          "Source": "SCEC CCA, Iteration 6, Basin Depth"
+        }
+      ],
+      "PGA": {
+        "Mean": -0.541051677220727,
+        "TotalStdDev": 0.5728796095058123,
+        "InterEvStdDev": 0.3107509502350554,
+        "IntraEvStdDev": 0.4812742398212708
+      }
+    }
+  ]
+}

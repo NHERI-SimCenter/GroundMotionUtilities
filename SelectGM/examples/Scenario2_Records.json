@@ -1,0 +1,4379 @@
+{
+    "GroundMotions": [
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.617668410593844
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5916351738676152
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5907224040942981
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.9505074220449306
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6498352449395399
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 6.459072712953504
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.8862478916788728
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.5421205372814559
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.46396155990306
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 6.823108167855663
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.111467947702094
+        },
+        {
+            "Record": {
+                "Id": 1111,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.23160621513285324
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.43667003437639698
+        },
+        {
+            "Record": {
+                "Id": 1111,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.18977383783127356
+        },
+        {
+            "Record": {
+                "Id": 1111,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.2006754669151574
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.6940670187446883
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.32633286393449037
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5537614773083935
+        },
+        {
+            "Record": {
+                "Id": 1284,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.2458869360737877
+        },
+        {
+            "Record": {
+                "Id": 4870,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6853613835497803
+        },
+        {
+            "Record": {
+                "Id": 4086,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.3033534523519818
+        },
+        {
+            "Record": {
+                "Id": 1284,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.188682060246591
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.1185888329614896
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.3540682565230426
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.3687534592688399
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.573882136698412
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5299288748343445
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5637869272279606
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5667525659696807
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.4751865229752364
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6527054988029859
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.913256425801235
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.995299079414817
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.393736100894437
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.1181901742028069
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.0175651840965768
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.0589086147420715
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.0536545676590495
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.26494861574367337
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.191863502111318
+        },
+        {
+            "Record": {
+                "Id": 4870,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.8740459471163459
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.92830592324282
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.9231647991741255
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.8684018626435007
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.879329305647712
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.038639131108199
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.037988134225701
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.004676399022733
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.2811953978045064
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.4499807262432234
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.4780939527655999
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.45465496727243379
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6462396774462261
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.695050270957463
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.604491764432967
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.9611886281238262
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6117017454868815
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.9519193252587044
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.1373239454767832
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 9.776684761097434
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.5918628006092059
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6799309232382694
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.3668668943643407
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.29540327172679317
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5537143729768155
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.2850084079449229
+        },
+        {
+            "Record": {
+                "Id": 4086,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.4998826113700338
+        },
+        {
+            "Record": {
+                "Id": 4086,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.6115431340231245
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.6327851796099518
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.683005973965429
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.604765315812303
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.4330979257029299
+        },
+        {
+            "Record": {
+                "Id": 1284,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.6402962851226636
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.08450197771875
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.095535338081118
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.4808989499182611
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5085286998920597
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6052090408037466
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.7072053219230734
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5853354283824729
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.4931494655490629
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5735140887663792
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.634173639517572
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.491093812414156
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.675317254411025
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.250997726561281
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.28313083695497578
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5824011993704106
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.2631786153938967
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.1221013936094725
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.4161493312338985
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.28246274083889336
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.4546963843169987
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.28281427167734088
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.236226218516563
+        },
+        {
+            "Record": {
+                "Id": 231,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.8660699272006184
+        },
+        {
+            "Record": {
+                "Id": 1284,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.48374456693404
+        },
+        {
+            "Record": {
+                "Id": 8157,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.16613458957724168
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.763582490401747
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5579832913821695
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6273582421791293
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.4343924238759657
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.4794747223555747
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.4413482135835992
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5840462411539015
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.216241328445632
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6254722388102058
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.32501112866092637
+        },
+        {
+            "Record": {
+                "Id": 2661,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.116516125469591
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 7.964112521623639
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.28573836709804009
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.458394266345825
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.3221806055067132
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.4190547647078969
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.6361536315011936
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.4943436682744334
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.8739308886871389
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.8017148939793982
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5628156085503942
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.4794226555254376
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.35732212320881698
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.0290330116781369
+        },
+        {
+            "Record": {
+                "Id": 4086,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.311517578648677
+        },
+        {
+            "Record": {
+                "Id": 4086,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.557394495322624
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.545261863156161
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6226062861718821
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6791928700664017
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.4913447052074584
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.3900224605425579
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.4741132813369149
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5934398382017895
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.7913182644479603
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.34544614891761446
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.17576706026226
+        },
+        {
+            "Record": {
+                "Id": 779,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.29021204734620117
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.28444650702115
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.275208313873621
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 7.640066516144094
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.3036701641335168
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.5018224314048649
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 6.502235276740916
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.3997063911222146
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.3531643548892007
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.36297386852915877
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.0247682925269597
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.8455639222086939
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.0452275139629738
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.029725807462046
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6005591495980424
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6507746297424997
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5555041309620638
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5127740387196728
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5242263890271759
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5889046852537001
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6692310909747696
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.7324149864004205
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.3801736301899037
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.253234177605983
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 7.783346684384192
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 7.486112087928803
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.37602852617060819
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.37486362683081778
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 7.649699505913914
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 7.562165702404143
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.3986126304695035
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 7.324866939093603
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 14.984104422014497
+        },
+        {
+            "Record": {
+                "Id": 1284,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.5513520805589899
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.9837413985155045
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.1483217434498456
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.4212303918406067
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6177893364234224
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.657026484443336
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.0390545338487119
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5520119247743585
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.7251573236598155
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.7523545466258728
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.723064477741784
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.2458118440601227
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.2835009666888942
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.059256178930626
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.1831757435537254
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 6.0232584796837
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.6469723425799588
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.2860352364131252
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.578804559924694
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 8.076383615102385
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 12.416697184180985
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 9.394366840898979
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 6.596360543200676
+        },
+        {
+            "Record": {
+                "Id": 1284,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.3516170048104136
+        },
+        {
+            "Record": {
+                "Id": 779,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.18819607583138912
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.207424638338829
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.2731453975807435
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5612424224126256
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6200681795729017
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6506784148472363
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 13.246367605982215
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.1695313183382747
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.3837473747233989
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.376919011762334
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.890018380807684
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.808477331156329
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.288457195408395
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.646590912870859
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 8.335017410725876
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 6.845754251603325
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.4782629629167058
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.30295832634589878
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 7.603933328845399
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 7.192023398324419
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 10.175435078667219
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 12.576262914596441
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 9.563389525165058
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 8.891624356366068
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.4511166340028862
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 8.779305142486127
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.3596996576320028
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.4130482411406036
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.6349770331587544
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.7108708377078855
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.858534922369171
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.3406217015279385
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.5486178386663909
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.067419252772807
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.778131547159137
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 9.948777613891377
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 11.415286166652617
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 9.95222559429841
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 10.11428153141014
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 8.67330277082303
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.3784557800167577
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.30590455027542737
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.38701789670486499
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.390682135415539
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 9.351653250952685
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 9.092635397945719
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 9.906300395516747
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 6.055158519791504
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.4528844148352526
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 8.410866635203107
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.4062917543520206
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.0482924946295405
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.078340074738233
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.92903437032285
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.719813092799726
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.2728137658240978
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.067838192276214
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.0737968104904109
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.785594016402018
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 13.01781519104806
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 12.231967906339865
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 11.755264323400361
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 10.319994006002249
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.1643546347863634
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.210440326251776
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.016648330884325
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.4819479389178716
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 8.394526073181979
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 11.507879710548206
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 9.648774435151829
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.99418123712219
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.908758688516856
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.3748276699487583
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.4914540019991376
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5250441427228268
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.9866317339044315
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.091693648388418
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.8857421692208704
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.9990363405388575
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.297364343882964
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.329535443289061
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.46148714155293
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.974214247654856
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 34.84166831776871
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 13.015756717180992
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 12.969386039346821
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.3266988203945927
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.35958161818815667
+        },
+        {
+            "Record": {
+                "Id": 779,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.14418345466313457
+        },
+        {
+            "Record": {
+                "Id": 779,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.151661761587654
+        },
+        {
+            "Record": {
+                "Id": 779,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.15620537062689789
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.807991475420352
+        },
+        {
+            "Record": {
+                "Id": 1284,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.9675300884164047
+        },
+        {
+            "Record": {
+                "Id": 1284,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.4966924748484109
+        },
+        {
+            "Record": {
+                "Id": 1284,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.498282631155955
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.1433455775170526
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.9829056963330051
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.1135209313314906
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.7760613438289215
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.0620884072951539
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.9953004307379986
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.595463411915372
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.560682067442206
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 12.641413647731369
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.125753375070787
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 18.598947902266766
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 22.578499966789687
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 38.189229542263088
+        },
+        {
+            "Record": {
+                "Id": 4457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.144493969893802
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 13.086793641242327
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 12.68467473932582
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 10.339638845170246
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 8.514788495112083
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 8.10528121766888
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.337550076220541
+        },
+        {
+            "Record": {
+                "Id": 3492,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.733389857048406
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 6.297680860504766
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.4633480733808027
+        },
+        {
+            "Record": {
+                "Id": 1515,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.4210854620559788
+        },
+        {
+            "Record": {
+                "Id": 740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 6.443620655304627
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.6701738445495737
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.875109652418989
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.3443904069678975
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.757016050244291
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.372640894671693
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.3777308532917318
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.983057652718166
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.004384746513986
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.335513553384319
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 20.362078592187858
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 39.735590517521398
+        },
+        {
+            "Record": {
+                "Id": 1494,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 8.119387988497737
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 65.03645848737263
+        },
+        {
+            "Record": {
+                "Id": 779,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.6318696582934534
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.3094782418733567
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 9.662046993999765
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 9.620832543584273
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 6.335924311389567
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 9.920828100422409
+        },
+        {
+            "Record": {
+                "Id": 3492,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.6370595408647405
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.926188574825992
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 13.029524817976365
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 15.598799225245444
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 18.489921749882883
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.531098319717999
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.7028372217585248
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.846268667273129
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.296924904097097
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.6477057872893137
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.7768409677304199
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.487824436802065
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.3693346555458327
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.0555087797896649
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.338699450243518
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 34.39184742590331
+        },
+        {
+            "Record": {
+                "Id": 779,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.1821314258181964
+        },
+        {
+            "Record": {
+                "Id": 779,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.253874962888921
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.3079413739187998
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 15.981730653336083
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 10.838425559571457
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 11.69645344562131
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 12.412979177080749
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 12.060553267805594
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 7.126150418635489
+        },
+        {
+            "Record": {
+                "Id": 779,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.44058301554355308
+        },
+        {
+            "Record": {
+                "Id": 516,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.1138750893995956
+        },
+        {
+            "Record": {
+                "Id": 4870,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.0710957943109
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 16.735248014503193
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 21.167241408429498
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.9239018465075414
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.7140955440114875
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.9643951483349175
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.676558415959433
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.671308072173779
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.771273331300796
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.6899404572176989
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.128578452219284
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.31636252349654
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 31.765314000837674
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.4621859708132384
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.2241081308021984
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 18.11301789812257
+        },
+        {
+            "Record": {
+                "Id": 779,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.8524529261703633
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 12.907487125277318
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.1809312442080669
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 6.108539635682836
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 14.86951551835002
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 20.24816335128957
+        },
+        {
+            "Record": {
+                "Id": 1284,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 6.602993505241348
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 18.320575105148607
+        },
+        {
+            "Record": {
+                "Id": 1284,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 7.033647404518636
+        },
+        {
+            "Record": {
+                "Id": 516,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.846046555267665
+        },
+        {
+            "Record": {
+                "Id": 779,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.722545490312497
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.0367854036817869
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 20.014587053717447
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.5051893064521209
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.6872927239912056
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.679657904035253
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.88035557815438
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.736449015261449
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.506314260730505
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.9807030069960032
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.782016140877273
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.509522482420605
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.2683245080377437
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 20.32918389631036
+        },
+        {
+            "Record": {
+                "Id": 2661,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.397976302160843
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 16.625324570104938
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 18.480445954923107
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.9381229488853917
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.3574932395853366
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 7.012455456221915
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 8.0847087129006
+        },
+        {
+            "Record": {
+                "Id": 2661,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.547365043264087
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 11.558838598050997
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 18.213741070679263
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 21.626202170064393
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 23.5432058780789
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.5607219258893476
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.8084960905957816
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.1686764187167
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.8069906816071525
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.134112844231716
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.702868224595801
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.279935033840968
+        },
+        {
+            "Record": {
+                "Id": 779,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.8059087025263
+        },
+        {
+            "Record": {
+                "Id": 779,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.1791204207791629
+        },
+        {
+            "Record": {
+                "Id": 779,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.0577916580266103
+        },
+        {
+            "Record": {
+                "Id": 779,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.2043328880081108
+        },
+        {
+            "Record": {
+                "Id": 2661,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.6632280854765817
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 13.79363696628696
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 16.466200122660447
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 16.10502427785808
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6619243452129089
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5356518428072597
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5032978720805955
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5960751548130865
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.7412074389021839
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.887838324703845
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 14.123416998755899
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 13.743275874319778
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 14.916729630715264
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 17.55229935980214
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.053800618486063
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.744689355387024
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.866182720699831
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.2843693340002866
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.253481138588177
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 13.212760486142722
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 24.093820739315949
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.3739829952501084
+        },
+        {
+            "Record": {
+                "Id": 2643,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 27.440432177214796
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 17.30287901711643
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.9681351809836848
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.051859462547471
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.3385252168547208
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.081013965575638
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 9.417574340508665
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 15.626561951932328
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.8984923922053489
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.4300822148476705
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.220070691197692
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5775413093283893
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.284464684304238
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.128757507605838
+        },
+        {
+            "Record": {
+                "Id": 779,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.32224103658661187
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.5161012744052555
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.6865920862804044
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.069707480762504
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.618018504091242
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.99188857658767
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.870139616197116
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5276056511472863
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.7585539787781313
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.751528027136093
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.2988186023929394
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 19.609800674714128
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.7833685820693461
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.1856695846767408
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 15.183282767423192
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 9.239678259825853
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 9.638938963218634
+        },
+        {
+            "Record": {
+                "Id": 779,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.4612052514081165
+        },
+        {
+            "Record": {
+                "Id": 1284,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.9622845724876938
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.7463811325641527
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.586230298562724
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.829486080003745
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 8.458200665940483
+        },
+        {
+            "Record": {
+                "Id": 325,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 9.278675231535737
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.386204509851508
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.048680473236809
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.367449529098602
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.5691314664207298
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.183437729857361
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.024333712344028
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.083816530095448
+        },
+        {
+            "Record": {
+                "Id": 3026,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.4638865350475369
+        },
+        {
+            "Record": {
+                "Id": 3026,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.706822136112767
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.7658053965088795
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.1177290480520783
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.8759729907610496
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.7452091345162548
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.7788349694071237
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 11.556818026564207
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5479782847827547
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6745548386910623
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 11.036272409529014
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 7.578249443851573
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.4300076045415723
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.85296087187289
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 11.543643021667622
+        },
+        {
+            "Record": {
+                "Id": 1515,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.6201287374571106
+        },
+        {
+            "Record": {
+                "Id": 555,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.393807514624639
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.822900569854337
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.8940647204081384
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.8061414512388196
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.8039135356194184
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.391826347280147
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.858927146553867
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.6612488401503868
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.7946219502843379
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.7948762378717935
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.7906914855630409
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.0673504476733958
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.0504024126286378
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.8125094100347908
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.4144394533927039
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6009922753425018
+        },
+        {
+            "Record": {
+                "Id": 2740,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 13.2315084215498
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 8.092608937006906
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.6678290099794537
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5303336630658169
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5487117555349286
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.1303149447011794
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.344596597403079
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.676962992877792
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.463041525118922
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.292036808015985
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.053361219087497
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.7412306740556168
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.5639403487307839
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 6.919511014343318
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 7.617522510760895
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.680489055412028
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.147312816973989
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.1718572625267829
+        },
+        {
+            "Record": {
+                "Id": 1787,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.2660511388427292
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.09416465613951
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.3011483427517738
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5209294282047135
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5449484311936659
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.3577403264354644
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.2835118056989752
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.9275258300847678
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5116121332653928
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5220448662139203
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.4989436763187802
+        },
+        {
+            "Record": {
+                "Id": 779,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.3254292295370931
+        },
+        {
+            "Record": {
+                "Id": 295,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 10.074562042719999
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.14651794576136
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5000259586179217
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5556275832361474
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.638526148965615
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.3647072918002429
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.828777344754186
+        },
+        {
+            "Record": {
+                "Id": 2640,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 43.72960158391529
+        },
+        {
+            "Record": {
+                "Id": 2640,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 50.783360184893208
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 8.540259702209897
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.265681967214996
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.9932890156698788
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.11185393049598
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.7845306788855037
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5016464052984107
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.1201473537391389
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.054307571772237
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.8710115485718583
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.8807507247945585
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.9334152738871351
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.7737156530058405
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.9195608161305141
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5670392533108116
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5300927230622723
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 6.737505659292423
+        },
+        {
+            "Record": {
+                "Id": 3469,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 7.845876260508926
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.6124994604822632
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.695885315537483
+        },
+        {
+            "Record": {
+                "Id": 1485,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5612659608182493
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.074137794823874
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.8077616672979466
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 6.355334390289344
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 7.471443147264707
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 7.628894565102531
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.498912046236278
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.7735217815211179
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.7102006585124935
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.118636450371495
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5331272022778209
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.1968319417124516
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.8749332766063712
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.9028496352861232
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.9789753573140391
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.8659362958045697
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.7347308356303539
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.833097336126969
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.8400063919562195
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.8872487224643613
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.7730276453416805
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.5558519696541589
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.3474427568067876
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.009594554166705
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.1696556806600172
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.4819891562932034
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.406809044001618
+        },
+        {
+            "Record": {
+                "Id": 3865,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.2284222711224679
+        },
+        {
+            "Record": {
+                "Id": 1210,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.184400642024591
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.6489118849275539
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 5.301208586566286
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 4.973088280807255
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 3.8234659514046296
+        },
+        {
+            "Record": {
+                "Id": 286,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 2.806686566312647
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.2149045099773349
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.9956374665862493
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.8848580401297084
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.7772915267687506
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.8028313900135798
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.7486537167378498
+        },
+        {
+            "Record": {
+                "Id": 2457,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.5925885880381842
+        },
+        {
+            "Record": {
+                "Id": 2621,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.4987625715235698
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.701819845272888
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.7488194466695797
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.4390569149622199
+        },
+        {
+            "Record": {
+                "Id": 3747,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 0.8318146187558728
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.7104361668691482
+        },
+        {
+            "Record": {
+                "Id": 1166,
+                "Source": "NGA West 2"
+            },
+            "ScaleFactor": 1.482469258945783
+        }
+    ]
+}

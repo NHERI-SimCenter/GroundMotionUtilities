@@ -1,0 +1,43 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "SelectGM",
+            "type": "cppdbg",
+            "request": "launch",
+            "targetArchitecture": "x64",
+            "program": "${workspaceRoot}/build/SelectGM/SelectGM",
+            "args": ["GMSelection.json", "Scenario2_Records.json"],
+            "stopAtEntry": true,
+            "cwd": "${workspaceRoot}/build/SelectGM",
+            "environment": [],
+            "externalConsole": true,
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "SimulateGM",
+            "type": "cppdbg",
+            "request": "launch",
+            "targetArchitecture": "x64",
+            "program": "${workspaceRoot}/build/SimulateGM/SimulateGM",
+            "args": ["SimGMConfig.json", "Scenario2_Sim.json"],
+            "stopAtEntry": true,
+            "cwd": "${workspaceRoot}/build/SimulateGM",
+            "environment": [],
+            "externalConsole": true,
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}

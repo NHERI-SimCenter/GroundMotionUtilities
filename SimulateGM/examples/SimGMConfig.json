@@ -1,0 +1,7 @@
+{
+    "GroundMotions":{
+        "File":"Scenario2_SA.json"
+    },
+    "NumSimulations": 1,
+    "SpatialCorrelation": true
+}

@@ -1,0 +1,219 @@
+{
+  "variant": {
+    "label": "Release",
+    "keywordSettings": {
+      "buildType": "release"
+    },
+    "description": "Enable optimizations, omit debug info"
+  },
+  "activeEnvironments": [],
+  "codeModel": {
+    "configurations": [
+      {
+        "name": "Release",
+        "projects": [
+          {
+            "buildDirectory": "/home/elhaddad/SourceTree/SHA/build",
+            "name": "Project",
+            "sourceDirectory": "/home/elhaddad/SourceTree/SHA",
+            "targets": [
+              {
+                "artifacts": [
+                  "/home/elhaddad/SourceTree/SHA/build/SelectGM/SelectGM"
+                ],
+                "buildDirectory": "/home/elhaddad/SourceTree/SHA/build/SelectGM",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-O3 -DNDEBUG  ",
+                    "includePath": [
+                      {
+                        "path": "/home/elhaddad/SourceTree/SHA/SelectGM/include"
+                      },
+                      {
+                        "path": "/home/elhaddad/SourceTree/SHA/SelectGM/../include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "C",
+                    "sources": [
+                      "src/csvparser.c"
+                    ]
+                  },
+                  {
+                    "compileFlags": "-O3 -DNDEBUG  ",
+                    "includePath": [
+                      {
+                        "path": "/home/elhaddad/SourceTree/SHA/SelectGM/include"
+                      },
+                      {
+                        "path": "/home/elhaddad/SourceTree/SHA/SelectGM/../include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "src/DiscretizedFunction.cpp",
+                      "src/GMRecord.cpp",
+                      "src/GMSelector.cpp",
+                      "src/Point.cpp",
+                      "src/Range.cpp",
+                      "src/SelectGM.cpp",
+                      "src/SelectionConfig.cpp",
+                      "src/SelectionCriteria.cpp",
+                      "src/SelectionResult.cpp",
+                      "src/SelectionTarget.cpp"
+                    ]
+                  }
+                ],
+                "fullName": "SelectGM",
+                "linkFlags": "-rdynamic",
+                "linkLanguageFlags": "-O3 -DNDEBUG",
+                "linkerLanguage": "CXX",
+                "name": "SelectGM",
+                "sourceDirectory": "/home/elhaddad/SourceTree/SHA/SelectGM",
+                "type": "EXECUTABLE"
+              },
+              {
+                "artifacts": [
+                  "/home/elhaddad/SourceTree/SHA/build/SimulateGM/SimulateGM"
+                ],
+                "buildDirectory": "/home/elhaddad/SourceTree/SHA/build/SimulateGM",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-O3 -DNDEBUG  ",
+                    "includePath": [
+                      {
+                        "path": "/home/elhaddad/SourceTree/SHA/SimulateGM/include"
+                      },
+                      {
+                        "path": "/home/elhaddad/SourceTree/SHA/SimulateGM/../include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "src/GMSimulator.cpp",
+                      "src/SimulateGM.cpp"
+                    ]
+                  }
+                ],
+                "fullName": "SimulateGM",
+                "linkFlags": "-rdynamic",
+                "linkLanguageFlags": "-O3 -DNDEBUG",
+                "linkerLanguage": "CXX",
+                "name": "SimulateGM",
+                "sourceDirectory": "/home/elhaddad/SourceTree/SHA/SimulateGM",
+                "type": "EXECUTABLE"
+              }
+            ]
+          },
+          {
+            "buildDirectory": "/home/elhaddad/SourceTree/SHA/build/SelectGM",
+            "name": "SelectGM",
+            "sourceDirectory": "/home/elhaddad/SourceTree/SHA/SelectGM",
+            "targets": [
+              {
+                "artifacts": [
+                  "/home/elhaddad/SourceTree/SHA/build/SelectGM/SelectGM"
+                ],
+                "buildDirectory": "/home/elhaddad/SourceTree/SHA/build/SelectGM",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-O3 -DNDEBUG  ",
+                    "includePath": [
+                      {
+                        "path": "/home/elhaddad/SourceTree/SHA/SelectGM/include"
+                      },
+                      {
+                        "path": "/home/elhaddad/SourceTree/SHA/SelectGM/../include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "C",
+                    "sources": [
+                      "src/csvparser.c"
+                    ]
+                  },
+                  {
+                    "compileFlags": "-O3 -DNDEBUG  ",
+                    "includePath": [
+                      {
+                        "path": "/home/elhaddad/SourceTree/SHA/SelectGM/include"
+                      },
+                      {
+                        "path": "/home/elhaddad/SourceTree/SHA/SelectGM/../include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "src/DiscretizedFunction.cpp",
+                      "src/GMRecord.cpp",
+                      "src/GMSelector.cpp",
+                      "src/Point.cpp",
+                      "src/Range.cpp",
+                      "src/SelectGM.cpp",
+                      "src/SelectionConfig.cpp",
+                      "src/SelectionCriteria.cpp",
+                      "src/SelectionResult.cpp",
+                      "src/SelectionTarget.cpp"
+                    ]
+                  }
+                ],
+                "fullName": "SelectGM",
+                "linkFlags": "-rdynamic",
+                "linkLanguageFlags": "-O3 -DNDEBUG",
+                "linkerLanguage": "CXX",
+                "name": "SelectGM",
+                "sourceDirectory": "/home/elhaddad/SourceTree/SHA/SelectGM",
+                "type": "EXECUTABLE"
+              }
+            ]
+          },
+          {
+            "buildDirectory": "/home/elhaddad/SourceTree/SHA/build/SimulateGM",
+            "name": "SimulateGM",
+            "sourceDirectory": "/home/elhaddad/SourceTree/SHA/SimulateGM",
+            "targets": [
+              {
+                "artifacts": [
+                  "/home/elhaddad/SourceTree/SHA/build/SimulateGM/SimulateGM"
+                ],
+                "buildDirectory": "/home/elhaddad/SourceTree/SHA/build/SimulateGM",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-O3 -DNDEBUG  ",
+                    "includePath": [
+                      {
+                        "path": "/home/elhaddad/SourceTree/SHA/SimulateGM/include"
+                      },
+                      {
+                        "path": "/home/elhaddad/SourceTree/SHA/SimulateGM/../include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "src/GMSimulator.cpp",
+                      "src/SimulateGM.cpp"
+                    ]
+                  }
+                ],
+                "fullName": "SimulateGM",
+                "linkFlags": "-rdynamic",
+                "linkLanguageFlags": "-O3 -DNDEBUG",
+                "linkerLanguage": "CXX",
+                "name": "SimulateGM",
+                "sourceDirectory": "/home/elhaddad/SourceTree/SHA/SimulateGM",
+                "type": "EXECUTABLE"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "cookie": "0.7838082822527412",
+    "inReplyTo": "codemodel",
+    "type": "reply"
+  }
+}

@@ -1,0 +1,34 @@
+{
+	"Site": {
+		"Type": "Grid",
+		"Grid": {
+			"Latitude": {
+				"Min": 37.0,
+				"Max": 38.2,
+				"Divisions": 25
+			},
+			"Longitude": {
+				"Min": -122.6,
+				"Max": -121.9,
+				"Divisions": 25
+			}
+		}
+	},
+	"EqRupture": {
+		"Type": "ERF",
+		"RuptureForecast": "WGCEP (2007) UCERF2 - Single Branch",
+		"SourceIndex": 28,
+		"RuptureIndex": 7
+	},
+	"GMPE": {
+		"Type": "Boore, Stewart, Seyhan & Atkinson (2014)",
+		"Parameters": {}
+	},
+	"IntensityMeasure": {
+		"Type": "SA",
+		"Periods": [0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0],
+		"EnableJsonOutput": true,
+		"EnableCsvOutput": false,
+		"EnableGeoJsonOutput": true
+	}
+}

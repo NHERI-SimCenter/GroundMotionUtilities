@@ -1,0 +1,22 @@
+{
+  "Type": "FeatureCollection",
+  "Features": [
+    {
+      "Type": "Feature",
+      "Geometry": {
+        "Type": "Point",
+        "Coordinates": [
+          -122.2585,
+          37.8719
+        ]
+      },
+      "Properties": {
+        "Vs30": 733.4,
+        "Vs30 Type": "Inferred",
+        "MeanPGA": -0.541051677220727,
+        "Depth 2.5 km/sec": 15.0,
+        "Depth 1.0 km/sec": 15000.0
+      }
+    }
+  ]
+}
