@@ -8,7 +8,7 @@ class Location : public QObject
     Q_OBJECT
 public:
     explicit Location(QObject *parent = nullptr);
-    Location(double longitude, double latitude, QObject *parent = nullptr);
+    Location(double latitude, double longitude, QObject *parent = nullptr);
     Location(const Location& location);
 
     double latitude() const;

@@ -23,6 +23,13 @@ bool GMPE::setType(const QString &type)
     return false;
 }
 
+QJsonObject GMPE::getJson()
+{
+    QJsonObject gmpe;
+    gmpe.insert("Type", m_type);
+    return gmpe;
+}
+
 const QStringList &GMPE::validTypes()
 {
     static QStringList validTypes = QStringList()

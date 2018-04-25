@@ -35,7 +35,10 @@ SOURCES += \
     SiteWidget.cpp \
     RuptureWidget.cpp \
     GMPEWidget.cpp \
-    IntensityMeasureWidget.cpp
+    IntensityMeasureWidget.cpp \
+    RecordSelectionConfig.cpp \
+    RecordSelectionWidget.cpp \
+    ScenarioProcessor.cpp
 
 HEADERS += \
         GMWidget.h \
@@ -48,7 +51,11 @@ HEADERS += \
     SiteWidget.h \
     RuptureWidget.h \
     GMPEWidget.h \
-    IntensityMeasureWidget.h
+    IntensityMeasureWidget.h \
+    JsonSerializable.h \
+    RecordSelectionConfig.h \
+    RecordSelectionWidget.h \
+    ScenarioProcessor.h
 
 FORMS += \
         GMWidget.ui

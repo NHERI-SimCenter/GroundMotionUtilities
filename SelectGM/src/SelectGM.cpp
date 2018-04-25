@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <ctime>
 #include "shacommon.h"
 #include "GMSelector.h"
 #include "SelectionConfig.h"

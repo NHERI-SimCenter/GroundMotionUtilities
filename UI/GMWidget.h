@@ -6,6 +6,8 @@
 #include "RuptureWidget.h"
 #include "GMPEWidget.h"
 #include "IntensityMeasureWidget.h"
+#include "RecordSelectionWidget.h"
+#include "ScenarioProcessor.h"
 
 namespace Ui {
 class GMWidget;
@@ -29,6 +31,9 @@ private:
     GMPEWidget* m_gmpeWidget;
     IntensityMeasure* m_intensityMeasure;
     IntensityMeasureWidget* m_intensityMeasureWidget;
+    RecordSelectionConfig* m_selectionconfig;
+    RecordSelectionWidget* m_selectionWidget;
+    ScenarioProcessor* m_scenarioProcessor;
 };
 
 #endif // GMWIDGET_H

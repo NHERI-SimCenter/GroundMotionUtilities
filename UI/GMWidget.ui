@@ -475,6 +475,14 @@
          <height>16777215</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <italic>false</italic>
+        </font>
+       </property>
+       <property name="modelColumn">
+        <number>0</number>
+       </property>
       </widget>
      </item>
     </layout>

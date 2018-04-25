@@ -2,8 +2,9 @@
 #define INTENSITYMEASURE_H
 
 #include <QObject>
+#include "JsonSerializable.h"
 
-class IntensityMeasure : public QObject
+class IntensityMeasure : public QObject, JsonSerializable
 {
     Q_OBJECT
 public:
@@ -26,6 +27,10 @@ public slots:
 private:
     QString m_type;
     QList<double> m_periods;
+
+    // JsonSerializable interface
+public:
+    QJsonObject getJson();
 };
 
 #endif // INTENSITYMEASURE_H

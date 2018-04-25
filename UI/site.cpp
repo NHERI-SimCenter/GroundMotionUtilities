@@ -19,3 +19,16 @@ Location &Site::location()
 {
     return this->m_location;
 }
+
+QJsonObject Site::getJson()
+{
+    QJsonObject siteJson;
+    siteJson.insert("Type","SingleLocation");
+    QJsonObject locationJson;
+
+    locationJson.insert("Latitude", this->location().latitude());
+    locationJson.insert("Longitude", this->location().longitude());
+    siteJson.insert("Location", locationJson);
+
+    return siteJson;
+}

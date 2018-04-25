@@ -3,17 +3,17 @@
 IntensityMeasureWidget::IntensityMeasureWidget(IntensityMeasure &im, QWidget *parent): QWidget(parent), m_intensityMeasure(im)
 {
     QGridLayout* layout = new QGridLayout();
-    QGroupBox* gmpeGroupBox = new QGroupBox(this);
-    gmpeGroupBox->setTitle("Ground Motion Prediction Equation");
-    gmpeGroupBox->setStyleSheet("QGroupBox { font-weight: bold; }");
+    QGroupBox* imGroupBox = new QGroupBox(this);
+    imGroupBox->setTitle("Intensity Measure");
+    imGroupBox->setStyleSheet("QGroupBox { font-weight: bold; }");
 
     QFormLayout* formLayout = new QFormLayout();
     m_typeBox = new QComboBox(this);
 
     formLayout->addRow(tr("Type:"), this->m_typeBox);
-    gmpeGroupBox->setLayout(formLayout);
+    imGroupBox->setLayout(formLayout);
 
-    layout->addWidget(gmpeGroupBox);
+    layout->addWidget(imGroupBox);
     this->setLayout(layout);
 
     const QStringList validType = this->m_intensityMeasure.validTypes();

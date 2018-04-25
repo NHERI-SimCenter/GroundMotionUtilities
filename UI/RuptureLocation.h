@@ -9,7 +9,7 @@ class RuptureLocation : public Location
 
 public:
     RuptureLocation(QObject *parent = nullptr);
-    RuptureLocation(double longitude, double latitude, QObject *parent = nullptr);
+    RuptureLocation(double latitude, double longitude, QObject *parent = nullptr);
 
     double depth() const;
 

@@ -1,4 +1,5 @@
 #include <QtAlgorithms>
+#include <QJsonArray>
 #include "IntensityMeasure.h"
 
 IntensityMeasure::IntensityMeasure(QObject *parent) : QObject(parent)
@@ -21,6 +22,23 @@ bool IntensityMeasure::setType(const QString &type)
         return true;
     }
     return false;
+}
+
+QJsonObject IntensityMeasure::getJson()
+{
+    QJsonObject im;
+    im.insert("Type", m_type);
+    if(m_type == "SA")
+    {
+        QJsonArray periods;
+        foreach(double period, m_periods)
+            periods.append(period);
+        im.insert("Periods", periods);
+    }
+    im.insert("EnableJsonOutput", true);
+    im.insert("EnableGeoJsonOutput", true);
+
+    return im;
 }
 
 const QStringList &IntensityMeasure::validTypes()

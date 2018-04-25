@@ -4,6 +4,7 @@
 #include <fstream>
 #include <math.h>
 #include <random>
+#include <ctime>
 #include "rapidjson/document.h"
 #include "rapidjson/istreamwrapper.h"
 #include "rapidjson/ostreamwrapper.h"

@@ -7,9 +7,9 @@ RuptureLocation::RuptureLocation(QObject *parent):Location(parent)
 
 }
 
-RuptureLocation::RuptureLocation(double longitude, double latitude, QObject *parent):Location(latitude, longitude, parent)
+RuptureLocation::RuptureLocation(double latitude, double longitude, QObject *parent):Location(latitude, longitude, parent)
 {
-
+    m_depth = 0.0;
 }
 
 double RuptureLocation::depth() const

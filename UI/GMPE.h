@@ -2,8 +2,9 @@
 #define GMPE_H
 
 #include <QObject>
+#include <JsonSerializable.h>
 
-class GMPE : public QObject
+class GMPE : public QObject, JsonSerializable
 {
     Q_OBJECT
 public:
@@ -20,6 +21,10 @@ public slots:
 
 private:
     QString m_type;
+
+    // JsonSerializable interface
+public:
+    QJsonObject getJson();
 };
 
 #endif // GMPE_H

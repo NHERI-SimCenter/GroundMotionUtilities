@@ -3,8 +3,9 @@
 
 #include <QObject>
 #include "RuptureLocation.h"
+#include "JsonSerializable.h"
 
-class PointSourceRupture : public QObject
+class PointSourceRupture : public QObject, JsonSerializable
 {
     Q_OBJECT
 public:
@@ -31,6 +32,10 @@ private:
     double m_averageRake;
     double m_averageDip;
     RuptureLocation m_location;
+
+    // JsonSerializable interface
+public:
+    QJsonObject getJson();
 };
 
 #endif // POINTSOURCERUPTURE_H
