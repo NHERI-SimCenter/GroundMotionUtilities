@@ -6,6 +6,9 @@
 class Location : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(double latitude READ latitude WRITE setLatitude NOTIFY latitudeChanged)
+    Q_PROPERTY(double longitude READ longitude WRITE setLongitude NOTIFY longitudeChanged)
+
 public:
     explicit Location(QObject *parent = nullptr);
     Location(double latitude, double longitude, QObject *parent = nullptr);

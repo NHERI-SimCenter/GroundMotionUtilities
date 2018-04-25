@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ScenarioMap.qml</file>
+        <file>SiteMarker.qml</file>
+        <file>PointRuptureMarker.qml</file>
+    </qresource>
+</RCC>

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui qml quick quickcontrols2
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -57,5 +57,7 @@ HEADERS += \
     RecordSelectionWidget.h \
     ScenarioProcessor.h
 
-FORMS += \
-        GMWidget.ui
+FORMS +=
+
+RESOURCES += \
+    qml.qrc
