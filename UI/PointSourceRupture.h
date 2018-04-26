@@ -8,7 +8,7 @@
 class PointSourceRupture : public QObject, JsonSerializable
 {
     Q_OBJECT
-    Q_PROPERTY(Location* location READ getLocationPtr)
+    Q_PROPERTY(Location* location READ getLocationPtr CONSTANT)
 
 public:
     PointSourceRupture(double magnitude, const RuptureLocation& location, double averageRake, double averageDip, QObject *parent = nullptr);

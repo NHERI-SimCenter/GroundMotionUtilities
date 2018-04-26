@@ -38,7 +38,8 @@ SOURCES += \
     IntensityMeasureWidget.cpp \
     RecordSelectionConfig.cpp \
     RecordSelectionWidget.cpp \
-    ScenarioProcessor.cpp
+    ScenarioProcessor.cpp \
+    SiteResult.cpp
 
 HEADERS += \
         GMWidget.h \
@@ -55,7 +56,8 @@ HEADERS += \
     JsonSerializable.h \
     RecordSelectionConfig.h \
     RecordSelectionWidget.h \
-    ScenarioProcessor.h
+    ScenarioProcessor.h \
+    SiteResult.h
 
 FORMS +=
 

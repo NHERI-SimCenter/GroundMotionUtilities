@@ -6,7 +6,7 @@ RuptureWidget::RuptureWidget(PointSourceRupture& rupture, QWidget *parent) : QWi
     QGridLayout* layout = new QGridLayout(this);
 
     this->m_siteGroupBox = new QGroupBox(tr("Earthquake Rupture"));
-    this->m_siteGroupBox->setStyleSheet("QGroupBox { font-weight: bold; }");
+    this->m_siteGroupBox->setStyleSheet("QGroupBox {font-weight: bold;font-size: 10pt; qproperty-flat: true;}");
 
     this->m_magnitudeBox = new QDoubleSpinBox(this->m_siteGroupBox);
     this->m_magnitudeBox->setRange(0.0, 12.0);

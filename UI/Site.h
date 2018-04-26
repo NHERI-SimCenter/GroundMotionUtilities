@@ -9,7 +9,7 @@
 class Site : public QObject, public JsonSerializable
 {
     Q_OBJECT
-    Q_PROPERTY(Location* location READ getLocationPtr)
+    Q_PROPERTY(Location* location READ getLocationPtr CONSTANT)
 
 public:
     explicit Site(QObject *parent = nullptr);

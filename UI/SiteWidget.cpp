@@ -6,18 +6,13 @@ SiteWidget::SiteWidget(Site& site, QWidget *parent) : QWidget(parent), m_site(si
     //We use a grid layout for the site widget
     QGridLayout* layout = new QGridLayout(this);
 
-    QFont boldFont;
-    boldFont.setBold(true);
-    QFont regularFont;
-    regularFont.setBold(false);
-
     this->m_siteGroupBox = new QGroupBox(tr("Site"));
-    this->m_siteGroupBox->setFont(boldFont);
     this->m_siteGroupBox->setGeometry(0, 0, 100, 50);
+    this->m_siteGroupBox->setStyleSheet("QGroupBox {font-weight: bold;font-size: 10pt; qproperty-flat: true;}");
 
     this->m_locationGroupBox = new QGroupBox(tr("Location"));
     this->m_locationGroupBox->setFlat(true);
-    this->m_locationGroupBox->setFont(regularFont);
+    this->m_locationGroupBox->setStyleSheet("QGroupBox { font-weight: normal;}");
 
     QVBoxLayout* locationLayout = new QVBoxLayout(this->m_locationGroupBox);
     this->m_latitudeBox = new QDoubleSpinBox(this->m_locationGroupBox);

@@ -6,8 +6,11 @@ import QtQml 2.2
 
 MapQuickItem {
 
+    anchorPoint.x: ruptureMarkerRect.width/2
+    anchorPoint.y: ruptureMarkerRect.height/2
+
     sourceItem: Rectangle {
-        id:markerRect
+        id:ruptureMarkerRect
         width:40
         height:40
         radius: width/2
@@ -22,6 +25,7 @@ MapQuickItem {
         {
             property bool hovered: false
             anchors.fill: parent
+            anchors.centerIn: parent
 
             ToolTip.visible: hovered
 
@@ -32,6 +36,20 @@ MapQuickItem {
             onEntered: hovered = true
             onExited: hovered = false
             hoverEnabled: true
+
+            drag.target: ruptureMarkerRect
+            cursorShape: pressed ? "ClosedHandCursor": "OpenHandCursor";
+
+
+            onPositionChanged: {
+
+                 if(drag.active)
+                 {
+                     var newCoordinate = map.toCoordinate(mapToItem(map, mouse.x+ width/2, mouse.y+height/2), false);
+                     rupture.location.setLatitude(newCoordinate.latitude)
+                     rupture.location.setLongitude(newCoordinate.longitude)
+                 }
+            }
         }
 
 

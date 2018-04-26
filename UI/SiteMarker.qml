@@ -1,10 +1,12 @@
-import QtQuick 2.0
+import QtQuick 2.7
 import QtLocation 5.6
 import QtPositioning 5.6
 import QtQuick.Controls 2.2
 
 MapQuickItem {
     id: siteMarker
+    anchorPoint.x: markerRect.width/2
+    anchorPoint.y: markerRect.height/2
 
     sourceItem: Rectangle {
         id:markerRect
@@ -24,7 +26,7 @@ MapQuickItem {
         {
             property bool hovered: false
             anchors.fill: parent
-
+            anchors.centerIn: parent
             ToolTip.visible: hovered
 
             ToolTip.text:  String(qsTr("Site\nLatitude: %1\nLongitude: %2")).arg(site.location.latitude).arg(site.location.longitude)
@@ -33,6 +35,19 @@ MapQuickItem {
             onEntered: hovered = true
             onExited: hovered = false
             hoverEnabled: true
+            drag.target: markerRect
+            cursorShape: pressed ? "ClosedHandCursor": "OpenHandCursor";
+
+
+            onPositionChanged: {
+
+                 if(drag.active)
+                 {
+                     var newCoordinate = map.toCoordinate(mapToItem(map, mouse.x+ width/2, mouse.y+height/2), false);
+                     site.location.setLatitude(newCoordinate.latitude)
+                     site.location.setLongitude(newCoordinate.longitude)
+                 }
+            }
         }
     }
 

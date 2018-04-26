@@ -8,7 +8,7 @@ Rectangle
     id:scenarioMap
     visible: true
     anchors.fill: parent
-    border.color: black
+    border.color: "black"
     border.width: 2
 
     Plugin {
@@ -17,13 +17,14 @@ Rectangle
         // specify plugin parameters if necessary
          PluginParameter { name: "osm.mapping.providersrepository.disabled";value: true}
          PluginParameter { name: "osm.mapping.highdpi_tiles";value: true}
-         PluginParameter { name: "osm.mapping.host";value: "https://maps.wikimedia.org/osm-intl/"}
+         PluginParameter { name: "osm.mapping.host";value: "https://tiles.basemaps.cartocdn.com/rastertiles/voyager/"}
          PluginParameter { name: "osm.useragent"; value: "Simcenter" }
 
 
     }
 
     Map {
+        id:map
         plugin: mapPlugin
         anchors.fill: parent
         width: 800
