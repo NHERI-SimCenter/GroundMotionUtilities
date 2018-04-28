@@ -10,7 +10,8 @@ RecordSelectionWidget::RecordSelectionWidget(RecordSelectionConfig& selectionCon
     QFormLayout* formLayout = new QFormLayout();
     m_dbBox = new QComboBox(this);
     formLayout->addRow(tr("Database:"), this->m_dbBox);
-    m_dbBox->addItem("NGA West 2", RecordSelectionConfig::RecordDb::NGAWest2);
+    m_dbBox->addItem("PEER NGA West 2", RecordSelectionConfig::RecordDb::NGAWest2);
+    m_dbBox->addItem("PEER NGA West 2 Subset (1000 records)", RecordSelectionConfig::RecordDb::NGAWest2Subset1000);
 
     m_dbBox->setCurrentIndex(m_dbBox->findData(this->m_selectionConfig.database()));
 

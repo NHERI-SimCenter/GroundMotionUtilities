@@ -2,7 +2,7 @@
 
 RecordSelectionConfig::RecordSelectionConfig(QObject *parent) : QObject(parent)
 {
-    this->m_database = RecordDb::NGAWest2;
+    this->m_database = RecordDb::NGAWest2Subset1000;
     this->m_error = ErrorMetric::RMSE;
 }
 

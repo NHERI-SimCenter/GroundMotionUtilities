@@ -1,6 +1,7 @@
 #include "RuptureWidget.h"
+#include "HBoxFormLayout.h"
 
-RuptureWidget::RuptureWidget(PointSourceRupture& rupture, QWidget *parent) : QWidget(parent), m_eqRupture(rupture)
+RuptureWidget::RuptureWidget(PointSourceRupture& rupture, QWidget *parent, Qt::Orientation orientation) : QWidget(parent), m_eqRupture(rupture)
 {
     //We use a grid layout for the Rupture widget
     QGridLayout* layout = new QGridLayout(this);
@@ -16,8 +17,10 @@ RuptureWidget::RuptureWidget(PointSourceRupture& rupture, QWidget *parent) : QWi
     QVBoxLayout* siteBoxLayout = new QVBoxLayout(this->m_siteGroupBox);
     QFormLayout* magnitudeFormLayout = new QFormLayout();
     magnitudeFormLayout->addRow(tr("Magnitude:"), this->m_magnitudeBox);
-
-
+    if(orientation == Qt::Horizontal)
+    {
+        magnitudeFormLayout->setFieldGrowthPolicy(QFormLayout::FieldsStayAtSizeHint);
+    }
     this->m_locationGroupBox = new QGroupBox(tr("Location"));
     this->m_locationGroupBox->setFlat(true);
     this->m_locationGroupBox->setStyleSheet("QGroupBox { font-weight: normal; }");
@@ -38,11 +41,22 @@ RuptureWidget::RuptureWidget(PointSourceRupture& rupture, QWidget *parent) : QWi
     this->m_depthBox->setDecimals(3);
     this->m_depthBox->setSingleStep(0.001);
 
-    QFormLayout* locationFormLayout = new QFormLayout();
-    locationFormLayout->addRow(tr("Latitude:"), this->m_latitudeBox);
-    locationFormLayout->addRow(tr("Longitude:"), this->m_longitudeBox);
-    locationFormLayout->addRow(tr("Depth:"), this->m_depthBox);
-    locationLayout->addLayout(locationFormLayout);
+    if(orientation == Qt::Horizontal)
+    {
+        HBoxFormLayout* locationFormLayout = new HBoxFormLayout();
+        locationFormLayout->addField(tr("Latitude:"), this->m_latitudeBox);
+        locationFormLayout->addField(tr("Longitude:"), this->m_longitudeBox);
+        locationFormLayout->addField(tr("Depth:"), this->m_depthBox);
+        locationLayout->addLayout(locationFormLayout);
+    }
+    else
+    {
+        QFormLayout* locationFormLayout = new QFormLayout();
+        locationFormLayout->addRow(tr("Latitude:"), this->m_latitudeBox);
+        locationFormLayout->addRow(tr("Longitude:"), this->m_longitudeBox);
+        locationFormLayout->addRow(tr("Depth:"), this->m_depthBox);
+        locationLayout->addLayout(locationFormLayout);
+    }
 
 
     this->m_geometryGroupBox = new QGroupBox(tr("Geometry"));
@@ -61,10 +75,20 @@ RuptureWidget::RuptureWidget(PointSourceRupture& rupture, QWidget *parent) : QWi
     this->m_rakeBox->setSingleStep(0.01);
 
 
-    QFormLayout* geometryFormLayout = new QFormLayout();
-    geometryFormLayout->addRow(tr("Average Dip:"), this->m_dipBox);
-    geometryFormLayout->addRow(tr("Average Rake:"), this->m_rakeBox);
-    geometryLayout->addLayout(geometryFormLayout);
+    if(orientation == Qt::Horizontal)
+    {
+        HBoxFormLayout* geometryFormLayout = new HBoxFormLayout();
+        geometryFormLayout->addField(tr("Average Dip:"), this->m_dipBox);
+        geometryFormLayout->addField(tr("Average Rake:"), this->m_rakeBox);
+        geometryLayout->addLayout(geometryFormLayout);
+    }
+    else
+    {
+        QFormLayout* geometryFormLayout = new QFormLayout();
+        geometryFormLayout->addRow(tr("Average Dip:"), this->m_dipBox);
+        geometryFormLayout->addRow(tr("Average Rake:"), this->m_rakeBox);
+        geometryLayout->addLayout(geometryFormLayout);
+    }
 
     siteBoxLayout->addLayout(magnitudeFormLayout);
     siteBoxLayout->addWidget(this->m_locationGroupBox);

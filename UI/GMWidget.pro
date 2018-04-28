@@ -39,7 +39,8 @@ SOURCES += \
     RecordSelectionConfig.cpp \
     RecordSelectionWidget.cpp \
     ScenarioProcessor.cpp \
-    SiteResult.cpp
+    SiteResult.cpp \
+    HBoxFormLayout.cpp
 
 HEADERS += \
         GMWidget.h \
@@ -57,9 +58,11 @@ HEADERS += \
     RecordSelectionConfig.h \
     RecordSelectionWidget.h \
     ScenarioProcessor.h \
-    SiteResult.h
+    SiteResult.h \
+    HBoxFormLayout.h
 
 FORMS +=
 
 RESOURCES += \
-    qml.qrc
+    qml.qrc \
+    ui.qrc

@@ -9,7 +9,7 @@ class RecordSelectionConfig : public QObject
 
 public:
     explicit RecordSelectionConfig(QObject *parent = nullptr);
-    enum RecordDb {NGAWest2 = 0};
+    enum RecordDb {NGAWest2 = 0, NGAWest2Subset1000};
     Q_ENUM(RecordDb)
 
     enum ErrorMetric {AbsSum = 0, RMSE = 1, MSE = 2, MAPE = 3};

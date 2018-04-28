@@ -9,7 +9,7 @@ class RuptureWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit RuptureWidget(PointSourceRupture& rupture, QWidget *parent = nullptr);
+    explicit RuptureWidget(PointSourceRupture& rupture, QWidget *parent = nullptr, Qt::Orientation orientation = Qt::Horizontal);
 
 signals:
 

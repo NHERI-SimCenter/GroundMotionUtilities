@@ -1,7 +1,8 @@
 #include <QtWidgets>
 #include "SiteWidget.h"
+#include "HBoxFormLayout.h"
 
-SiteWidget::SiteWidget(Site& site, QWidget *parent) : QWidget(parent), m_site(site)
+SiteWidget::SiteWidget(Site& site, QWidget *parent, Qt::Orientation orientation) : QWidget(parent), m_site(site)
 {
     //We use a grid layout for the site widget
     QGridLayout* layout = new QGridLayout(this);
@@ -27,11 +28,22 @@ SiteWidget::SiteWidget(Site& site, QWidget *parent) : QWidget(parent), m_site(si
     this->m_longitudeBox->setSingleStep(0.001);
     this->m_longitudeBox->setValue(this->m_site.location().longitude());
 
-    QFormLayout* formLayout = new QFormLayout();
 
-    formLayout->addRow(tr("Latitude:"), this->m_latitudeBox);
-    formLayout->addRow(tr("Longitude:"), this->m_longitudeBox);
-    locationLayout->addLayout(formLayout);
+
+    if(orientation == Qt::Horizontal)
+    {
+        HBoxFormLayout* formLayout = new HBoxFormLayout();
+        formLayout->addField(tr("Latitude:"), this->m_latitudeBox);
+        formLayout->addField(tr("Longitude:"), this->m_longitudeBox);
+        locationLayout->addLayout(formLayout);
+    }
+    else
+    {
+        QFormLayout* formLayout = new QFormLayout();
+        formLayout->addRow(tr("Latitude:"), this->m_latitudeBox);
+        formLayout->addRow(tr("Longitude:"), this->m_longitudeBox);
+        locationLayout->addLayout(formLayout);
+    }
 
     QVBoxLayout* siteBoxLayout = new QVBoxLayout(this->m_siteGroupBox);
     siteBoxLayout->addWidget(this->m_locationGroupBox);

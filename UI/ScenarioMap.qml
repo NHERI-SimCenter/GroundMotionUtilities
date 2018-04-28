@@ -13,7 +13,7 @@ Rectangle
 
     Plugin {
         id: mapPlugin
-        name: "osm" // "mapboxgl", "esri", ...
+        name: "osm" //"mapbox"// , "esri", ...
         // specify plugin parameters if necessary
          PluginParameter { name: "osm.mapping.providersrepository.disabled";value: true}
          PluginParameter { name: "osm.mapping.highdpi_tiles";value: true}

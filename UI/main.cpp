@@ -3,9 +3,12 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    GMWidget w;
-    w.show();
+    QApplication gmApp(argc, argv);
+    GMWidget gmWindow;
+    gmWindow.show();
 
-    return a.exec();
+    QFile styleFile(":/style.qss");
+    styleFile.open( QFile::ReadOnly );
+    gmApp.setStyleSheet(styleFile.readAll());
+    return gmApp.exec();
 }
