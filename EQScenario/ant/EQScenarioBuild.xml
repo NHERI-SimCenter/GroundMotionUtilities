@@ -6,7 +6,23 @@
     <property name="dir.buildfile" value="."/>
     <property name="dir.workspace" value="${dir.buildfile}/../.."/>
     <property name="dir.jarfile" value="${dir.workspace}/EQScenario/build"/>
-    <target name="create_run_jar">
+
+<target name="init">
+<!-- Create the bin directory used by compile -->
+<mkdir dir="${dir.workspace}/EQScenario/bin"/>
+</target>
+
+<target name="compile" depends="init">
+<!-- Create the bin directory used by compile -->
+    <!-- Compile the Java code from ${src} into ${bin} -->
+    <javac srcdir="${dir.workspace}/EQScenario/src" destdir="${dir.workspace}/EQScenario/bin">
+   <classpath>
+        <pathelement path="${dir.workspace}/EQScenario/lib/gson-2.6.2.jar"/>
+        <pathelement path="${dir.workspace}/EQScenario/lib/OpenSHA-1.4.0.jar"/>
+    </classpath>
+</javac>
+</target>
+    <target name="create_run_jar" depends="compile">
         <jar destfile="${dir.jarfile}/EQScenario.jar" filesetmanifest="mergewithoutmain">
             <manifest>
                 <attribute name="Main-Class" value="org.designsafe.ci.simcenter.EQScenarioCalc"/>

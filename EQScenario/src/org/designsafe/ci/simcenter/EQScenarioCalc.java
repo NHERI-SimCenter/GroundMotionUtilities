@@ -394,7 +394,7 @@ public class EQScenarioCalc implements ParameterChangeWarningListener {
 		if(imCfg.hasJsonOutput())
 		{
 			Gson gson = new GsonBuilder().setPrettyPrinting().serializeSpecialFloatingPointValues().create();
-			String outputFile = Files.getNameWithoutExtension(file) + "_Output.json";
+			String outputFile = file;
 			FileUtils.save(Paths.get(directory, outputFile).toAbsolutePath().toString(), gson.toJson(output));
 		}
 		

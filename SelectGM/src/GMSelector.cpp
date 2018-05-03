@@ -325,18 +325,18 @@ STATUS GMSelector::WriteSelectionResults(const char* outputFile, std::vector<Sel
     PrettyWriter<OStreamWrapper> writer(osw);
     output.Accept(writer);
 
-    //Now we can also retrieve the records
-    std::vector<int> recIds;
-    recIds.reserve(selectionResults.size());
+    // //Now we can also retrieve the records
+    // std::vector<int> recIds;
+    // recIds.reserve(selectionResults.size());
 
-    for(int i = 0 ; i < selectionResults.size(); i++)
-    {
-        recIds.push_back(selectionResults[i].Record().GetId());
-    }
-    std::sort(recIds.begin(), recIds.end());
-    std::vector<int>::iterator last = std::unique(recIds.begin(), recIds.end());
-    recIds.erase(last, recIds.end());
-    this->WriteRecords(recIds);
+    // for(int i = 0 ; i < selectionResults.size(); i++)
+    // {
+    //     recIds.push_back(selectionResults[i].Record().GetId());
+    // }
+    // std::sort(recIds.begin(), recIds.end());
+    // std::vector<int>::iterator last = std::unique(recIds.begin(), recIds.end());
+    // recIds.erase(last, recIds.end());
+    // this->WriteRecords(recIds);
 
     //Creating GeoJsonOutput
     Document geoJson;
