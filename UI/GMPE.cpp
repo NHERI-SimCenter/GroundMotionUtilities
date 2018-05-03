@@ -3,7 +3,7 @@
 
 GMPE::GMPE(QObject *parent) : QObject(parent)
 {
-    this->m_type = "Abrahamson, Silva & Kamai (2014)";
+    this->m_type = "Campbell & Bozorgnia (2014)";
 }
 
 QString GMPE::type() const

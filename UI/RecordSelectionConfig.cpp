@@ -33,3 +33,35 @@ void RecordSelectionConfig::setError(const ErrorMetric &error)
         emit this->errorChanged(m_error);
     }
 }
+
+QJsonObject RecordSelectionConfig::getJson()
+{
+    QJsonObject target;
+    target.insert("Type", "SimulatedSpectrum");
+
+    QJsonObject db;
+    db.insert("Type", "CSV");
+
+    QJsonObject criteria;
+    QJsonObject magnitude;
+    QJsonObject distance;
+    QJsonObject vs30;
+    magnitude.insert("Min", 6.0);
+    magnitude.insert("Max", 8.0);
+    distance.insert("Min", 0.0);
+    distance.insert("Max", 50.0);
+    vs30.insert("Min", 400.0);
+    vs30.insert("Max", 800.0);
+
+    criteria.insert("Magnitude", magnitude);
+    criteria.insert("Distance", distance);
+    criteria.insert("Vs30", vs30);
+
+    QJsonObject selection;
+
+    selection.insert("Target", target);
+    selection.insert("Database", db);
+    selection.insert("Criteria", criteria);
+
+    return selection;
+}

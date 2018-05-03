@@ -5,7 +5,7 @@
 IntensityMeasure::IntensityMeasure(QObject *parent) : QObject(parent)
 {
     this->setType("SA");
-    this->addPeriod(1.0);
+    m_periods << 0.05 << 0.1 << 0.2 << 0.5 << 1.0 << 2.0 << 5.0 << 10.0;
 }
 
 QString IntensityMeasure::type() const

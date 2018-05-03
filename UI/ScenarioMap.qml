@@ -19,6 +19,7 @@ Rectangle
          PluginParameter { name: "osm.mapping.highdpi_tiles";value: true}
          PluginParameter { name: "osm.mapping.host";value: "https://tiles.basemaps.cartocdn.com/rastertiles/voyager/"}
          PluginParameter { name: "osm.useragent"; value: "Simcenter" }
+//         PluginParameter { name: "mapbox.access_token"; value: "pk.eyJ1IjoiZWw3YWRkYWQiLCJhIjoiY2pnaW5ra2xyMDJkaDJwbmI5aWdnN3hoMCJ9.PbM-__DXZNSVuqTYnjIdrQ" }
 
 
     }

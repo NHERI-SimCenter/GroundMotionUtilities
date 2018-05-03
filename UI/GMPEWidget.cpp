@@ -20,6 +20,7 @@ GMPEWidget::GMPEWidget(GMPE& gmpe, QWidget *parent): QWidget(parent), m_gmpe(gmp
 
     QStringListModel* typeModel = new QStringListModel(validType);
     m_typeBox->setModel(typeModel);
+    m_typeBox->setCurrentIndex(validType.indexOf(m_gmpe.type()));
     this->setupConnections();
 }
 

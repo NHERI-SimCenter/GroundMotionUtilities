@@ -2,8 +2,9 @@
 #define RECORDSELECTIONCONFIG_H
 
 #include <QObject>
+#include "JsonSerializable.h"
 
-class RecordSelectionConfig : public QObject
+class RecordSelectionConfig : public QObject, JsonSerializable
 {
     Q_OBJECT
 
@@ -29,6 +30,10 @@ public slots:
 private:
     RecordDb m_database;
     ErrorMetric m_error;
+
+    // JsonSerializable interface
+public:
+    QJsonObject getJson();
 };
 
 #endif // RECORDSELECTIONCONFIG_H

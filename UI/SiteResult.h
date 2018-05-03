@@ -1,7 +1,9 @@
 #ifndef SITERESULT_H
 #define SITERESULT_H
 #include <QObject>
-#include <QList>
+#include <QtCharts/QLineSeries>
+
+using namespace QtCharts;
 
 class SiteResult
 {
@@ -9,10 +11,11 @@ public:
     SiteResult();
 
 private:
-    QList<double> m_means;
-    QList<double> m_stdDevs;
-    QList<double> m_interEventStdDevs;
-    QList<double> m_intraEventStdDevs;
+
+    QLineSeries a;
+    QLineSeries m_stdDevs;
+    QLineSeries m_interEventStdDevs;
+    QLineSeries m_intraEventStdDevs;
 };
 
 #endif // SITERESULT_H

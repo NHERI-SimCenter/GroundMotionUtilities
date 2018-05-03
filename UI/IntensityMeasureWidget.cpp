@@ -18,8 +18,10 @@ IntensityMeasureWidget::IntensityMeasureWidget(IntensityMeasure &im, QWidget *pa
 
     const QStringList validType = this->m_intensityMeasure.validTypes();
 
-    m_typeBox->addItem("Peak Ground Acceleration (PGA)");
-    m_typeBox->addItem("Spectral Accelerations (SA)");
+    m_typeBox->addItem("Peak Ground Acceleration (PGA)", "PGA");
+    m_typeBox->addItem("Spectral Accelerations (SA)", "SA");
+
+    m_typeBox->setCurrentIndex(validType.indexOf(m_intensityMeasure.type()));
 
     this->setupConnections();
 }
