@@ -10,14 +10,17 @@ The tools in this repository are organized in following folders:
 The tools provided in this repository are console applications. Each tool requires an input json file and outputs one or more json files. Sample usage of each tool is printed on the screen when the applications are executed without arguments. In addition, documentation of the input and output is provided in each tool's folder.
 
 ## Developer's Guide
-Tools in this repositoy use different build systems. EQScenario is a java application and is built using Apache Ant. Eclipse is the prefered IDE to build EQScenario.
+Tools in this repositoy use different build systems. EQScenario is a java application and is built using Apache Ant. Eclipse is the prefered IDE to build EQScenario. However, the app can also be built using the shell command (path of the build file is relative to EQScenario folder):
+```shell
+ant -buildfile  ./ant/EQScenarioBuild.xml
+```
 
 SimulateGM and SelectGM are C++ applications that can be built using cmake. SimulateGM uses random number generation feature introduced in the C++11 standard. So, a C++11 compliant compiler is needed to build SimulateGM.
 
 ### Build SimulateGM and SelectGM
 It is preferred to use an out-of-source build, to keep the source code separated from the binary files. To achive that, this guide assumes a folder called build exists in the parent folder and is used to build the executable files from the source.
 
-#### Unix-based operating system
+#### Unix-like operating system
 Building on *nix was tested using both the GCC and intel compilers. The following command can be used to build the SimulateGM and SelectGM for debugging:
 ```
 cmake -D CMAKE_BUILD_TYPE=Release ..
