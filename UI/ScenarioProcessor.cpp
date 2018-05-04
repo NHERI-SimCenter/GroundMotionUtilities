@@ -1,4 +1,5 @@
 #include <QJsonDocument>
+#include <QJsonArray>
 #include <QFile>
 #include <QDebug>
 #include "ScenarioProcessor.h"
@@ -6,9 +7,9 @@
 #include <QDir>
 
 ScenarioProcessor::ScenarioProcessor(Site &site, PointSourceRupture &rupture, GMPE &gmpe,
-                                     IntensityMeasure &intensityMeasure, RecordSelectionConfig &selectionConfig,
+                                     IntensityMeasure &intensityMeasure, RecordSelectionConfig &selectionConfig, SiteResult& siteResult,
                                      QObject *parent) : QObject(parent), m_site(site), m_rupture(rupture),
-                                     m_gmpe(gmpe), m_intensityMeasure(intensityMeasure), m_selectionConfig(selectionConfig)
+                                     m_gmpe(gmpe), m_intensityMeasure(intensityMeasure), m_selectionConfig(selectionConfig), m_siteResult(siteResult)
 {
     //Init the working directory that will be used by this processor
     QString dataDirectory = QStandardPaths::writableLocation(QStandardPaths::StandardLocation::GenericDataLocation);
@@ -136,8 +137,13 @@ void ScenarioProcessor::startSelection()
 
 
     QJsonObject selectionConfig = m_selectionConfig.getJson();
-    selectionConfig["Target"].toObject().insert("File", simOutputPath);
-    selectionConfig["Database"].toObject().insert("File", "C:/SourceTree/Simcenter-EQSS/SelectGM/examples/NGAWest2-1000.csv");
+    QJsonObject target = selectionConfig["Target"].toObject();
+    target.insert("File", simOutputPath);
+    selectionConfig.insert("Target", target);
+
+    QJsonObject db =  selectionConfig["Database"].toObject();
+    db.insert("File", "C:/SourceTree/Simcenter-EQSS/SelectGM/examples/NGAWest2-1000.csv");
+    selectionConfig.insert("Database", db);
 
     QJsonDocument selectionConfigDoc(selectionConfig);
     QFile selectionConfigFile(selectionConfigPath);
@@ -147,8 +153,6 @@ void ScenarioProcessor::startSelection()
     }
     selectionConfigFile.write(selectionConfigDoc.toJson());
     selectionConfigFile.close();
-
-
 
     QStringList args;
     args << selectionConfigPath << selectionOutputPath;
@@ -186,7 +190,24 @@ QString ScenarioProcessor::getWorkFilePath(QString filename)
 
 void ScenarioProcessor::startProcessingOutputs()
 {
+    QString selectionOutputPath = getWorkFilePath("SelectionOutput.json");
+    QFile selectionOutputFile(selectionOutputPath);
+    if(!selectionOutputFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        qWarning("Couldn't read record selection config file.");
+        return;
+    }
 
+    QJsonDocument selectionOutputDoc;
+    QString output = selectionOutputFile.readAll();
+    selectionOutputDoc = QJsonDocument::fromJson(output.toUtf8());
+    QJsonObject outobj = selectionOutputDoc.object();
+
+    QJsonArray results = selectionOutputDoc.object()["GroundMotions"].toArray();
+    QJsonObject result = results[0].toObject();
+
+    m_siteResult.setRecordId(result["Record"].toObject()["Id"].toInt());
+    m_siteResult.setScaleFactor(result["ScaleFactor"].toDouble());
 }
 
 void ScenarioProcessor::setupConnections()

@@ -33,6 +33,7 @@ private:
     IntensityMeasureWidget* m_intensityMeasureWidget;
     RecordSelectionConfig* m_selectionconfig;
     RecordSelectionWidget* m_selectionWidget;
+    SiteResult* m_siteResult;
     ScenarioProcessor* m_scenarioProcessor;
 };
 

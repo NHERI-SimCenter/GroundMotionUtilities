@@ -8,13 +8,15 @@
 #include "GMPE.h"
 #include "IntensityMeasure.h"
 #include "RecordSelectionConfig.h"
+#include "SiteResult.h"
 
 class ScenarioProcessor : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit ScenarioProcessor(Site& site, PointSourceRupture& rupture, GMPE& gmpe, IntensityMeasure& intensityMeasure, RecordSelectionConfig& selectionConfig, QObject *parent = nullptr);
+    explicit ScenarioProcessor(Site& site, PointSourceRupture& rupture, GMPE& gmpe, IntensityMeasure& intensityMeasure,
+                               RecordSelectionConfig& selectionConfig, SiteResult& siteResult, QObject *parent = nullptr);
 
 signals:
     void statusUpdated(QString status);
@@ -42,6 +44,7 @@ private:
     GMPE& m_gmpe;
     IntensityMeasure& m_intensityMeasure;
     RecordSelectionConfig& m_selectionConfig;
+    SiteResult& m_siteResult;
 
     QProcess m_hazardAnalysisProcess;
     QProcess m_simulationProcess;

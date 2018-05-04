@@ -29,7 +29,7 @@ MapQuickItem {
             anchors.centerIn: parent
             ToolTip.visible: hovered
 
-            ToolTip.text:  String(qsTr("Site\nLatitude: %1\nLongitude: %2")).arg(site.location.latitude).arg(site.location.longitude)
+            ToolTip.text:  String(qsTr("Site\nLatitude: %1\nLongitude: %2\nSelected Record Id:%3\nScale Factor:%4")).arg(site.location.latitude).arg(site.location.longitude).arg(siteResult.recordId).arg(siteResult.scaleFactor)
             ToolTip.timeout: 5000
 
             onEntered: hovered = true

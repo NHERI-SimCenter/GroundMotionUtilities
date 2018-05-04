@@ -40,7 +40,8 @@ GMWidget::GMWidget(QWidget *parent) :
     this->m_selectionWidget = new RecordSelectionWidget(*this->m_selectionconfig, this);
     vBoxLayout->addWidget(this->m_selectionWidget, 0);
 
-    m_scenarioProcessor = new ScenarioProcessor(*m_site, *m_eqRupture, *m_gmpe, *m_intensityMeasure, *m_selectionconfig);
+    this->m_siteResult = new SiteResult();
+    m_scenarioProcessor = new ScenarioProcessor(*m_site, *m_eqRupture, *m_gmpe, *m_intensityMeasure, *m_selectionconfig, *m_siteResult);
 
     QPushButton* runButton = new QPushButton(tr("&Run"));
     runButton->setMinimumSize(64, 32);
@@ -65,6 +66,7 @@ GMWidget::GMWidget(QWidget *parent) :
     view->rootContext()->setContextProperty("site", this->m_site);
     view->rootContext()->setContextProperty("siteLocation", &this->m_site->location());
     view->rootContext()->setContextProperty("rupture", this->m_eqRupture);
+    view->rootContext()->setContextProperty("siteResult", this->m_siteResult);
 
     view->setSource(QUrl("qrc:/ScenarioMap.qml"));
     QWidget *container = QWidget::createWindowContainer(view, this);

@@ -372,4 +372,6 @@ STATUS GMSelector::WriteSelectionResults(const char* outputFile, std::vector<Sel
     OStreamWrapper geoJsonOsw(geoJsonOfs);
     PrettyWriter<OStreamWrapper> geoJsonWriter(geoJsonOsw);
     geoJson.Accept(geoJsonWriter);
+
+	return STATUS::SUCCESS;
 }
