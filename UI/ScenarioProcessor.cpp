@@ -6,9 +6,9 @@
 #include <QStandardPaths>
 #include <QDir>
 
-ScenarioProcessor::ScenarioProcessor(Site &site, PointSourceRupture &rupture, GMPE &gmpe,
+ScenarioProcessor::ScenarioProcessor(SiteConfig& siteConfig, PointSourceRupture &rupture, GMPE &gmpe,
                                      IntensityMeasure &intensityMeasure, RecordSelectionConfig &selectionConfig, SiteResult& siteResult,
-                                     QObject *parent) : QObject(parent), m_site(site), m_rupture(rupture),
+                                     QObject *parent) : QObject(parent), m_siteConfig(siteConfig), m_rupture(rupture),
                                      m_gmpe(gmpe), m_intensityMeasure(intensityMeasure), m_selectionConfig(selectionConfig), m_siteResult(siteResult)
 {
     //Init the working directory that will be used by this processor
@@ -50,7 +50,7 @@ void ScenarioProcessor::startProcessingScenario()
 void ScenarioProcessor::startHazardAnalysis()
 {
     QJsonObject scenarioInput;
-    scenarioInput.insert("Site", m_site.getJson());
+    scenarioInput.insert("Site", m_siteConfig.getJson());
     scenarioInput.insert("EqRupture", m_rupture.getJson());
     scenarioInput.insert("GMPE", m_gmpe.getJson());
     scenarioInput.insert("IntensityMeasure", m_intensityMeasure.getJson());

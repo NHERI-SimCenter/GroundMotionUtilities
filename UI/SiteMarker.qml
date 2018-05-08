@@ -2,11 +2,13 @@ import QtQuick 2.7
 import QtLocation 5.6
 import QtPositioning 5.6
 import QtQuick.Controls 2.2
+import org.designsafe.ci.simcenter 1.0
 
 MapQuickItem {
     id: siteMarker
     anchorPoint.x: markerRect.width/2
     anchorPoint.y: markerRect.height/2
+    visible:(siteConfig.type === SiteConfig.Single)
 
     sourceItem: Rectangle {
         id:markerRect

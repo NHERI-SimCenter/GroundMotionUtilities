@@ -8,6 +8,7 @@
 #include "IntensityMeasureWidget.h"
 #include "RecordSelectionWidget.h"
 #include "ScenarioProcessor.h"
+#include "SiteConfigWidget.h"
 
 namespace Ui {
 class GMWidget;
@@ -23,8 +24,6 @@ public:
 
 private:
     Ui::GMWidget *ui;
-    SiteWidget* m_siteWidget;
-    Site* m_site;
     RuptureWidget* m_ruptureWidget;
     PointSourceRupture* m_eqRupture;
     GMPE* m_gmpe;
@@ -35,6 +34,8 @@ private:
     RecordSelectionWidget* m_selectionWidget;
     SiteResult* m_siteResult;
     ScenarioProcessor* m_scenarioProcessor;
+    SiteConfig* m_siteConfig;
+    SiteConfigWidget* m_siteConfigWidget;
 };
 
 #endif // GMWIDGET_H

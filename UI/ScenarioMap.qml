@@ -24,6 +24,31 @@ Rectangle
 
     }
 
+    ListModel{
+        id:sitesModel
+
+        Component.onCompleted:
+        {
+            updateModel()
+
+        }
+
+        function updateModel() {
+            sitesModel.clear()
+            var latstep = (siteGrid.latitude.max - siteGrid.latitude.min)/siteGrid.latitude.divisions;
+            var lonStep = (siteGrid.longitude.max - siteGrid.longitude.min)/siteGrid.longitude.divisions;
+            var dTol = 1e-3
+
+            for(var alat = siteGrid.latitude.min; alat - siteGrid.latitude.max <= dTol; alat += latstep)
+            {
+                for(var alon = siteGrid.longitude.min; alon - siteGrid.longitude.max <= dTol; alon += lonStep)
+                {
+                    sitesModel.append({latitude: alat, longitude : alon})
+                }
+            }
+        }
+    }
+
     Map {
         id:map
         plugin: mapPlugin
@@ -53,5 +78,29 @@ Rectangle
         {
             id:ruptureMarker
         }
+
+        SiteGridMarker
+        {
+            id:siteGridMarker
+        }
+
+//        MouseArea
+//        {
+//            anchors.fill: parent
+//            onClicked: {
+//                console.debug(sitesModel.count)
+//            }
+//        }
+
+        GridPoints{
+            id:gridPoint            
+        }
+
+        Connections
+        {
+            target: siteGrid.latitude
+
+        }
+
     }
 }

@@ -17,7 +17,6 @@ public slots:
 
 private:
     Site& m_site;
-    QGroupBox* m_siteGroupBox;
     QGroupBox* m_locationGroupBox;
     QDoubleSpinBox* m_latitudeBox;
     QDoubleSpinBox* m_longitudeBox;

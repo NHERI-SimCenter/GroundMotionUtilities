@@ -5,17 +5,14 @@
 SiteWidget::SiteWidget(Site& site, QWidget *parent, Qt::Orientation orientation) : QWidget(parent), m_site(site)
 {
     //We use a grid layout for the site widget
-    QGridLayout* layout = new QGridLayout(this);
-
-    this->m_siteGroupBox = new QGroupBox(tr("Site"));
-    this->m_siteGroupBox->setGeometry(0, 0, 100, 50);
-    this->m_siteGroupBox->setStyleSheet("QGroupBox {font-weight: bold;font-size: 10pt; qproperty-flat: true;}");
+    QVBoxLayout* layout = new QVBoxLayout(this);
 
     this->m_locationGroupBox = new QGroupBox(tr("Location"));
     this->m_locationGroupBox->setFlat(true);
     this->m_locationGroupBox->setStyleSheet("QGroupBox { font-weight: normal;}");
 
     QVBoxLayout* locationLayout = new QVBoxLayout(this->m_locationGroupBox);
+
     this->m_latitudeBox = new QDoubleSpinBox(this->m_locationGroupBox);
     this->m_latitudeBox->setRange(-90.0, 90.0);
     this->m_latitudeBox->setDecimals(3);
@@ -45,12 +42,10 @@ SiteWidget::SiteWidget(Site& site, QWidget *parent, Qt::Orientation orientation)
         locationLayout->addLayout(formLayout);
     }
 
-    QVBoxLayout* siteBoxLayout = new QVBoxLayout(this->m_siteGroupBox);
-    siteBoxLayout->addWidget(this->m_locationGroupBox);
+    layout->addWidget(m_locationGroupBox);
+    layout->addStretch();
 
-    layout->addWidget(this->m_siteGroupBox);
-
-    this->setLayout(layout);
+    layout->setContentsMargins(0, 0, 0, 0);
 
     //Now we need to setup the connections
     this->setupConnections();

@@ -40,7 +40,12 @@ SOURCES += \
     RecordSelectionWidget.cpp \
     ScenarioProcessor.cpp \
     SiteResult.cpp \
-    HBoxFormLayout.cpp
+    HBoxFormLayout.cpp \
+    SiteGrid.cpp \
+    GridDivision.cpp \
+    SiteConfig.cpp \
+    SiteConfigWidget.cpp \
+    SiteGridWidget.cpp
 
 HEADERS += \
         GMWidget.h \
@@ -59,7 +64,12 @@ HEADERS += \
     RecordSelectionWidget.h \
     ScenarioProcessor.h \
     SiteResult.h \
-    HBoxFormLayout.h
+    HBoxFormLayout.h \
+    SiteGrid.h \
+    GridDivision.h \
+    SiteConfig.h \
+    SiteConfigWidget.h \
+    SiteGridWidget.h
 
 FORMS +=
 

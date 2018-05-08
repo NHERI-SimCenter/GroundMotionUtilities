@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QProcess>
-#include "Site.h"
+#include "SiteConfig.h"
 #include "PointSourceRupture.h"
 #include "GMPE.h"
 #include "IntensityMeasure.h"
@@ -15,7 +15,7 @@ class ScenarioProcessor : public QObject
     Q_OBJECT
 
 public:
-    explicit ScenarioProcessor(Site& site, PointSourceRupture& rupture, GMPE& gmpe, IntensityMeasure& intensityMeasure,
+    explicit ScenarioProcessor(SiteConfig& siteConfig, PointSourceRupture& rupture, GMPE& gmpe, IntensityMeasure& intensityMeasure,
                                RecordSelectionConfig& selectionConfig, SiteResult& siteResult, QObject *parent = nullptr);
 
 signals:
@@ -39,7 +39,7 @@ private slots:
     void processSelectionOutput();
 
 private:
-    Site& m_site;
+    SiteConfig& m_siteConfig;
     PointSourceRupture& m_rupture;
     GMPE& m_gmpe;
     IntensityMeasure& m_intensityMeasure;

@@ -9,18 +9,20 @@ GMWidget::GMWidget(QWidget *parent) :
     QWidget(parent)
 {
     this->setAutoFillBackground(true);
+    Qt::Orientation orientation = Qt::Horizontal;
+
     QPalette palette = QPalette();
     palette.setColor(QPalette::Background, Qt::white);
     this->setPalette(palette);
-    this->m_site = new Site(37.8719, -122.2585);
 
-    Qt::Orientation orientation = Qt::Horizontal;
-
-    this->m_siteWidget = new SiteWidget(*this->m_site, this, orientation);
     QHBoxLayout* hBoxLayout = new QHBoxLayout(this);
 
     QVBoxLayout* vBoxLayout = new QVBoxLayout();
-    vBoxLayout->addWidget(this->m_siteWidget, 0);
+
+    //Adding Site Config Widget
+    m_siteConfig = new SiteConfig();
+    m_siteConfigWidget = new SiteConfigWidget(*m_siteConfig);
+    vBoxLayout->addWidget(this->m_siteConfigWidget, 0);
 
     RuptureLocation location(37.9,  -122.3);
 
@@ -41,7 +43,7 @@ GMWidget::GMWidget(QWidget *parent) :
     vBoxLayout->addWidget(this->m_selectionWidget, 0);
 
     this->m_siteResult = new SiteResult();
-    m_scenarioProcessor = new ScenarioProcessor(*m_site, *m_eqRupture, *m_gmpe, *m_intensityMeasure, *m_selectionconfig, *m_siteResult);
+    m_scenarioProcessor = new ScenarioProcessor(*m_siteConfig, *m_eqRupture, *m_gmpe, *m_intensityMeasure, *m_selectionconfig, *m_siteResult);
 
     QPushButton* runButton = new QPushButton(tr("&Run"));
     runButton->setMinimumSize(64, 32);
@@ -61,12 +63,14 @@ GMWidget::GMWidget(QWidget *parent) :
     vBoxLayout->insertStretch(5, 1);
     vBoxLayout->addWidget(bottomToolsWidget);
 
-
     QQuickView *view = new QQuickView();
-    view->rootContext()->setContextProperty("site", this->m_site);
-    view->rootContext()->setContextProperty("siteLocation", &this->m_site->location());
+    qmlRegisterType<SiteConfig>("org.designsafe.ci.simcenter", 1, 0, "SiteConfig");
+
+    view->rootContext()->setContextProperty("site", &m_siteConfig->site());
     view->rootContext()->setContextProperty("rupture", this->m_eqRupture);
     view->rootContext()->setContextProperty("siteResult", this->m_siteResult);
+    view->rootContext()->setContextProperty("siteGrid", &m_siteConfig->siteGrid());
+    view->rootContext()->setContextProperty("siteConfig", m_siteConfig);
 
     view->setSource(QUrl("qrc:/ScenarioMap.qml"));
     QWidget *container = QWidget::createWindowContainer(view, this);

@@ -3,5 +3,7 @@
         <file>ScenarioMap.qml</file>
         <file>SiteMarker.qml</file>
         <file>PointRuptureMarker.qml</file>
+        <file>SiteGridMarker.qml</file>
+        <file>GridPoints.qml</file>
     </qresource>
 </RCC>
