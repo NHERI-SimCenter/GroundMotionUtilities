@@ -10,7 +10,9 @@ MapItemView {
     delegate: MapQuickItem
     {
         zoomLevel:11
-        visible: (siteConfig.type === SiteConfig.Grid) && !siteGridMarker.dragged
+//        visible: (siteConfig.type === SiteConfig.Grid) && !siteGridMarker.dragged
+        visible: false
+
         sourceItem: Rectangle {
         width:10
         height:10

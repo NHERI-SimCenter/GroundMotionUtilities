@@ -2,8 +2,8 @@
 
 SiteGrid::SiteGrid(QObject *parent) : QObject(parent)
 {
-    m_latitude.set(37.0, 38.2, 50);
-    m_longitude.set(-122.6, -121.9, 50);
+    m_latitude.set(37.0, 38.2, 30);
+    m_longitude.set(-122.6, -121.9, 30);
 }
 
 GridDivision &SiteGrid::latitude()
@@ -42,7 +42,7 @@ QJsonObject SiteGrid::getJson()
     longitudeJson.insert("Min", m_longitude.min());
     longitudeJson.insert("Max", m_longitude.max());
     longitudeJson.insert("Divisions", m_longitude.divisions());
-    gridJson.insert("Longitude", latitudeJson);
+    gridJson.insert("Longitude", longitudeJson);
 
     siteJson.insert("Grid", gridJson);
     return siteJson;

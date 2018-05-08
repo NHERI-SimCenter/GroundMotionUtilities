@@ -102,5 +102,9 @@ Rectangle
 
         }
 
+        SiteResultsView
+        {
+            id:resultsView
+        }
     }
 }

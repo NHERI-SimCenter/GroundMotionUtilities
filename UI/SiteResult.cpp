@@ -33,3 +33,27 @@ void SiteResult::setScaleFactor(double scaleFactor)
         emit scaleChanged(m_scaleFactor);
     }
 }
+
+void SiteResult::setMeans(QVector<double> means)
+{
+    m_means = means;
+    emit meanChanged(getMean0());
+}
+
+Location &SiteResult::location()
+{
+    return m_location;
+}
+
+Location *SiteResult::getLocationPtr()
+{
+    return &m_location;
+}
+
+double SiteResult::getMean0()
+{
+    if(m_means.size() > 0)
+        return m_means[0];
+    else
+        return 0;
+}

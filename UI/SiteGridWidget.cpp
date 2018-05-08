@@ -31,9 +31,8 @@ SiteGridWidget::SiteGridWidget(SiteGrid& siteGrid, QWidget *parent) : QWidget(pa
     m_latitudeDivBox->setRange(1, 500);
     m_latitudeDivBox->setValue(m_siteGrid.latitude().divisions());
     latitudeFormLayout->addField(tr("Divisions:"), this->m_latitudeDivBox);
-    latitudeLayout->addLayout(latitudeFormLayout);
 
-    QGroupBox* longitudeGroupBox = new QGroupBox(tr("longitude"));
+    QGroupBox* longitudeGroupBox = new QGroupBox(tr("Longitude"));
     longitudeGroupBox->setFlat(true);
     longitudeGroupBox->setStyleSheet("QGroupBox { font-weight: normal;}");
     QVBoxLayout* longitudeLayout = new QVBoxLayout(longitudeGroupBox);
@@ -58,7 +57,6 @@ SiteGridWidget::SiteGridWidget(SiteGrid& siteGrid, QWidget *parent) : QWidget(pa
     m_longitudeDivBox->setRange(1, 500);
     m_longitudeDivBox->setValue(m_siteGrid.longitude().divisions());
     longitudeFormLayout->addField(tr("Divisions:"), this->m_longitudeDivBox);
-    longitudeLayout->addLayout(longitudeFormLayout);
 
 //    m_minLongitudeBox = new QDoubleSpinBox(this->m_locationGroupBox);
 //    m_minLongitudeBox->setRange(-180.0, 180.0);

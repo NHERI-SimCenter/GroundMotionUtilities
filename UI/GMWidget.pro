@@ -45,7 +45,8 @@ SOURCES += \
     GridDivision.cpp \
     SiteConfig.cpp \
     SiteConfigWidget.cpp \
-    SiteGridWidget.cpp
+    SiteGridWidget.cpp \
+    SiteResultsModel.cpp
 
 HEADERS += \
         GMWidget.h \
@@ -69,7 +70,8 @@ HEADERS += \
     GridDivision.h \
     SiteConfig.h \
     SiteConfigWidget.h \
-    SiteGridWidget.h
+    SiteGridWidget.h \
+    SiteResultsModel.h
 
 FORMS +=
 

@@ -5,5 +5,6 @@
         <file>PointRuptureMarker.qml</file>
         <file>SiteGridMarker.qml</file>
         <file>GridPoints.qml</file>
+        <file>SiteResultsView.qml</file>
     </qresource>
 </RCC>

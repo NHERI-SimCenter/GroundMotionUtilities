@@ -20,6 +20,11 @@ ScenarioProcessor::ScenarioProcessor(SiteConfig& siteConfig, PointSourceRupture 
     setupConnections();
 }
 
+SiteResultsModel &ScenarioProcessor::getResultsModel()
+{
+    return m_resultsModel;
+}
+
 void ScenarioProcessor::killProcesses()
 {
     if(m_hazardAnalysisProcess.state() >= QProcess::ProcessState::Starting)
@@ -190,21 +195,56 @@ QString ScenarioProcessor::getWorkFilePath(QString filename)
 
 void ScenarioProcessor::startProcessingOutputs()
 {
+    //We will open the record selection output
     QString selectionOutputPath = getWorkFilePath("SelectionOutput.json");
     QFile selectionOutputFile(selectionOutputPath);
     if(!selectionOutputFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qWarning("Couldn't read record selection config file.");
+        qWarning("Couldn't read record selection outputs!");
         return;
     }
 
-    QJsonDocument selectionOutputDoc;
     QString output = selectionOutputFile.readAll();
-    selectionOutputDoc = QJsonDocument::fromJson(output.toUtf8());
-    QJsonObject outobj = selectionOutputDoc.object();
+    QJsonDocument selectionOutputDoc = QJsonDocument::fromJson(output.toUtf8());
+    QJsonArray selectionResults = selectionOutputDoc.object()["GroundMotions"].toArray();
 
-    QJsonArray results = selectionOutputDoc.object()["GroundMotions"].toArray();
-    QJsonObject result = results[0].toObject();
+    //We will also open the hazard analysis output to read the site location
+    QString hazardOutputPath = getWorkFilePath("Scenario_" + m_intensityMeasure.type()+ ".json");
+    QFile hazardOutputFile(hazardOutputPath);
+    if(!hazardOutputFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        qWarning("Couldn't read hazard analysis outputs!");
+        return;
+    }
+    output = hazardOutputFile.readAll();
+    QJsonDocument hazardOutputDoc = QJsonDocument::fromJson(output.toUtf8());
+    QJsonArray hazardResults = hazardOutputDoc.object()["GroundMotions"].toArray();
+
+    //Clearing results before adding new ones
+    m_resultsModel.clear();
+    for(int i = 0; i < selectionResults.size(); i++)
+    {
+        SiteResult* newResult = m_resultsModel.createNewResult();
+
+        QJsonObject location = hazardResults[i].toObject()["Location"].toObject();
+        newResult->location().set(location["Latitude"].toDouble(), location["Longitude"].toDouble());
+
+        QJsonObject result = selectionResults[i].toObject();
+        newResult->setRecordId(result["Record"].toObject()["Id"].toInt());
+        newResult->setScaleFactor(result["ScaleFactor"].toDouble());
+
+        QJsonArray imMeans;
+        if(m_intensityMeasure.type() == "SA")
+            imMeans = hazardResults[i].toObject()["SA"].toObject()["Mean"].toArray();
+        else
+            imMeans = hazardResults[i].toObject()["PGA"].toObject()["Mean"].toArray();
+        QVector<double> means;
+        QJsonValue mean;
+        foreach (mean, imMeans)
+            means.append(exp(mean.toDouble()));
+        newResult->setMeans(means);
+    }
+    QJsonObject result = selectionResults[0].toObject();
 
     m_siteResult.setRecordId(result["Record"].toObject()["Id"].toInt());
     m_siteResult.setScaleFactor(result["ScaleFactor"].toDouble());

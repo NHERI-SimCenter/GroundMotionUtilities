@@ -71,6 +71,7 @@ GMWidget::GMWidget(QWidget *parent) :
     view->rootContext()->setContextProperty("siteResult", this->m_siteResult);
     view->rootContext()->setContextProperty("siteGrid", &m_siteConfig->siteGrid());
     view->rootContext()->setContextProperty("siteConfig", m_siteConfig);
+    view->rootContext()->setContextProperty("siteResultsModel", &m_scenarioProcessor->getResultsModel());
 
     view->setSource(QUrl("qrc:/ScenarioMap.qml"));
     QWidget *container = QWidget::createWindowContainer(view, this);
