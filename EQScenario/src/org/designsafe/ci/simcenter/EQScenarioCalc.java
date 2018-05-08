@@ -38,6 +38,7 @@ public class EQScenarioCalc implements ParameterChangeWarningListener {
 	private HashMap<String, String> imrMap;
 	private SHAOutput output;
 	private OrderedSiteDataProviderList siteDataProviders;
+	public static final double dTol = 1e-3;
 	
 	public EQScenarioCalc()
 	{
@@ -212,9 +213,9 @@ public class EQScenarioCalc implements ParameterChangeWarningListener {
 			Division longitudeCfg = siteCfg.Grid().Longitude();
 			double longitudeStep = longitudeCfg.GetStep();
 			
-			for(double latitude = latitudeCfg.Min(); latitude <= latitudeCfg.Max(); latitude += latitudeStep)
+			for(double latitude = latitudeCfg.Min(); latitude <= latitudeCfg.Max() + dTol; latitude += latitudeStep)
 			{
-				for(double longitude = longitudeCfg.Min(); longitude <= longitudeCfg.Max(); longitude += longitudeStep)
+				for(double longitude = longitudeCfg.Min(); longitude <= longitudeCfg.Max() + dTol; longitude += longitudeStep)
 				{
 					siteLocations.add(new SiteLocation(latitude, longitude));
 				}
