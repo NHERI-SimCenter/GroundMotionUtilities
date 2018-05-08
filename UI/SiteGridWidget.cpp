@@ -100,6 +100,21 @@ void SiteGridWidget::setupConnections()
             &m_siteGrid.latitude(),
             &GridDivision::setDivisions);
 
+    connect(&m_siteGrid.latitude(),
+            &GridDivision::minChanged,
+            this->m_minLatitudeBox,
+            &QDoubleSpinBox::setValue);
+
+    connect(&m_siteGrid.latitude(),
+            &GridDivision::maxChanged,
+            this->m_maxLatitudeBox,
+            &QDoubleSpinBox::setValue);
+
+    connect(&m_siteGrid.latitude(),
+            &GridDivision::divisionsChanged,
+            this->m_latitudeDivBox,
+            &QSpinBox::setValue);
+
     //Connecting Longitude
     connect(this->m_minLongitudeBox,
             QOverload<double>::of(&QDoubleSpinBox::valueChanged),
@@ -116,4 +131,18 @@ void SiteGridWidget::setupConnections()
             &m_siteGrid.longitude(),
             &GridDivision::setDivisions);
 
+    connect(&m_siteGrid.longitude(),
+            &GridDivision::minChanged,
+            this->m_minLongitudeBox,
+            &QDoubleSpinBox::setValue);
+
+    connect(&m_siteGrid.longitude(),
+            &GridDivision::maxChanged,
+            this->m_maxLongitudeBox,
+            &QDoubleSpinBox::setValue);
+
+    connect(&m_siteGrid.longitude(),
+            &GridDivision::divisionsChanged,
+            this->m_longitudeDivBox,
+            &QSpinBox::setValue);
 }
