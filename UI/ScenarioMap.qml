@@ -55,7 +55,7 @@ Rectangle
         anchors.fill: parent
         width: 800
         height: 800
-        zoomLevel: 11
+        zoomLevel: 9
         center: QtPositioning.coordinate(37.9358, -122.3477) // Richmond, CA
         activeMapType: supportedMapTypes[supportedMapTypes.length -1]
 

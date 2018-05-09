@@ -8,6 +8,7 @@
 GMWidget::GMWidget(QWidget *parent) :
     QWidget(parent)
 {
+    m_mode = ApplicationMode::Edit;
     this->setAutoFillBackground(true);
     Qt::Orientation orientation = Qt::Horizontal;
 
@@ -65,6 +66,7 @@ GMWidget::GMWidget(QWidget *parent) :
 
     QQuickView *view = new QQuickView();
     qmlRegisterType<SiteConfig>("org.designsafe.ci.simcenter", 1, 0, "SiteConfig");
+    qmlRegisterType<GMWidget>("org.designsafe.ci.simcenter", 1, 0, "GMWidget");
 
     view->rootContext()->setContextProperty("site", &m_siteConfig->site());
     view->rootContext()->setContextProperty("rupture", this->m_eqRupture);
@@ -72,6 +74,7 @@ GMWidget::GMWidget(QWidget *parent) :
     view->rootContext()->setContextProperty("siteGrid", &m_siteConfig->siteGrid());
     view->rootContext()->setContextProperty("siteConfig", m_siteConfig);
     view->rootContext()->setContextProperty("siteResultsModel", &m_scenarioProcessor->getResultsModel());
+    view->rootContext()->setContextProperty("gmApp", this);
 
     view->setSource(QUrl("qrc:/ScenarioMap.qml"));
     QWidget *container = QWidget::createWindowContainer(view, this);
@@ -90,8 +93,31 @@ GMWidget::GMWidget(QWidget *parent) :
     hBoxLayout->addWidget(splitter, 1);
     this->resize(1000, this->height());
     this->window()->setWindowTitle(tr("Simcenter - Earthquake Scenario Simulation"));
+    setupConnections();
 }
 
 GMWidget::~GMWidget()
 {
+}
+
+GMWidget::ApplicationMode GMWidget::mode() const
+{
+    return m_mode;
+}
+
+void GMWidget::setMode(GMWidget::ApplicationMode mode)
+{
+    if(m_mode != mode)
+    {
+        m_mode = mode;
+        emit modeChanged(m_mode);
+    }
+}
+
+void GMWidget::setupConnections()
+{
+    connect(m_scenarioProcessor, &ScenarioProcessor::finished, [this]()
+    {
+        setMode(GMWidget::ApplicationMode::Results);
+    });
 }

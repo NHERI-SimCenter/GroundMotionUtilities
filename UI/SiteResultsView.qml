@@ -18,8 +18,8 @@ MapItemView {
             color: getcolor(model.display.mean)
 
             border.color: "black"
-            border.width: 1
-
+            border.width: 0.5
+            z: 50
             MouseArea
             {
                 property bool hovered: false
@@ -39,14 +39,13 @@ MapItemView {
             latitude: model.display.location.latitude
             longitude: model.display.location.longitude
         }
-
+        z:50
         function getcolor(value) {
                 if (value < 0.25)
                     return Qt.rgba(0, 1, 1-value/0.25)
                 else if(value >= 0.25 && value < 0.5)
                     return Qt.rgba(1-(value-0.25)/0.25, 1, 0)
                 else if(value >= 0.5 && value < 1.0)
-
                     return Qt.rgba(value*0.9, 1 - (value-0.5)/0.5 , 0)
                 else
                     return Qt.rgba(0.9 - 0.1*value, 0, 0)

@@ -248,6 +248,7 @@ void ScenarioProcessor::startProcessingOutputs()
 
     m_siteResult.setRecordId(result["Record"].toObject()["Id"].toInt());
     m_siteResult.setScaleFactor(result["ScaleFactor"].toDouble());
+    emit finished();
 }
 
 void ScenarioProcessor::setupConnections()

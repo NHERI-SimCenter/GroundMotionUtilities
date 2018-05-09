@@ -12,6 +12,7 @@ MapQuickItem {
 
     sourceItem: Rectangle {
         id:markerRect
+        z:10
         width:30
         height:30
         radius: width/2
@@ -42,7 +43,6 @@ MapQuickItem {
 
 
             onPositionChanged: {
-
                  if(drag.active)
                  {
                      var newCoordinate = map.toCoordinate(mapToItem(map, mouse.x+ width/2, mouse.y+height/2), false);
@@ -57,6 +57,7 @@ MapQuickItem {
         latitude: site.location.latitude
         longitude: site.location.longitude
     }
+    z:10
 
 
 }

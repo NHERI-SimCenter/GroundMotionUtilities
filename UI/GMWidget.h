@@ -17,10 +17,19 @@ class GMWidget;
 class GMWidget : public QWidget
 {
     Q_OBJECT
-
+    Q_ENUMS(ApplicationMode)
+    Q_PROPERTY(ApplicationMode mode READ mode WRITE setMode NOTIFY modeChanged)
 public:
     explicit GMWidget(QWidget *parent = 0);
     ~GMWidget();
+    enum ApplicationMode{Edit = 0, Results = 1};
+    ApplicationMode mode() const;
+
+signals:
+    void modeChanged(ApplicationMode newMode);
+
+public slots:
+    void setMode(ApplicationMode mode);
 
 private:
     Ui::GMWidget *ui;
@@ -36,6 +45,9 @@ private:
     ScenarioProcessor* m_scenarioProcessor;
     SiteConfig* m_siteConfig;
     SiteConfigWidget* m_siteConfigWidget;
+    ApplicationMode m_mode;
+
+    void setupConnections();
 };
 
 #endif // GMWIDGET_H

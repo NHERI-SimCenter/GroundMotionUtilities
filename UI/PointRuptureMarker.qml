@@ -6,8 +6,8 @@ import QtQml 2.2
 
 MapQuickItem {
 
-    anchorPoint.x: ruptureMarkerRect.width/2
-    anchorPoint.y: ruptureMarkerRect.height/2
+    anchorPoint.x: 0
+    anchorPoint.y: 0
 
     sourceItem: Rectangle {
         id:ruptureMarkerRect
@@ -20,7 +20,7 @@ MapQuickItem {
         anchors.centerIn: parent
         border.color: "black"
         border.width: 2
-
+        z: 100
         MouseArea
         {
             property bool hovered: false
@@ -45,7 +45,7 @@ MapQuickItem {
 
                  if(drag.active)
                  {
-                     var newCoordinate = map.toCoordinate(mapToItem(map, mouse.x+ width/2, mouse.y+height/2), false);
+                     var newCoordinate = map.toCoordinate(mapToItem(map, mouse.x, mouse.y), false);
                      rupture.location.setLatitude(newCoordinate.latitude)
                      rupture.location.setLongitude(newCoordinate.longitude)
                  }
@@ -63,6 +63,7 @@ MapQuickItem {
             anchors.centerIn: parent
             border.color: "black"
             border.width: 2
+            z: 100
         }
 
         Rectangle {
@@ -75,6 +76,7 @@ MapQuickItem {
                 anchors.centerIn: parent
                 border.color: "black"
                 border.width: 2
+                z: 100
         }
 
     }
@@ -84,6 +86,9 @@ MapQuickItem {
         latitude: rupture.location.latitude
         longitude: rupture.location.longitude
     }
+
+    zoomLevel: 11
+    z:100
 
 
 }
