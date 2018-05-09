@@ -5,7 +5,7 @@ import QtQuick.Controls 2.2
 import org.designsafe.ci.simcenter 1.0
 
 MapItemView {
-    model: sitesModel
+    model: locationsModel
 
     delegate: MapQuickItem
     {
@@ -28,8 +28,8 @@ MapItemView {
 
         coordinate
         {
-            latitude: latitude
-            longitude: longitude
+            latitude: model.display.latitude
+            longitude: model.display.longitude
         }
     }
 }

@@ -6,8 +6,8 @@ import org.designsafe.ci.simcenter 1.0
 
 MapQuickItem {
     id: siteMarker
-    anchorPoint.x: markerRect.width/2
-    anchorPoint.y: markerRect.height/2
+    anchorPoint.x: 0
+    anchorPoint.y: 0
     visible:(siteConfig.type === SiteConfig.Single)
 
     sourceItem: Rectangle {
@@ -45,7 +45,7 @@ MapQuickItem {
             onPositionChanged: {
                  if(drag.active)
                  {
-                     var newCoordinate = map.toCoordinate(mapToItem(map, mouse.x+ width/2, mouse.y+height/2), false);
+                     var newCoordinate = map.toCoordinate(mapToItem(map, mouse.x, mouse.y), false);
                      site.location.setLatitude(newCoordinate.latitude)
                      site.location.setLongitude(newCoordinate.longitude)
                  }
@@ -58,6 +58,6 @@ MapQuickItem {
         longitude: site.location.longitude
     }
     z:10
-
+    zoomLevel: 11
 
 }

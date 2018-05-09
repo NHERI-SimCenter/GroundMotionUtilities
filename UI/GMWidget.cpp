@@ -9,6 +9,8 @@ GMWidget::GMWidget(QWidget *parent) :
     QWidget(parent)
 {
     m_mode = ApplicationMode::Edit;
+    m_locationsModel = new LocationsListModel(this);
+
     this->setAutoFillBackground(true);
     Qt::Orientation orientation = Qt::Horizontal;
 
@@ -75,11 +77,14 @@ GMWidget::GMWidget(QWidget *parent) :
     view->rootContext()->setContextProperty("siteConfig", m_siteConfig);
     view->rootContext()->setContextProperty("siteResultsModel", &m_scenarioProcessor->getResultsModel());
     view->rootContext()->setContextProperty("gmApp", this);
+    view->rootContext()->setContextProperty("locationsModel", m_locationsModel);
 
     view->setSource(QUrl("qrc:/ScenarioMap.qml"));
     QWidget *container = QWidget::createWindowContainer(view, this);
     container->setMinimumSize(400, 400);
     container->resize(600, container->height());
+    m_mapObject = view->rootObject();
+
 
     QSplitter* splitter = new QSplitter(Qt::Orientation::Horizontal, this);
     //hBoxLayout->addLayout(vBoxLayout);
@@ -93,6 +98,8 @@ GMWidget::GMWidget(QWidget *parent) :
     hBoxLayout->addWidget(splitter, 1);
     this->resize(1000, this->height());
     this->window()->setWindowTitle(tr("Simcenter - Earthquake Scenario Simulation"));
+
+    updateLocations();
     setupConnections();
 }
 
@@ -114,10 +121,110 @@ void GMWidget::setMode(GMWidget::ApplicationMode mode)
     }
 }
 
+void GMWidget::updateLocations()
+{
+    QObject* gridMarker = m_mapObject->findChild<QObject*>("siteGridMarker");
+    QVariant dragged = gridMarker->property("dragged");
+    bool isDragged = dragged.toBool();
+
+    if(!isDragged)
+    {
+        QVector<Location*> locations;
+        double dTol =  1e-3;
+        GridDivision& latitude = m_siteConfig->siteGrid().latitude();
+        GridDivision& longitude = m_siteConfig->siteGrid().longitude();
+        for (double alat = latitude.min(); alat <= latitude.max() + dTol; alat += latitude.getStep())
+        {
+            for (double alon = longitude.min(); alon <= longitude.max() + dTol; alon += longitude.getStep())
+            {
+                locations.append(new Location(alat, alon));
+            }
+        }
+        m_locationsModel->setLocations(locations);
+    }
+}
+
 void GMWidget::setupConnections()
 {
     connect(m_scenarioProcessor, &ScenarioProcessor::finished, [this]()
     {
         setMode(GMWidget::ApplicationMode::Results);
     });
+
+    //Connecting changes in input to edit mode
+    //Connecting grid latitude
+    connect(&m_siteConfig->siteGrid().latitude(), &GridDivision::minChanged, [this]()
+    {
+        setMode(GMWidget::ApplicationMode::Edit);
+    });
+
+    connect(&m_siteConfig->siteGrid().latitude(), &GridDivision::maxChanged, [this]()
+    {
+        setMode(GMWidget::ApplicationMode::Edit);
+    });
+
+    connect(&m_siteConfig->siteGrid().latitude(), &GridDivision::divisionsChanged, [this]()
+    {
+        setMode(GMWidget::ApplicationMode::Edit);
+    });
+
+    //Connecting grid longitude
+    connect(&m_siteConfig->siteGrid().longitude(), &GridDivision::minChanged, [this]()
+    {
+        setMode(GMWidget::ApplicationMode::Edit);
+    });
+
+    connect(&m_siteConfig->siteGrid().longitude(), &GridDivision::maxChanged, [this]()
+    {
+        setMode(GMWidget::ApplicationMode::Edit);
+    });
+
+    connect(&m_siteConfig->siteGrid().longitude(), &GridDivision::divisionsChanged, [this]()
+    {
+        setMode(GMWidget::ApplicationMode::Edit);
+    });
+
+    connect(m_siteConfig, &SiteConfig::typeChanged, [this]()
+    {
+        setMode(GMWidget::ApplicationMode::Edit);
+    });
+
+    connect(m_eqRupture, &PointSourceRupture::magnitudeChanged, [this]()
+    {
+        setMode(GMWidget::ApplicationMode::Edit);
+    });
+
+    connect(m_eqRupture, &PointSourceRupture::dipChanged, [this]()
+    {
+        setMode(GMWidget::ApplicationMode::Edit);
+    });
+
+    connect(m_eqRupture, &PointSourceRupture::rakeChanged, [this]()
+    {
+        setMode(GMWidget::ApplicationMode::Edit);
+    });
+
+    connect(&m_eqRupture->location(), &RuptureLocation::latitudeChanged, [this]()
+    {
+        setMode(GMWidget::ApplicationMode::Edit);
+    });
+
+    connect(&m_eqRupture->location(), &RuptureLocation::longitudeChanged, [this]()
+    {
+        setMode(GMWidget::ApplicationMode::Edit);
+    });
+
+    connect(&m_eqRupture->location(), &RuptureLocation::depthChanged, [this]()
+    {
+        setMode(GMWidget::ApplicationMode::Edit);
+    });
+
+    //Connecting changes in the site grid to update in locations list
+    connect(&m_siteConfig->siteGrid().latitude(), &GridDivision::minChanged, [this](){updateLocations();});
+    connect(&m_siteConfig->siteGrid().latitude(), &GridDivision::maxChanged, [this](){updateLocations();});
+    connect(&m_siteConfig->siteGrid().latitude(), &GridDivision::divisionsChanged, [this](){updateLocations();});
+    connect(&m_siteConfig->siteGrid().longitude(), &GridDivision::minChanged, [this](){updateLocations();});
+    connect(&m_siteConfig->siteGrid().longitude(), &GridDivision::maxChanged, [this](){updateLocations();});
+    connect(&m_siteConfig->siteGrid().longitude(), &GridDivision::divisionsChanged, [this](){updateLocations();});
+
 }

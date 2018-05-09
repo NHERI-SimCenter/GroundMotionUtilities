@@ -2,6 +2,7 @@
 #define GMWIDGET_H
 
 #include <QWidget>
+#include <QQuickItem>
 #include "SiteWidget.h"
 #include "RuptureWidget.h"
 #include "GMPEWidget.h"
@@ -9,6 +10,7 @@
 #include "RecordSelectionWidget.h"
 #include "ScenarioProcessor.h"
 #include "SiteConfigWidget.h"
+#include "LocationsListModel.h"
 
 namespace Ui {
 class GMWidget;
@@ -27,9 +29,11 @@ public:
 
 signals:
     void modeChanged(ApplicationMode newMode);
+    void locationsChanged();
 
 public slots:
     void setMode(ApplicationMode mode);
+    void updateLocations();
 
 private:
     Ui::GMWidget *ui;
@@ -46,6 +50,8 @@ private:
     SiteConfig* m_siteConfig;
     SiteConfigWidget* m_siteConfigWidget;
     ApplicationMode m_mode;
+    LocationsListModel* m_locationsModel;
+    QQuickItem* m_mapObject;
 
     void setupConnections();
 };

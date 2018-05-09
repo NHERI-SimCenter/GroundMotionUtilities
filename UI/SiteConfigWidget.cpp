@@ -13,7 +13,7 @@ SiteConfigWidget::SiteConfigWidget(SiteConfig &siteconfig, QWidget *parent) : QW
     m_typeButtonsGroup = new QButtonGroup();
 
     QRadioButton* siteRadioButton = new QRadioButton(tr("Single Location"));
-    QRadioButton* gridRadioButton = new QRadioButton(tr("Grid of Sites"));
+    QRadioButton* gridRadioButton = new QRadioButton(tr("Grid of Locations"));
     m_typeButtonsGroup->addButton(siteRadioButton, 0);
     m_typeButtonsGroup->addButton(gridRadioButton, 1);
 

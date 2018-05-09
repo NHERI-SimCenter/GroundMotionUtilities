@@ -9,6 +9,7 @@ MapItemView {
     delegate: MapQuickItem
     {
         zoomLevel:11
+        visible: (gmApp.mode === GMWidget.Results)
         sourceItem: Rectangle {
             width: 30 * model.display.mean
             height:width

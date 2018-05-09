@@ -5,6 +5,11 @@ GridDivision::GridDivision(QObject *parent) : QObject(parent)
 
 }
 
+double GridDivision::getStep()
+{
+    return (m_max - m_min)/m_divisions;
+}
+
 double GridDivision::min()
 {
     return m_min;
@@ -47,5 +52,9 @@ int GridDivision::divisions()
 
 void GridDivision::setDivisions(int divisions)
 {
-    m_divisions = divisions;
+    if(m_divisions != divisions)
+    {
+        m_divisions = divisions;
+        emit divisionsChanged(m_divisions);
+    }
 }

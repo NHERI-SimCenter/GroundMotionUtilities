@@ -46,7 +46,8 @@ SOURCES += \
     SiteConfig.cpp \
     SiteConfigWidget.cpp \
     SiteGridWidget.cpp \
-    SiteResultsModel.cpp
+    SiteResultsModel.cpp \
+    LocationsListModel.cpp
 
 HEADERS += \
         GMWidget.h \
@@ -71,7 +72,8 @@ HEADERS += \
     SiteConfig.h \
     SiteConfigWidget.h \
     SiteGridWidget.h \
-    SiteResultsModel.h
+    SiteResultsModel.h \
+    LocationsListModel.h
 
 FORMS +=
 

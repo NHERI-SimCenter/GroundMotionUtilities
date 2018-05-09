@@ -7,6 +7,7 @@ import org.designsafe.ci.simcenter 1.0
 MapItemGroup
 {
     id: siteGridMarker
+    objectName: "siteGridMarker"
     property bool dragged;
     visible: (siteConfig.type === SiteConfig.Grid)
     Component.onCompleted:
@@ -32,6 +33,7 @@ MapItemGroup
 
     MapCircle
     {
+        visible:(gmApp.mode === GMWidget.Edit)
         id:topRightCorner
         center{
             latitude: siteGrid.latitude.max
@@ -52,8 +54,8 @@ MapItemGroup
             }
             else
             {
-                sitesModel.updateModel()
                 dragged = false;
+                gmApp.updateLocations()
             }
         }
         MouseArea{
@@ -75,6 +77,7 @@ MapItemGroup
     MapCircle
     {
         id:topLeftCorner
+        visible:(gmApp.mode === GMWidget.Edit)
         center{
             latitude: siteGrid.latitude.max
             longitude:siteGrid.longitude.min
@@ -95,8 +98,8 @@ MapItemGroup
             }
             else
             {
-                sitesModel.updateModel()
                 dragged = false;
+                gmApp.updateLocations()
             }
         }
         MouseArea{
@@ -118,6 +121,7 @@ MapItemGroup
     MapCircle
     {
         id:bottomLeftCorner
+        visible:(gmApp.mode === GMWidget.Edit)
         center{
             latitude: siteGrid.latitude.min
             longitude:siteGrid.longitude.min
@@ -137,8 +141,8 @@ MapItemGroup
             }
             else
             {
-                sitesModel.updateModel()
                 dragged = false;
+                gmApp.updateLocations()
             }
         }
         MouseArea{
@@ -162,6 +166,7 @@ MapItemGroup
     MapCircle
     {
         id:bottomRightCorner
+        visible:(gmApp.mode === GMWidget.Edit)
         center{
             latitude: siteGrid.latitude.min
             longitude:siteGrid.longitude.max
@@ -181,8 +186,8 @@ MapItemGroup
             }
             else
             {
-                sitesModel.updateModel()
                 dragged = false;
+                gmApp.updateLocations()
             }
         }
         MouseArea{
