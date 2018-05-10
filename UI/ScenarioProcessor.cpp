@@ -180,7 +180,6 @@ void ScenarioProcessor::startSelection()
 void ScenarioProcessor::processHazardOutput()
 {
     QByteArray output = m_hazardAnalysisProcess.readAllStandardOutput();
-    qDebug().nospace().noquote() << output;
     m_output = m_output.append(QString(output));
     processOutputLines();
 }
@@ -188,7 +187,6 @@ void ScenarioProcessor::processHazardOutput()
 void ScenarioProcessor::processSimulationOutput()
 {
     QByteArray output = m_simulationProcess.readAllStandardOutput();
-    qDebug().nospace().noquote() << output;
     m_output = m_output.append(QString(output));
     processOutputLines();
 }
@@ -196,7 +194,6 @@ void ScenarioProcessor::processSimulationOutput()
 void ScenarioProcessor::processSelectionOutput()
 {
     QByteArray output = m_recordSelectionProcess.readAllStandardOutput();
-    qDebug().nospace().noquote() << output;
     m_output = m_output.append(QString(output));
     processOutputLines();
 }
@@ -301,7 +298,9 @@ void ScenarioProcessor::processOutputLines()
             lines.removeAt(i);
 
     QRegularExpression siteExp("Processing Site ([0-9]+)");
+    QRegularExpression simulationExp("\\t Processing period: ([\\d\\.]+)");
     QRegularExpression selectionExp("Selecting record for target ([0-9]+)");
+
 
     foreach (line, lines)
     {
@@ -312,6 +311,14 @@ void ScenarioProcessor::processOutputLines()
         {
             int siteNo = siteMatch.captured(1).toInt();
             emit progressUpdated((double)siteNo/m_siteConfig.siteGrid().getNumSites());
+        }
+
+        QRegularExpressionMatch simulationMatch = simulationExp.match(line);
+        if (simulationMatch.hasMatch())
+        {
+            double period = simulationMatch.captured(1).toDouble();
+            int count = m_intensityMeasure.periods().indexOf(period);
+            emit progressUpdated((double)count/m_intensityMeasure.periods().size());
         }
 
         QRegularExpressionMatch selectionMatch = selectionExp.match(line);
