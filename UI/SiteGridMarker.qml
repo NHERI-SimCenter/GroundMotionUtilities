@@ -9,15 +9,19 @@ MapItemGroup
     id: siteGridMarker
     objectName: "siteGridMarker"
     property bool dragged;
+    property bool isMoving;
+
     visible: (siteConfig.type === SiteConfig.Grid)
     Component.onCompleted:
     {
         dragged = false
+        isMoving = false
     }
 
     MapRectangle {
         color: 'blue'
         border.width: 2
+        visible: !isMoving
         topLeft {
             latitude: siteGrid.latitude.max
             longitude: siteGrid.longitude.min
@@ -203,6 +207,45 @@ MapItemGroup
 
             if(!isNaN(center.longitude))
                 siteGrid.longitude.setMax(center.longitude)
+        }
+    }
+
+    MapCircle
+    {
+        id:centerMark
+
+        visible:(gmApp.mode === GMWidget.Edit)
+        center{
+            latitude: (siteGrid.latitude.min +siteGrid.latitude.max)/2
+            longitude: (siteGrid.longitude.min +siteGrid.longitude.max)/2
+
+        }
+        radius: 1000
+        color: 'blue'
+        opacity: 0.2
+
+        width: 2
+        Drag.active: centerHandle.drag.active
+        Drag.onActiveChanged:
+        {
+            if(Drag.active)
+            {
+                isMoving = true
+                dragged = true
+            }
+            else
+            {
+                isMoving = false
+                dragged = false
+                siteGrid.setCenter(center.latitude, center.longitude)
+                gmApp.updateLocations()
+            }
+        }
+        MouseArea{
+            anchors.fill: parent
+            drag.target: parent
+            id: centerHandle
+            cursorShape: pressed ? "ClosedHandCursor": "OpenHandCursor"
         }
     }
 }

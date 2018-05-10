@@ -22,6 +22,7 @@ public:
 signals:
 
 public slots:
+    void setCenter(double latitude, double longitude);
 
 private:
     GridDivision m_latitude;

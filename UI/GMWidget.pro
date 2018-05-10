@@ -47,7 +47,8 @@ SOURCES += \
     SiteConfigWidget.cpp \
     SiteGridWidget.cpp \
     SiteResultsModel.cpp \
-    LocationsListModel.cpp
+    LocationsListModel.cpp \
+    ../../widgets/Common/FooterWidget.cpp
 
 HEADERS += \
         GMWidget.h \
@@ -73,10 +74,12 @@ HEADERS += \
     SiteConfigWidget.h \
     SiteGridWidget.h \
     SiteResultsModel.h \
-    LocationsListModel.h
+    LocationsListModel.h \
+    ../../widgets/Common/FooterWidget.h
 
 FORMS +=
 
 RESOURCES += \
     qml.qrc \
-    ui.qrc
+    ui.qrc \
+    ../../widgets/Common/images.qrc

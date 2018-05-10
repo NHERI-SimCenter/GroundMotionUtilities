@@ -4,6 +4,7 @@
 #include <QPalette>
 #include <QtQuick/QQuickView>
 #include <QQmlContext>
+#include "../../widgets/Common/FooterWidget.h"
 
 GMWidget::GMWidget(QWidget *parent) :
     QWidget(parent)
@@ -98,6 +99,10 @@ GMWidget::GMWidget(QWidget *parent) :
     this->resize(1000, this->height());
     this->window()->setWindowTitle(tr("Simcenter - Earthquake Scenario Simulation"));
 
+    //Adding Simcenter footer
+    FooterWidget* footer = new FooterWidget(this);
+    vBoxLayout->addWidget(footer);
+
     //Adding a status bar
     m_statusBar = new QStatusBar(this);
     m_mainStatus = new QLabel("");
@@ -127,6 +132,7 @@ GMWidget::GMWidget(QWidget *parent) :
     m_progressBar->setSizePolicy(progressSizePolicy);
     m_progressBar->setMaximumWidth(200);
     m_statusBar->addWidget(m_progressBar, 0);
+    m_statusBar->setStyleSheet("QStatusBar::item { border: 1px solid #F0F8FF; border-radius: 3px; }");
 
     vBoxLayout->addWidget(m_statusBar);
     updateLocations();
