@@ -5,6 +5,7 @@
 #include "ScenarioProcessor.h"
 #include <QStandardPaths>
 #include <QDir>
+#include <QRegularExpressionMatch>
 
 ScenarioProcessor::ScenarioProcessor(SiteConfig& siteConfig, PointSourceRupture &rupture, GMPE &gmpe,
                                      IntensityMeasure &intensityMeasure, RecordSelectionConfig &selectionConfig, SiteResult& siteResult,
@@ -54,6 +55,8 @@ void ScenarioProcessor::startProcessingScenario()
 
 void ScenarioProcessor::startHazardAnalysis()
 {
+    emit statusUpdated("Processing seismic hazard analysis...");
+
     QJsonObject scenarioInput;
     scenarioInput.insert("Site", m_siteConfig.getJson());
     scenarioInput.insert("EqRupture", m_rupture.getJson());
@@ -88,6 +91,8 @@ void ScenarioProcessor::startHazardAnalysis()
 
 void ScenarioProcessor::startSimulation()
 {
+    emit statusUpdated("Simulating intensity measure...");
+
     //First we need to check hazard analysis did not fail
     if(m_hazardAnalysisProcess.exitStatus() == QProcess::ExitStatus::CrashExit || m_hazardAnalysisProcess.exitCode() != 0)
         return;
@@ -130,6 +135,8 @@ void ScenarioProcessor::startSimulation()
 
 void ScenarioProcessor::startSelection()
 {
+    emit statusUpdated("Selecting and scaling ground motion...");
+
     //First we need to check IM simulation
     if(m_simulationProcess.exitStatus() == QProcess::ExitStatus::CrashExit || m_simulationProcess.exitCode() != 0)
         return;
@@ -174,18 +181,24 @@ void ScenarioProcessor::processHazardOutput()
 {
     QByteArray output = m_hazardAnalysisProcess.readAllStandardOutput();
     qDebug().nospace().noquote() << output;
+    m_output = m_output.append(QString(output));
+    processOutputLines();
 }
 
 void ScenarioProcessor::processSimulationOutput()
 {
     QByteArray output = m_simulationProcess.readAllStandardOutput();
     qDebug().nospace().noquote() << output;
+    m_output = m_output.append(QString(output));
+    processOutputLines();
 }
 
 void ScenarioProcessor::processSelectionOutput()
 {
     QByteArray output = m_recordSelectionProcess.readAllStandardOutput();
     qDebug().nospace().noquote() << output;
+    m_output = m_output.append(QString(output));
+    processOutputLines();
 }
 
 QString ScenarioProcessor::getWorkFilePath(QString filename)
@@ -195,6 +208,8 @@ QString ScenarioProcessor::getWorkFilePath(QString filename)
 
 void ScenarioProcessor::startProcessingOutputs()
 {
+    emit statusUpdated("Processing outputs...");
+
     //We will open the record selection output
     QString selectionOutputPath = getWorkFilePath("SelectionOutput.json");
     QFile selectionOutputFile(selectionOutputPath);
@@ -248,7 +263,10 @@ void ScenarioProcessor::startProcessingOutputs()
 
     m_siteResult.setRecordId(result["Record"].toObject()["Id"].toInt());
     m_siteResult.setScaleFactor(result["ScaleFactor"].toDouble());
+    emit progressUpdated("Finished record selection and scaling");
+    emit statusUpdated("Analysis completed successfully!");
     emit finished();
+    emit progressUpdated("");
 }
 
 void ScenarioProcessor::setupConnections()
@@ -270,4 +288,37 @@ void ScenarioProcessor::setupConnections()
 
     //connecting selection finish to process the outputs
     connect(&m_recordSelectionProcess, QOverload<int>::of(&QProcess::finished), [this](int){this->startProcessingOutputs();});
+}
+
+void ScenarioProcessor::processOutputLines()
+{
+    QString line;
+    QStringList lines =  m_output.split(QRegExp("\n|\r\n|\r"), QString::SkipEmptyParts);
+    m_output.clear();
+
+    if(lines.count() > 100)
+        for (int i = 0; i < lines.count() - 100; i++ )
+            lines.removeAt(i);
+
+    QRegularExpression siteExp("Processing Site ([0-9]+)");
+    QRegularExpression selectionExp("Selecting record for target ([0-9]+)");
+
+    foreach (line, lines)
+    {
+        emit progressUpdated(line.trimmed());
+
+        QRegularExpressionMatch siteMatch = siteExp.match(line);
+        if (siteMatch.hasMatch())
+        {
+            int siteNo = siteMatch.captured(1).toInt();
+            emit progressUpdated((double)siteNo/m_siteConfig.siteGrid().getNumSites());
+        }
+
+        QRegularExpressionMatch selectionMatch = selectionExp.match(line);
+        if (selectionMatch.hasMatch())
+        {
+            int targetNo = selectionMatch.captured(1).toInt();
+            emit progressUpdated((double)targetNo/m_siteConfig.siteGrid().getNumSites());
+        }
+    }
 }

@@ -21,6 +21,8 @@ public:
 
 signals:
     void statusUpdated(QString status);
+    void progressUpdated(QString detail);
+    void progressUpdated(double percent);
     void stepFinished(QString stepName);
     void stepFailed(QString stepName);
     void finished();
@@ -53,8 +55,10 @@ private:
     QString m_workDir;
     QString getWorkFilePath(QString filename);
     SiteResultsModel m_resultsModel;
+    QString m_output;
 
     void setupConnections();
+    void processOutputLines();
 };
 
 #endif // SCENARIOPROCESSOR_H

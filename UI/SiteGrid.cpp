@@ -16,6 +16,11 @@ GridDivision &SiteGrid::longitude()
     return m_longitude;
 }
 
+int SiteGrid::getNumSites()
+{
+    return (latitude().divisions() + 1) * (longitude().divisions() + 1);
+}
+
 GridDivision *SiteGrid::getLatitudePtr()
 {
     return &m_latitude;

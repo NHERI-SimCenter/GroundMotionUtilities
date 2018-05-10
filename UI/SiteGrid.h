@@ -17,6 +17,7 @@ public:
 
     GridDivision& latitude();
     GridDivision& longitude();
+    int getNumSites();
 
 signals:
 

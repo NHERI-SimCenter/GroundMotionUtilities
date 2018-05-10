@@ -52,6 +52,12 @@ private:
     ApplicationMode m_mode;
     LocationsListModel* m_locationsModel;
     QQuickItem* m_mapObject;
+    QStatusBar* m_statusBar;
+    QLabel* m_mainStatus;
+    QLabel* m_detailedStatus;
+    QLabel* m_modeStatus;
+    QProgressBar* m_progressBar;
+    QPushButton* m_runButton;
 
     void setupConnections();
 };
