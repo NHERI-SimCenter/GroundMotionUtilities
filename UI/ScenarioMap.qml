@@ -9,7 +9,7 @@ Rectangle
     visible: true
     anchors.fill: parent
     border.color: "black"
-    border.width: 2
+    border.width: 1
 
     Plugin {
         id: mapPlugin
@@ -19,9 +19,7 @@ Rectangle
          PluginParameter { name: "osm.mapping.highdpi_tiles";value: true}
          PluginParameter { name: "osm.mapping.host";value: "https://tiles.basemaps.cartocdn.com/rastertiles/voyager/"}
          PluginParameter { name: "osm.useragent"; value: "Simcenter" }
-//         PluginParameter { name: "mapbox.access_token"; value: "pk.eyJ1IjoiZWw3YWRkYWQiLCJhIjoiY2pnaW5ra2xyMDJkaDJwbmI5aWdnN3hoMCJ9.PbM-__DXZNSVuqTYnjIdrQ" }
-
-
+         PluginParameter { name: "osm.mapping.custom.mapcopyright"; value: "<a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> Contributions, &copy; <a href=\"https://carto.com/attribution/\">Carto</a>" }
     }
 
     ListModel{
@@ -65,7 +63,7 @@ Rectangle
             visible: true
             anchors.fill: parent
             border.color: "black"
-            border.width: 2
+            border.width: 1
             color: "transparent"
         }
 
