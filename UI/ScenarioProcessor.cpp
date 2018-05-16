@@ -7,10 +7,11 @@
 #include <QDir>
 #include <QRegularExpressionMatch>
 
-ScenarioProcessor::ScenarioProcessor(SiteConfig& siteConfig, PointSourceRupture &rupture, GMPE &gmpe,
+ScenarioProcessor::ScenarioProcessor(GmAppConfig &appconfig, SiteConfig& siteConfig, PointSourceRupture &rupture, GMPE &gmpe,
                                      IntensityMeasure &intensityMeasure, RecordSelectionConfig &selectionConfig, SiteResult& siteResult,
                                      QObject *parent) : QObject(parent), m_siteConfig(siteConfig), m_rupture(rupture),
-                                     m_gmpe(gmpe), m_intensityMeasure(intensityMeasure), m_selectionConfig(selectionConfig), m_siteResult(siteResult)
+                                     m_gmpe(gmpe), m_intensityMeasure(intensityMeasure), m_selectionConfig(selectionConfig), m_siteResult(siteResult),
+                                     m_appConfig(appconfig)
 {
     //Init the working directory that will be used by this processor
     QString dataDirectory = QStandardPaths::writableLocation(QStandardPaths::StandardLocation::GenericDataLocation);
@@ -72,13 +73,10 @@ void ScenarioProcessor::startHazardAnalysis()
     inputFile.write(inputDoc.toJson());
     inputFile.close();
 
-    //TODO: This will need to be configured
-    QString eqScenarioPath = "C:/SourceTree/Simcenter-EQSS/EQScenario/build/EQScenario.jar";
-
     QString inputName = getWorkFilePath("Scenario.json");
     QString outputName = getWorkFilePath("Scenario_" + m_intensityMeasure.type()+ ".json");
     QStringList args;
-    args << "-jar" << eqScenarioPath << inputName << outputName;
+    args << "-jar" << m_appConfig.eqHazardPath() << inputName << outputName;
 
     m_hazardAnalysisProcess.start("java", args);
 
@@ -96,8 +94,6 @@ void ScenarioProcessor::startSimulation()
     //First we need to check hazard analysis did not fail
     if(m_hazardAnalysisProcess.exitStatus() == QProcess::ExitStatus::CrashExit || m_hazardAnalysisProcess.exitCode() != 0)
         return;
-    QString simulateIMPath = "C:/SourceTree/Simcenter-EQSS/build/SimulateGM/Release/SimulateGM.exe";
-
 
     QString hazardOutputPath = getWorkFilePath("Scenario_" + m_intensityMeasure.type()+ ".json");
     QString simConfigPath = getWorkFilePath("SimConfig.json");
@@ -123,7 +119,7 @@ void ScenarioProcessor::startSimulation()
 
     QStringList args;
     args << simConfigPath << simOutputPath;
-    m_simulationProcess.start(simulateIMPath, args);
+    m_simulationProcess.start(m_appConfig.simulateIMPath(), args);
 
     if(!m_simulationProcess.waitForStarted(-1))
     {
@@ -140,8 +136,6 @@ void ScenarioProcessor::startSelection()
     //First we need to check IM simulation
     if(m_simulationProcess.exitStatus() == QProcess::ExitStatus::CrashExit || m_simulationProcess.exitCode() != 0)
         return;
-    QString selectRecordPath = "C:/SourceTree/Simcenter-EQSS/build/SelectGM/Release/SelectGM.exe";
-
 
     QString selectionConfigPath = getWorkFilePath("SelectionConfig.json");
     QString simOutputPath = getWorkFilePath("SimOutput.json");
@@ -154,7 +148,11 @@ void ScenarioProcessor::startSelection()
     selectionConfig.insert("Target", target);
 
     QJsonObject db =  selectionConfig["Database"].toObject();
-    db.insert("File", "C:/SourceTree/Simcenter-EQSS/SelectGM/examples/NGAWest2-1000.csv");
+    if(m_selectionConfig.database() == RecordSelectionConfig::NGAWest2)
+        db.insert("File", m_appConfig.NGAW2DbPath());
+    else
+        db.insert("File", m_appConfig.NGAW2SubsetDbPath());
+
     selectionConfig.insert("Database", db);
 
     QJsonDocument selectionConfigDoc(selectionConfig);
@@ -168,7 +166,7 @@ void ScenarioProcessor::startSelection()
 
     QStringList args;
     args << selectionConfigPath << selectionOutputPath;
-    m_recordSelectionProcess.start(selectRecordPath, args);
+    m_recordSelectionProcess.start(m_appConfig.selectRecordPath(), args);
 
     if(!m_recordSelectionProcess.waitForStarted(-1))
     {

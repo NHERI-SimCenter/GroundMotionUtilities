@@ -4,6 +4,10 @@
 int main(int argc, char *argv[])
 {
     QApplication gmApp(argc, argv);
+
+    QCoreApplication::setOrganizationName("SimCenter");
+    QCoreApplication::setApplicationName("Ground Motion Tools");
+
     GMWidget gmWindow;
     gmWindow.show();
 

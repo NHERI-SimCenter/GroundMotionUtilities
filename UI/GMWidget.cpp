@@ -5,14 +5,19 @@
 #include <QtQuick/QQuickView>
 #include <QQmlContext>
 #include "../../widgets/Common/FooterWidget.h"
+#include "GmAppConfigWidget.h"
 
 GMWidget::GMWidget(QWidget *parent) :
     QWidget(parent)
 {
+    initAppConfig();
+
     m_mode = ApplicationMode::Edit;
     m_locationsModel = new LocationsListModel(this);
 
     this->setAutoFillBackground(true);
+    this->setWindowIcon(QIcon(":/images/earthquake.svg"));
+
     Qt::Orientation orientation = Qt::Horizontal;
 
     QPalette palette = QPalette();
@@ -47,19 +52,29 @@ GMWidget::GMWidget(QWidget *parent) :
     toolsVBoxLayout->addWidget(this->m_selectionWidget, 0);
 
     this->m_siteResult = new SiteResult();
-    m_scenarioProcessor = new ScenarioProcessor(*m_siteConfig, *m_eqRupture, *m_gmpe, *m_intensityMeasure, *m_selectionconfig, *m_siteResult);
+    m_scenarioProcessor = new ScenarioProcessor(*m_appConfig, *m_siteConfig, *m_eqRupture, *m_gmpe,
+                                                *m_intensityMeasure, *m_selectionconfig, *m_siteResult);
 
     m_runButton = new QPushButton(tr("&Run"));
     m_runButton->setMinimumSize(64, 32);
 
-    QPushButton* settingButton = new QPushButton(QIcon(":/images/settings.png"), tr("&Settings"));
-    settingButton->setMinimumSize(96, 32);
-    settingButton->setIconSize(QSize(25,25));
+    m_settingButton = new QPushButton(QIcon(":/images/settings.png"), tr("&Settings"));
+    m_settingButton->setMinimumSize(96, 32);
+    m_settingButton->setIconSize(QSize(25,25));
 
     QWidget* bottomToolsWidget = new QWidget();
     QHBoxLayout* bottomToolsHBox = new QHBoxLayout();
     bottomToolsWidget->setLayout(bottomToolsHBox);
-    bottomToolsHBox->addWidget(settingButton);
+    bottomToolsHBox->addWidget(m_settingButton);
+
+    //Adding alert icon
+    QIcon alertIcon(":/images/Alert.svg");
+    m_alertIconWidget = new QLabel();
+    m_alertIconWidget->setPixmap(alertIcon.pixmap(30, 30));
+    m_alertIconWidget->setToolTip("The application is not configured properly, please go to setting to set the paths!");
+    bottomToolsHBox->addWidget(m_alertIconWidget);
+    m_alertIconWidget->setHidden(true);
+
     bottomToolsHBox->addStretch();
     bottomToolsHBox->addWidget(m_runButton);
 
@@ -84,7 +99,6 @@ GMWidget::GMWidget(QWidget *parent) :
     container->setMinimumSize(400, 400);
     container->resize(600, container->height());
     m_mapObject = view->rootObject();
-
 
     QSplitter* splitter = new QSplitter(Qt::Orientation::Horizontal, this);
     //hBoxLayout->addLayout(vBoxLayout);
@@ -184,8 +198,25 @@ void GMWidget::setupConnections()
 {    
     connect(m_runButton, &QPushButton::released, [this]()
     {
-        this->m_scenarioProcessor->startProcessingScenario();
-        m_progressBar->setVisible(true);
+        if(m_appConfig->validate())
+        {
+            this->m_scenarioProcessor->startProcessingScenario();
+            m_progressBar->setVisible(true);
+            m_alertIconWidget->setHidden(true);
+            saveAppSettings();
+        }
+        else
+        {
+            m_alertIconWidget->setHidden(false);
+            m_progressBar->setVisible(false);
+            m_mainStatus->setText("Invalid configuration!");
+        }
+    });
+
+    connect(m_settingButton, &QPushButton::released, [this]()
+    {
+        GmAppConfigWidget* configWidget = new GmAppConfigWidget(*m_appConfig, this);
+        configWidget->show();
     });
 
     connect(m_scenarioProcessor, &ScenarioProcessor::finished, [this]()
@@ -290,4 +321,59 @@ void GMWidget::setupConnections()
     connect(m_scenarioProcessor, QOverload<double>::of(&ScenarioProcessor::progressUpdated), [this](double progress){
        m_progressBar->setValue(static_cast<int>(progress*100));
     });
+}
+
+void GMWidget::initAppConfig()
+{
+    m_appConfig = new GmAppConfig(this);
+
+    //First, We will look into settings
+    QSettings settings;
+    m_appConfig->setEqHazardPath(settings.value("EqHazardPath", "").toString());
+    m_appConfig->setSimulateIMPath(settings.value("SimulateIMPath", "").toString());
+    m_appConfig->setSelectRecordPath(settings.value("SelectRecordPath", "").toString());
+    m_appConfig->setNGAW2DbPath(settings.value("NGAW2DbPath", "").toString());
+    m_appConfig->setNGAW2SubsetDbPath(settings.value("NGAW2SubsetDbPath", "").toString());
+
+    //If path is missing we will try relative path
+    //TODO: we need to search for the applications and files automatically (maybe platform dependent)
+    if(m_appConfig->eqHazardPath().isEmpty() || !QFile::exists(m_appConfig->eqHazardPath()))
+    {
+        if(QFileInfo::exists("../EQScenario/build/EQScenario.jar"))
+            m_appConfig->setEqHazardPath(QFileInfo("../EQScenario/build/EQScenario.jar").absoluteFilePath());
+    }
+
+    if(m_appConfig->simulateIMPath().isEmpty() || !QFile::exists(m_appConfig->simulateIMPath()))
+    {
+        if(QFileInfo::exists("./SimulateGM/Release/SimulateGM.exe"))
+            m_appConfig->setSimulateIMPath(QFileInfo("./SimulateGM/Release/SimulateGM.exe").absoluteFilePath());
+    }
+
+    if(m_appConfig->selectRecordPath().isEmpty() || !QFile::exists(m_appConfig->selectRecordPath()))
+    {
+        if(QFileInfo::exists("./SelectGM/Release/SelectGM.exe"))
+            m_appConfig->setSelectRecordPath(QFileInfo("./SelectGM/Release/SelectGM.exe").absoluteFilePath());
+    }
+
+    if(m_appConfig->NGAW2DbPath().isEmpty() || !QFile::exists(m_appConfig->NGAW2DbPath()))
+    {
+        if(QFileInfo::exists("./SelectGM/Release/NGAWest2.csv"))
+            m_appConfig->setNGAW2DbPath(QFileInfo("./SelectGM/Release/NGAWest2.csv").absoluteFilePath());
+    }
+
+    if(m_appConfig->NGAW2SubsetDbPath().isEmpty() || !QFile::exists(m_appConfig->NGAW2SubsetDbPath()))
+    {
+        if(QFileInfo::exists("./SelectGM/Release/NGAWest2-1000.csv"))
+            m_appConfig->setNGAW2SubsetDbPath(QFileInfo("./SelectGM/Release/NGAWest2-1000.csv").absoluteFilePath());
+    }
+}
+
+void GMWidget::saveAppSettings()
+{
+    QSettings settings;
+    settings.setValue("EqHazardPath", m_appConfig->eqHazardPath());
+    settings.setValue("SimulateIMPath", m_appConfig->simulateIMPath());
+    settings.setValue("SelectRecordPath", m_appConfig->selectRecordPath());
+    settings.setValue("NGAW2DbPath", m_appConfig->NGAW2DbPath());
+    settings.setValue("NGAW2SubsetDbPath", m_appConfig->NGAW2SubsetDbPath());
 }

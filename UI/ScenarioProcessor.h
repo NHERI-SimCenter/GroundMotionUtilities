@@ -9,13 +9,14 @@
 #include "IntensityMeasure.h"
 #include "RecordSelectionConfig.h"
 #include "SiteResultsModel.h"
+#include "GmAppConfig.h"
 
 class ScenarioProcessor : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit ScenarioProcessor(SiteConfig& siteConfig, PointSourceRupture& rupture, GMPE& gmpe, IntensityMeasure& intensityMeasure,
+    explicit ScenarioProcessor(GmAppConfig& appconfig, SiteConfig& siteConfig, PointSourceRupture& rupture, GMPE& gmpe, IntensityMeasure& intensityMeasure,
                                RecordSelectionConfig& selectionConfig, SiteResult& siteResult, QObject *parent = nullptr);
     SiteResultsModel& getResultsModel();
 
@@ -48,6 +49,7 @@ private:
     IntensityMeasure& m_intensityMeasure;
     RecordSelectionConfig& m_selectionConfig;
     SiteResult& m_siteResult;
+    GmAppConfig& m_appConfig;
 
     QProcess m_hazardAnalysisProcess;
     QProcess m_simulationProcess;

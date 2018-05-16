@@ -11,10 +11,7 @@
 #include "ScenarioProcessor.h"
 #include "SiteConfigWidget.h"
 #include "LocationsListModel.h"
-
-namespace Ui {
-class GMWidget;
-}
+#include "GmAppConfig.h"
 
 class GMWidget : public QWidget
 {
@@ -36,7 +33,6 @@ public slots:
     void updateLocations();
 
 private:
-    Ui::GMWidget *ui;
     RuptureWidget* m_ruptureWidget;
     PointSourceRupture* m_eqRupture;
     GMPE* m_gmpe;
@@ -58,8 +54,13 @@ private:
     QLabel* m_modeStatus;
     QProgressBar* m_progressBar;
     QPushButton* m_runButton;
+    QPushButton* m_settingButton;
+    GmAppConfig* m_appConfig;
+    QLabel* m_alertIconWidget;
 
     void setupConnections();
+    void initAppConfig();
+    void saveAppSettings();
 };
 
 #endif // GMWIDGET_H

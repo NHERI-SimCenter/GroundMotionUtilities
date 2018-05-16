@@ -48,7 +48,9 @@ SOURCES += \
     SiteGridWidget.cpp \
     SiteResultsModel.cpp \
     LocationsListModel.cpp \
-    ../../widgets/Common/FooterWidget.cpp
+    ../../widgets/Common/FooterWidget.cpp \
+    GmAppConfig.cpp \
+    GmAppConfigWidget.cpp
 
 HEADERS += \
         GMWidget.h \
@@ -75,7 +77,9 @@ HEADERS += \
     SiteGridWidget.h \
     SiteResultsModel.h \
     LocationsListModel.h \
-    ../../widgets/Common/FooterWidget.h
+    ../../widgets/Common/FooterWidget.h \
+    GmAppConfig.h \
+    GmAppConfigWidget.h
 
 FORMS +=
 
