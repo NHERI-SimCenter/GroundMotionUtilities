@@ -11,6 +11,7 @@ GMWidget::GMWidget(QWidget *parent) :
     QWidget(parent)
 {
     initAppConfig();
+    initActions();
 
     m_mode = ApplicationMode::Edit;
     m_locationsModel = new LocationsListModel(this);
@@ -148,6 +149,32 @@ GMWidget::GMWidget(QWidget *parent) :
     m_statusBar->addWidget(m_progressBar, 0);
     m_statusBar->setStyleSheet("QStatusBar::item { border: 1px solid #F0F8FF; border-radius: 3px; }");
 
+    QMenuBar* menuBar = new QMenuBar();
+    QMenu *fileMenu = new QMenu(tr("&File"));
+    menuBar->addMenu(fileMenu);
+    fileMenu->addAction(m_saveAction);
+    fileMenu->addAction(m_loadAction);
+    fileMenu->addSeparator();
+    fileMenu->addAction(m_exportAction);
+    fileMenu->addSeparator();
+    fileMenu->addAction(m_exitAction);
+
+    QMenu *editMenu = new QMenu(tr("&Edit"));
+    QMenu* presetsMenu = editMenu->addMenu(tr("&Presets"));
+    presetsMenu->addAction(m_setLAAction);
+    presetsMenu->addAction(m_setSFAction);
+    presetsMenu->addAction(m_setSEAAction);
+    editMenu->addSeparator();
+    editMenu->addAction(m_settingsAction);
+    menuBar->addMenu(editMenu);
+
+    QMenu *helpMenu = new QMenu(tr("&Help"));
+    helpMenu->addAction(m_aboutAction);
+    helpMenu->addAction(m_licenseAction);
+    menuBar->addMenu(helpMenu);
+
+
+    this->layout()->setMenuBar(menuBar);
     vBoxLayout->addWidget(m_statusBar);
     updateLocations();
     setupConnections();
@@ -194,6 +221,12 @@ void GMWidget::updateLocations()
     }
 }
 
+void GMWidget::setAppConfig()
+{
+    GmAppConfigWidget* configWidget = new GmAppConfigWidget(*m_appConfig, this);
+    configWidget->show();
+}
+
 void GMWidget::setupConnections()
 {    
     connect(m_runButton, &QPushButton::released, [this]()
@@ -213,11 +246,7 @@ void GMWidget::setupConnections()
         }
     });
 
-    connect(m_settingButton, &QPushButton::released, [this]()
-    {
-        GmAppConfigWidget* configWidget = new GmAppConfigWidget(*m_appConfig, this);
-        configWidget->show();
-    });
+    connect(m_settingButton, &QPushButton::released, this, &GMWidget::setAppConfig);
 
     connect(m_scenarioProcessor, &ScenarioProcessor::finished, [this]()
     {
@@ -228,9 +257,15 @@ void GMWidget::setupConnections()
     connect(this, &GMWidget::modeChanged, [this]()
     {
         if(m_mode == ApplicationMode::Edit)
+        {
             m_modeStatus->setText("Mode: Edit");
+            m_exportAction->setDisabled(true);
+        }
         else
+        {
             m_modeStatus->setText("Mode: Results");
+            m_exportAction->setDisabled(false);
+        }
     });
 
     //Connecting changes in input to edit mode
@@ -321,6 +356,17 @@ void GMWidget::setupConnections()
     connect(m_scenarioProcessor, QOverload<double>::of(&ScenarioProcessor::progressUpdated), [this](double progress){
        m_progressBar->setValue(static_cast<int>(progress*100));
     });
+
+    //Connecting Actions
+    connect(m_exitAction, &QAction::triggered, QApplication::instance(), &QApplication::quit);
+    connect(m_settingsAction, &QAction::triggered, this, &GMWidget::setAppConfig);
+    connect(m_setLAAction, &QAction::triggered, [this]()
+    {
+        m_siteConfig->siteGrid().setCenter(34, -118);
+        m_siteConfig->site().setLocation(34.0522, -118.2437);
+        m_eqRupture->location().set(33.892, -117.779);
+    });
+
 }
 
 void GMWidget::initAppConfig()
@@ -366,6 +412,32 @@ void GMWidget::initAppConfig()
         if(QFileInfo::exists("./SelectGM/Release/NGAWest2-1000.csv"))
             m_appConfig->setNGAW2SubsetDbPath(QFileInfo("./SelectGM/Release/NGAWest2-1000.csv").absoluteFilePath());
     }
+}
+
+void GMWidget::initActions()
+{
+    m_saveAction = new QAction(tr("&Save Scenario"), this);
+    m_saveAction->setShortcut(QKeySequence::Save);
+
+    m_loadAction = new QAction(tr("&Load Scenario"), this);
+    m_loadAction->setShortcut(QKeySequence::Open);
+
+    m_exportAction = new QAction(tr("Ex&port all"), this);
+    m_exportAction->setShortcut(QKeySequence::SaveAs);
+    m_exportAction->setDisabled(true);
+
+    m_exitAction = new QAction(tr("E&xit"), this);
+    m_exitAction->setShortcut(QKeySequence::Close);
+
+    m_setLAAction = new QAction(tr("Los &Angeles"), this);
+    m_setSFAction = new QAction(tr("San &Francisco"), this);
+    m_setSEAAction = new QAction(tr("Sea&ttle"), this);
+
+    m_settingsAction = new QAction(tr("Settin&gs"), this);
+
+    m_aboutAction = new QAction(tr("A&bout"), this);
+    m_licenseAction = new QAction(tr("&License"), this);
+
 }
 
 void GMWidget::saveAppSettings()

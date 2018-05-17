@@ -31,6 +31,7 @@ signals:
 public slots:
     void setMode(ApplicationMode mode);
     void updateLocations();
+    void setAppConfig();
 
 private:
     RuptureWidget* m_ruptureWidget;
@@ -58,8 +59,22 @@ private:
     GmAppConfig* m_appConfig;
     QLabel* m_alertIconWidget;
 
+    //actions
+    QAction* m_saveAction;
+    QAction* m_loadAction;
+    QAction* m_exportAction;
+    QAction* m_exitAction;
+    QAction* m_settingsAction;
+    QAction* m_setLAAction;
+    QAction* m_setSFAction;
+    QAction* m_setSEAAction;
+    QAction* m_aboutAction;
+    QAction* m_licenseAction;
+
+
     void setupConnections();
     void initAppConfig();
+    void initActions();
     void saveAppSettings();
 };
 
