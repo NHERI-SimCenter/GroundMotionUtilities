@@ -7,6 +7,7 @@
 #include "../../widgets/Common/FooterWidget.h"
 #include "GmAppConfigWidget.h"
 
+
 GMWidget::GMWidget(QWidget *parent) :
     QWidget(parent)
 {
@@ -362,9 +363,33 @@ void GMWidget::setupConnections()
     connect(m_settingsAction, &QAction::triggered, this, &GMWidget::setAppConfig);
     connect(m_setLAAction, &QAction::triggered, [this]()
     {
-        m_siteConfig->siteGrid().setCenter(34, -118);
+        m_siteConfig->siteGrid().setCenter(33.955, -117.9195);
+        m_siteConfig->siteGrid().latitude().set(33.713, 34.197, 25);
+        m_siteConfig->siteGrid().longitude().set(-118.527, -117.312, 40);
         m_siteConfig->site().setLocation(34.0522, -118.2437);
         m_eqRupture->location().set(33.892, -117.779);
+        setMapCenter(33.955, -117.9195);
+    });
+
+    connect(m_setSFAction, &QAction::triggered, [this]()
+    {
+        m_siteConfig->siteGrid().setCenter(37.7, -122.1245);
+        m_siteConfig->siteGrid().latitude().set(37.301, 38.100, 30);
+        m_siteConfig->siteGrid().longitude().set(-122.519, -121.730, 30);
+        m_siteConfig->site().setLocation(37.8719, -122.2585);
+        m_eqRupture->location().set(37.770, -122.128);
+        setMapCenter(37.7, -122.1245);
+    });
+
+    connect(m_setSEAAction, &QAction::triggered, [this]()
+    {
+        m_siteConfig->siteGrid().setCenter(47.6325, -122.133);
+        m_siteConfig->siteGrid().latitude().set(47.258, 48.007, 40);
+        m_siteConfig->siteGrid().longitude().set(-122.395, -121.871, 25);
+
+        m_siteConfig->site().setLocation(47.6062, -122.3321);
+        m_eqRupture->location().set(47.591, -122.158);
+        setMapCenter(47.6325, -122.133);
     });
 
 }
@@ -437,7 +462,6 @@ void GMWidget::initActions()
 
     m_aboutAction = new QAction(tr("A&bout"), this);
     m_licenseAction = new QAction(tr("&License"), this);
-
 }
 
 void GMWidget::saveAppSettings()
@@ -448,4 +472,16 @@ void GMWidget::saveAppSettings()
     settings.setValue("SelectRecordPath", m_appConfig->selectRecordPath());
     settings.setValue("NGAW2DbPath", m_appConfig->NGAW2DbPath());
     settings.setValue("NGAW2SubsetDbPath", m_appConfig->NGAW2SubsetDbPath());
+}
+
+void GMWidget::setMapCenter(double latitude, double longitude)
+{
+    QObject* map = m_mapObject->findChild<QObject*>("map");
+    if (map)
+    {
+        m_mapCenter.setLatitude(latitude);
+        m_mapCenter.setLongitude(longitude);
+        map->setProperty("center", QVariant::fromValue(m_mapCenter));
+        map->setProperty("zoomLevel", 9.75);
+    }
 }

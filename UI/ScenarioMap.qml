@@ -49,6 +49,7 @@ Rectangle
 
     Map {
         id:map
+        objectName: "map"
         plugin: mapPlugin
         anchors.fill: parent
         width: 800

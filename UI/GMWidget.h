@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QQuickItem>
+#include <QGeoCoordinate>
 #include "SiteWidget.h"
 #include "RuptureWidget.h"
 #include "GMPEWidget.h"
@@ -58,6 +59,7 @@ private:
     QPushButton* m_settingButton;
     GmAppConfig* m_appConfig;
     QLabel* m_alertIconWidget;
+    QGeoCoordinate m_mapCenter;
 
     //actions
     QAction* m_saveAction;
@@ -76,6 +78,7 @@ private:
     void initAppConfig();
     void initActions();
     void saveAppSettings();
+    void setMapCenter(double latitude, double longitude);
 };
 
 #endif // GMWIDGET_H
