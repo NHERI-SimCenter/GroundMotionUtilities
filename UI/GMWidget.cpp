@@ -6,7 +6,7 @@
 #include <QQmlContext>
 #include "../../widgets/Common/FooterWidget.h"
 #include "GmAppConfigWidget.h"
-
+#include "GmCommon.h"
 
 GMWidget::GMWidget(QWidget *parent) :
     QWidget(parent)
@@ -228,6 +228,22 @@ void GMWidget::setAppConfig()
     configWidget->show();
 }
 
+void GMWidget::exportAll()
+{
+    QString exportDir = QFileDialog::getExistingDirectory(this);
+    if(!exportDir.isEmpty())
+    {
+        exportFile("Scenario.json", exportDir);
+        exportFile("Scenario_" + m_intensityMeasure->type() + ".json", exportDir);
+        exportFile("Scenario_" + m_intensityMeasure->type() + "_Geo.json", exportDir);
+        exportFile("SimConfig.json", exportDir);
+        exportFile("SimOutput.json", exportDir);
+        exportFile("SelectionConfig.json", exportDir);
+        exportFile("SelectionOutput.json", exportDir);
+
+    }
+}
+
 void GMWidget::setupConnections()
 {    
     connect(m_runButton, &QPushButton::released, [this]()
@@ -392,6 +408,8 @@ void GMWidget::setupConnections()
         setMapCenter(47.6325, -122.133);
     });
 
+    connect(m_exportAction, &QAction::triggered, this, &GMWidget::exportAll);
+
 }
 
 void GMWidget::initAppConfig()
@@ -484,4 +502,11 @@ void GMWidget::setMapCenter(double latitude, double longitude)
         map->setProperty("center", QVariant::fromValue(m_mapCenter));
         map->setProperty("zoomLevel", 9.75);
     }
+}
+
+void GMWidget::exportFile(QString fileName, QString directory)
+{
+    QString workFilePath = GmCommon::getWorkFilePath(fileName);
+    if(QFileInfo::exists(workFilePath))
+        QFile::copy(workFilePath, QDir::cleanPath(directory + QDir::separator() + fileName));
 }

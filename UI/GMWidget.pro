@@ -50,7 +50,8 @@ SOURCES += \
     LocationsListModel.cpp \
     ../../widgets/Common/FooterWidget.cpp \
     GmAppConfig.cpp \
-    GmAppConfigWidget.cpp
+    GmAppConfigWidget.cpp \
+    GmCommon.cpp
 
 HEADERS += \
         GMWidget.h \
@@ -79,7 +80,8 @@ HEADERS += \
     LocationsListModel.h \
     ../../widgets/Common/FooterWidget.h \
     GmAppConfig.h \
-    GmAppConfigWidget.h
+    GmAppConfigWidget.h \
+    GmCommon.h
 
 FORMS +=
 

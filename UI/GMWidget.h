@@ -33,6 +33,7 @@ public slots:
     void setMode(ApplicationMode mode);
     void updateLocations();
     void setAppConfig();
+    void exportAll();
 
 private:
     RuptureWidget* m_ruptureWidget;
@@ -79,6 +80,7 @@ private:
     void initActions();
     void saveAppSettings();
     void setMapCenter(double latitude, double longitude);
+    void exportFile(QString fileName, QString directory);
 };
 
 #endif // GMWIDGET_H
