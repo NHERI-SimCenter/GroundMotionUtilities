@@ -37,7 +37,19 @@ const QStringList &GMPE::validTypes()
             << "Boore, Stewart, Seyhan & Atkinson (2014)"
             << "Campbell & Bozorgnia (2014)"
             << "Chiou & Youngs (2014)"
-            << "Idriss (2014)";
+            << "Idriss (2014)"
+            << "Campbell & Bozorgnia (2008)"
+            << "Boore & Atkinson (2008)"
+            << "Abrahamson & Silva (2008)"
+            << "Chiou & Youngs (2008)"
+            << "Boore & Atkinson (2006)"
+            << "Chiou & Youngs (2006)"
+            << "Campbell & Bozorgnia (2006)"
+            << "Campbell and Bozorgnia (2003)"
+            << "Field (2000)"
+            << "Campbell (1997) w/ erratum (2000) changes"
+            << "Abrahamson & Silva (1997)"
+            << "Boore, Joyner & Fumal (1997)";
 
     return validTypes;
 }

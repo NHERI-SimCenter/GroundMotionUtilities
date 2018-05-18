@@ -79,7 +79,7 @@ STATUS GMSimulator::SimulateGM(std::string gmFile, std::string OutputFile, bool 
                 for (int j = 0; j < GMs.Size(); j++)
                 {
                     Value::Array mu = GMs[j]["SA"]["Mean"].GetArray();
-                    Value::Array sigma = GMs[j]["SA"]["StdDev"].GetArray();
+                    Value::Array sigma = GMs[j]["SA"]["TotalStdDev"].GetArray();
 
                     if(mu.Size() != periods.Size())
                         return FAIL;         

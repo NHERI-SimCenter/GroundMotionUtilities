@@ -10,7 +10,7 @@ RuptureWidget::RuptureWidget(PointSourceRupture& rupture, QWidget *parent, Qt::O
     this->m_siteGroupBox->setStyleSheet("QGroupBox {font-weight: bold;font-size: 10pt; qproperty-flat: true;}");
 
     this->m_magnitudeBox = new QDoubleSpinBox(this->m_siteGroupBox);
-    this->m_magnitudeBox->setRange(0.0, 12.0);
+    this->m_magnitudeBox->setRange(4.5, 9.0);
     this->m_magnitudeBox->setDecimals(3);
     this->m_magnitudeBox->setSingleStep(0.001);
 

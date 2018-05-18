@@ -24,7 +24,7 @@ public class SHAOutput
 	{
 		this.m_Results = new SiteResult[size];
 		this.m_Periods = periods;
-		this.m_EqRupture = eqRupture;	
+		this.m_EqRupture = eqRupture;
 	}
 	
 	public SiteResult[] Results()

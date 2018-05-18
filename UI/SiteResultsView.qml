@@ -11,7 +11,7 @@ MapItemView {
         zoomLevel:11
         visible: (gmApp.mode === GMWidget.Results)
         sourceItem: Rectangle {
-            width: 30 * model.display.mean
+            width: 40 * model.display.mean
             height:width
             radius: width/2
             visible: true
@@ -26,7 +26,11 @@ MapItemView {
                 property bool hovered: false
                 anchors.centerIn: parent
                 anchors.fill: parent
-                ToolTip.text:  String(qsTr("Site\nLocation: (%1, %2)\nMean IM:%3\nSelected Record Id:%4\nScale Factor:%5")).arg(model.display.location.latitude).arg(model.display.location.longitude).arg(model.display.mean).arg(model.display.recordId).arg(model.display.scaleFactor)
+                ToolTip.text:  String(qsTr("Site\nLocation: (%1, %2)\nMean PGA:%3\nSelected Record Id:%4\nScale Factor:%5"))
+                                    .arg(model.display.location.latitude)
+                                    .arg(model.display.location.longitude)
+                                    .arg(model.display.mean).arg(model.display.recordId)
+                                    .arg(model.display.scaleFactor)
                 ToolTip.timeout: 5000
                 ToolTip.visible: hovered
                 onEntered: hovered = true
@@ -42,14 +46,14 @@ MapItemView {
         }
         z:50
         function getcolor(value) {
-                if (value < 0.25)
-                    return Qt.rgba(0, 1, 1-value/0.25)
+                if (value < 0.1)
+                    return Qt.rgba(0, 1, 1-value/0.1)
+                else if(value >= 0.1 && value < 0.25)
+                    return Qt.rgba((value-0.1)/0.15, 1, 0)
                 else if(value >= 0.25 && value < 0.5)
-                    return Qt.rgba(1-(value-0.25)/0.25, 1, 0)
-                else if(value >= 0.5 && value < 1.0)
-                    return Qt.rgba(value*0.9, 1 - (value-0.5)/0.5 , 0)
+                    return Qt.rgba(1, (0.5-value)/0.25, 0)
                 else
-                    return Qt.rgba(0.9 - 0.1*value, 0, 0)
+                    return Qt.rgba(Math.max(1.0 - (value-0.5), 0.5), 0, 0)
              }
     }
 

@@ -74,7 +74,7 @@ void ScenarioProcessor::startHazardAnalysis()
     inputFile.close();
 
     QString inputName = getWorkFilePath("Scenario.json");
-    QString outputName = getWorkFilePath("Scenario_" + m_intensityMeasure.type()+ ".json");
+    QString outputName = getWorkFilePath("Scenario_SHA.json");
     QStringList args;
     args << "-jar" << m_appConfig.eqHazardPath() << inputName << outputName;
 
@@ -89,13 +89,16 @@ void ScenarioProcessor::startHazardAnalysis()
 
 void ScenarioProcessor::startSimulation()
 {
-    emit statusUpdated("Simulating intensity measure...");
-
     //First we need to check hazard analysis did not fail
     if(m_hazardAnalysisProcess.exitStatus() == QProcess::ExitStatus::CrashExit || m_hazardAnalysisProcess.exitCode() != 0)
+    {
+        emit statusUpdated("Hazard analysis failed!");
         return;
+    }
+    emit statusUpdated("Simulating intensity measure...");
 
-    QString hazardOutputPath = getWorkFilePath("Scenario_" + m_intensityMeasure.type()+ ".json");
+    updatePeriods();
+    QString hazardOutputPath = getWorkFilePath("Scenario_SHA.json");
     QString simConfigPath = getWorkFilePath("SimConfig.json");
     QString simOutputPath = getWorkFilePath("SimOutput.json");
 
@@ -105,7 +108,7 @@ void ScenarioProcessor::startSimulation()
     QJsonObject simulationConfig;
     simulationConfig.insert("GroundMotions", gmConfig);
     simulationConfig.insert("NumSimulations", 1);
-    simulationConfig.insert("SpatialCorrelation", true);
+    simulationConfig.insert("SpatialCorrelation", m_intensityMeasure.IsCorrelated());
 
     QJsonDocument simConfigDoc(simulationConfig);
     QFile simConfigFile(simConfigPath);
@@ -219,7 +222,7 @@ void ScenarioProcessor::startProcessingOutputs()
     QJsonArray selectionResults = selectionOutputDoc.object()["GroundMotions"].toArray();
 
     //We will also open the hazard analysis output to read the site location
-    QString hazardOutputPath = getWorkFilePath("Scenario_" + m_intensityMeasure.type()+ ".json");
+    QString hazardOutputPath = getWorkFilePath("Scenario_SHA.json");
     QFile hazardOutputFile(hazardOutputPath);
     if(!hazardOutputFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -243,21 +246,21 @@ void ScenarioProcessor::startProcessingOutputs()
         newResult->setRecordId(result["Record"].toObject()["Id"].toInt());
         newResult->setScaleFactor(result["ScaleFactor"].toDouble());
 
-        QJsonArray imMeans;
-        if(m_intensityMeasure.type() == "SA")
-            imMeans = hazardResults[i].toObject()["SA"].toObject()["Mean"].toArray();
-        else
-            imMeans = hazardResults[i].toObject()["PGA"].toObject()["Mean"].toArray();
-        QVector<double> means;
-        QJsonValue mean;
-        foreach (mean, imMeans)
-            means.append(exp(mean.toDouble()));
-        newResult->setMeans(means);
-    }
-    QJsonObject result = selectionResults[0].toObject();
+        QVector<double> PGAMean;
+        QJsonValue mean = hazardResults[i].toObject()["PGA"].toObject()["Mean"];
+        PGAMean.append(exp(mean.toDouble()));
+//        QJsonValue mean;
+//        foreach (mean, imMeans)
+//            means.append(exp(mean.toDouble()));
 
+        newResult->setMeans(PGAMean);
+    }
+
+    //TODO, single site result
+    QJsonObject result = selectionResults[0].toObject();
     m_siteResult.setRecordId(result["Record"].toObject()["Id"].toInt());
     m_siteResult.setScaleFactor(result["ScaleFactor"].toDouble());
+
     emit progressUpdated("Finished record selection and scaling");
     emit statusUpdated("Analysis completed successfully!");
     emit finished();
@@ -315,8 +318,8 @@ void ScenarioProcessor::processOutputLines()
         if (simulationMatch.hasMatch())
         {
             double period = simulationMatch.captured(1).toDouble();
-            int count = m_intensityMeasure.periods().indexOf(period);
-            emit progressUpdated((double)count/m_intensityMeasure.periods().size());
+            int count = m_periods.indexOf(period) + 1;
+            emit progressUpdated((double)count/m_periods.size());
         }
 
         QRegularExpressionMatch selectionMatch = selectionExp.match(line);
@@ -326,4 +329,25 @@ void ScenarioProcessor::processOutputLines()
             emit progressUpdated((double)targetNo/m_siteConfig.siteGrid().getNumSites());
         }
     }
+}
+
+void ScenarioProcessor::updatePeriods()
+{
+    QString hazardOutputPath = getWorkFilePath("Scenario_SHA.json");
+    QFile hazardOutputFile(hazardOutputPath);
+    if(!hazardOutputFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        qWarning("Couldn't read hazard analysis outputs!");
+        return;
+    }
+    QString output = hazardOutputFile.readAll();
+    QJsonDocument hazardOutputDoc = QJsonDocument::fromJson(output.toUtf8());
+    QJsonArray periods = hazardOutputDoc.object()["Periods"].toArray();
+    QJsonValue period;
+    m_periods.clear();
+    foreach(period, periods)
+    {
+        m_periods.append(period.toDouble());
+    }
+    hazardOutputFile.close();
 }

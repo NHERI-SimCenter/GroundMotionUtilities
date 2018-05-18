@@ -32,6 +32,14 @@ public class SiteResult
 		this.m_PGA = result;
 	}
 	
+	public SiteResult(SiteLocation location, ArrayList<SiteDataResult> siteData, PGAResult pgaResult, SAResult saResult)
+	{
+		this.m_Location = location;
+		this.m_SiteData = siteData;
+		this.m_PGA = pgaResult;
+		this.m_SA = saResult;
+	}
+	
 	public SiteLocation Location()
 	{
 		return this.m_Location;

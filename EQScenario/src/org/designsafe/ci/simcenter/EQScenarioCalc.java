@@ -10,6 +10,7 @@ import org.opensha.commons.data.siteData.*;
 import org.opensha.commons.geo.*;
 import org.opensha.commons.param.*;
 import org.opensha.commons.param.Parameter;
+import org.opensha.commons.param.constraint.ParameterConstraint;
 import org.opensha.commons.param.event.*;
 import org.opensha.commons.util.*;
 import org.opensha.sha.earthquake.*;
@@ -95,8 +96,8 @@ public class EQScenarioCalc implements ParameterChangeWarningListener {
 			System.out.println("Usage:");
 			System.out.println("\tEQScenario ScenarioConfig.json ScenarioOutput.json");
 			return;
-		}
-		
+		}		
+	
 		EQScenarioCalc calc = new EQScenarioCalc();
 		String jsonCfgPath = args[0];
 		File cfgFile = new File(jsonCfgPath);
@@ -106,12 +107,18 @@ public class EQScenarioCalc implements ParameterChangeWarningListener {
 			cfg = Files.toString(cfgFile, Charsets.UTF_8);
 		} catch (IOException e) {
 			System.out.print(e.getMessage());
-			return;
+			System.exit(-1);
 		}
 		
 		Gson gson = new GsonBuilder().create();
 		EQScenarioConfig scenarioConfig = gson.fromJson(cfg, EQScenarioConfig.class);
-		calc.PerformSHA(scenarioConfig);
+		try {
+			calc.PerformSHA(scenarioConfig);
+		}
+		catch (Exception e) {
+			System.err.print(e.getMessage());
+			System.exit(-2);
+		}
 		
 		String outFilePath = args[1];
 		File outFile = new File(outFilePath);
@@ -136,6 +143,10 @@ public class EQScenarioCalc implements ParameterChangeWarningListener {
 	{
 		GMPEConfig GMPECfg = scenarioConfig.GetGMPEConfig();
 		ScalarIMR imr = CreateIMRInstance(GMPECfg.Type());
+		ParameterList ims =imr.getSupportedIntensityMeasures();
+		SA_Param saParam = (SA_Param)ims.getParameter(SA_Param.NAME);
+		double[] supportedPeriods = saParam.getPeriodParam().getPeriods();
+		Arrays.sort(supportedPeriods);
 		
 		EqkRupture eqRup = new EqkRupture();
 		EqRuptureConfig eqRupCfg = scenarioConfig.GetRuptureConfig();
@@ -228,24 +239,41 @@ public class EQScenarioCalc implements ParameterChangeWarningListener {
 		}
 				
 		IMConfig imConfig = scenarioConfig.GetIMConfig();
-
+		//check if periods are specified
+		if(!imConfig.hasPeriods())
+		{
+			imConfig.setPeriods(supportedPeriods);
+		}
+		
 		//First we need to find the type of IM
-		boolean isSA = false;
+		boolean isSANeeded = false;
+		boolean isPGANeeded = false;
+
 		if(imConfig.Type().equalsIgnoreCase("SA"))
 		{
-			isSA = true;
+			isSANeeded = true;
+			isPGANeeded = false;
+
 			output = new SHAOutput(siteLocations.size(), imConfig.Periods(), scenarioConfig.GetRuptureConfig());
 		}
 		else if(imConfig.Type().equalsIgnoreCase("PGA"))
 		{
 			output = new SHAOutput(siteLocations.size(), null, scenarioConfig.GetRuptureConfig());
-			isSA = false;
+			isSANeeded = false;
+			isPGANeeded = true;
+		}
+		else if(imConfig.Type().equalsIgnoreCase("All"))
+		{
+			output = new SHAOutput(siteLocations.size(), imConfig.Periods(), scenarioConfig.GetRuptureConfig());
+			isSANeeded = true;
+			isPGANeeded = true;
 		}
 		else
 		{
 			System.out.print("Invalid IM Type: " + imConfig.Type() + " !");
 			return;
-		}	
+		}
+		
 		
 		ArrayList<Site> sites = new ArrayList<Site>();
 		for(SiteLocation siteLocation: siteLocations)
@@ -319,12 +347,16 @@ public class EQScenarioCalc implements ParameterChangeWarningListener {
 			boolean hasIEStats = stdDevParam.isAllowed(StdDevTypeParam.STD_DEV_TYPE_INTER) &&
 					stdDevParam.isAllowed(StdDevTypeParam.STD_DEV_TYPE_INTRA);
 			
-			imr.setIntensityMeasure(imConfig.Type());
 			double[] periods = imConfig.Periods();
-			if(isSA)
-			{			
+			
+			PGAResult pgaResult = null;
+			SAResult saResult = null;
+			if(isSANeeded)
+			{	
+				imr.setIntensityMeasure("SA");
+
 				Parameter imtParam = (Parameter)imr.getIntensityMeasure();
-				SAResult saResult = new SAResult(periods.length, hasIEStats);	
+				saResult = new SAResult(periods.length, hasIEStats);	
 
 				for(int j=0; j < imConfig.Periods().length; j++)
 				{
@@ -346,20 +378,16 @@ public class EQScenarioCalc implements ParameterChangeWarningListener {
 						saResult.SetResult(j, mean, stdDev);
 					}
 				}
-				
-				if(siteDataValues.isEmpty())
-					result = new SiteResult(siteLocation, null, saResult);
-				else
-					result = new SiteResult(siteLocation, siteDataResults, saResult);
-
 			}
-			else
+
+			if(isPGANeeded)
 			{
+				imr.setIntensityMeasure("PGA");
+
 				double mean = imr.getMean();
 				stdDevParam.setValue(StdDevTypeParam.STD_DEV_TYPE_TOTAL);
-				double stdDev = imr.getStdDev();
-				PGAResult pgaResult;	
-
+				double stdDev = imr.getStdDev();					
+				
 				if(hasIEStats)
 				{
 					stdDevParam.setValue(StdDevTypeParam.STD_DEV_TYPE_INTER);
@@ -372,12 +400,12 @@ public class EQScenarioCalc implements ParameterChangeWarningListener {
 				{
 					pgaResult = new PGAResult(mean, stdDev);
 				}
-				
-				if(siteDataValues.isEmpty())
-					result = new SiteResult(siteLocation, null, pgaResult);
-				else
-					result = new SiteResult(siteLocation, siteDataResults, pgaResult);				
 			}
+			
+			if(siteDataValues.isEmpty())
+				result = new SiteResult(siteLocation, null, pgaResult, saResult);
+			else
+				result = new SiteResult(siteLocation, siteDataResults, pgaResult, saResult);
 			
 			output.SetResult(i, result);
 		}
@@ -518,10 +546,10 @@ public class EQScenarioCalc implements ParameterChangeWarningListener {
 		return "Provider not detected!";
 	}
 	
-	EqkRupture getEqRuptureFromERF(EqRuptureConfig eqRupConfig)
+	ERF getERF(String erfName)
 	{
 		ERF erf = null;
-		switch (eqRupConfig.RuptureForecast()) {
+		switch (erfName) {
 		case "WGCEP (2007) UCERF2 - Single Branch":
 			erf = new MeanUCERF2();
 			erf.getAdjustableParameterList().getParameter(
@@ -540,6 +568,10 @@ public class EQScenarioCalc implements ParameterChangeWarningListener {
 			
 		case "GEM1 CEUS ERF":
 			erf = new GEM1_CEUS_ERF();
+			break;
+			
+		case "GEM1 WEUS ERF":
+			erf = new GEM1_WEUS_ERF();
 			break;
 			
 		case "Mean UCERF3":
@@ -568,10 +600,21 @@ public class EQScenarioCalc implements ParameterChangeWarningListener {
 		}
 		
 		erf.getTimeSpan().setDuration(1.0);
-		
 		if(null != erf)
 		{
 			erf.updateForecast();
+			return erf;
+		}
+		
+		return erf;//We failed to find the earthquake rupture forecast
+	}
+	
+	EqkRupture getEqRuptureFromERF(EqRuptureConfig eqRupConfig)
+	{
+		ERF erf = getERF(eqRupConfig.RuptureForecast());		
+		
+		if(null != erf)
+		{
 			EqkSource eqSource = erf.getSource(eqRupConfig.SourceIndex());
 			eqSource.getName();
 			if(null != eqSource)

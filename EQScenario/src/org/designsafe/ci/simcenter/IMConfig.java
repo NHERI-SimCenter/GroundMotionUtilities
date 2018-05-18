@@ -55,4 +55,14 @@ public class IMConfig
 	{
 		return this.m_Periods;
 	}
+	
+	public Boolean hasPeriods()
+	{
+		return m_Periods != null && m_Periods.length > 0;
+	}
+	
+	public void setPeriods(double[] periods)
+	{
+		m_Periods = periods;
+	}
 }

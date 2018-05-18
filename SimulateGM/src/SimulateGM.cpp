@@ -46,7 +46,7 @@ int main(int argc, const char **argv)
     try{
         if(SUCCESS != GMSimulator::SimulateGM(gmFileName, outputFileName, isCorrelated, numSimulations))
         {
-            std::cout << "Failed to simulation ground motions!";
+            std::cout << "\nFailed to simulate ground motions!\n";
             return -1;
         }
     }

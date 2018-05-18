@@ -18,6 +18,7 @@ public slots:
 private:
     IntensityMeasure& m_intensityMeasure;
     QComboBox* m_typeBox;
+    QCheckBox* m_isCorrelatedBox;
 
     void setupConnections();
 };

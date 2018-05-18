@@ -58,9 +58,11 @@ private:
     QString getWorkFilePath(QString filename);
     SiteResultsModel m_resultsModel;
     QString m_output;
+    QVector<double> m_periods;
 
     void setupConnections();
     void processOutputLines();
+    void updatePeriods();
 };
 
 #endif // SCENARIOPROCESSOR_H

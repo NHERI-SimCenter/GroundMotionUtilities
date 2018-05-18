@@ -234,8 +234,8 @@ void GMWidget::exportAll()
     if(!exportDir.isEmpty())
     {
         exportFile("Scenario.json", exportDir);
-        exportFile("Scenario_" + m_intensityMeasure->type() + ".json", exportDir);
-        exportFile("Scenario_" + m_intensityMeasure->type() + "_Geo.json", exportDir);
+        exportFile("Scenario_SHA.json", exportDir);
+        exportFile("Scenario_SHA_Geo.json", exportDir);
         exportFile("SimConfig.json", exportDir);
         exportFile("SimOutput.json", exportDir);
         exportFile("SelectionConfig.json", exportDir);
@@ -246,6 +246,7 @@ void GMWidget::exportAll()
 
 void GMWidget::setupConnections()
 {    
+    //Connecting button
     connect(m_runButton, &QPushButton::released, [this]()
     {
         if(m_appConfig->validate())
@@ -265,6 +266,7 @@ void GMWidget::setupConnections()
 
     connect(m_settingButton, &QPushButton::released, this, &GMWidget::setAppConfig);
 
+    //connecting scenario to status bar
     connect(m_scenarioProcessor, &ScenarioProcessor::finished, [this]()
     {
         setMode(GMWidget::ApplicationMode::Results);
@@ -313,6 +315,7 @@ void GMWidget::setupConnections()
         setMode(GMWidget::ApplicationMode::Edit);
     });
 
+    //Connecting input changes to mode
     connect(&m_siteConfig->siteGrid().longitude(), &GridDivision::divisionsChanged, [this]()
     {
         setMode(GMWidget::ApplicationMode::Edit);
@@ -323,6 +326,7 @@ void GMWidget::setupConnections()
         setMode(GMWidget::ApplicationMode::Edit);
     });
 
+    //Connecting rupture
     connect(m_eqRupture, &PointSourceRupture::magnitudeChanged, [this]()
     {
         setMode(GMWidget::ApplicationMode::Edit);

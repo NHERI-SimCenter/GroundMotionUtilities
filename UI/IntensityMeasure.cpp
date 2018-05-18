@@ -4,8 +4,8 @@
 
 IntensityMeasure::IntensityMeasure(QObject *parent) : QObject(parent)
 {
-    this->setType("SA");
-    m_periods << 0.05 << 0.1 << 0.2 << 0.5 << 1.0 << 2.0 << 5.0 << 10.0;
+    this->setType("All");
+    setIsCorrelated(true);
 }
 
 QString IntensityMeasure::type() const
@@ -24,17 +24,20 @@ bool IntensityMeasure::setType(const QString &type)
     return false;
 }
 
+
+void IntensityMeasure::setIsCorrelated(bool isCorrelated)
+{
+    if(m_isCorrelated != isCorrelated)
+    {
+        m_isCorrelated = isCorrelated;
+        emit correlationChanged(m_isCorrelated);
+    }
+}
+
 QJsonObject IntensityMeasure::getJson()
 {
     QJsonObject im;
     im.insert("Type", m_type);
-    if(m_type == "SA")
-    {
-        QJsonArray periods;
-        foreach(double period, m_periods)
-            periods.append(period);
-        im.insert("Periods", periods);
-    }
     im.insert("EnableJsonOutput", true);
     im.insert("EnableGeoJsonOutput", true);
 
@@ -45,7 +48,8 @@ const QStringList &IntensityMeasure::validTypes()
 {
     static QStringList validTypes = QStringList()
             << "PGA"
-            << "SA";
+            << "SA"
+            <<  "All";
 
     return validTypes;
 }
@@ -64,4 +68,9 @@ void IntensityMeasure::addPeriod(double period)
 {
     this->m_periods.append(period);
     qSort(this->m_periods);
+}
+
+bool IntensityMeasure::IsCorrelated() const
+{
+    return m_isCorrelated;
 }
