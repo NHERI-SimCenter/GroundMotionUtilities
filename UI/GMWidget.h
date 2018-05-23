@@ -19,6 +19,8 @@ class GMWidget : public QWidget
     Q_OBJECT
     Q_ENUMS(ApplicationMode)
     Q_PROPERTY(ApplicationMode mode READ mode WRITE setMode NOTIFY modeChanged)
+    Q_PROPERTY(QString cacheLocation READ getCacheLocation CONSTANT)
+
 public:
     explicit GMWidget(QWidget *parent = 0);
     ~GMWidget();
@@ -73,7 +75,8 @@ private:
     QAction* m_setSEAAction;
     QAction* m_aboutAction;
     QAction* m_licenseAction;
-
+    QAction* m_defaultMapAction;
+    QAction* m_terrainMapAction;
 
     void setupConnections();
     void initAppConfig();
@@ -81,6 +84,7 @@ private:
     void saveAppSettings();
     void setMapCenter(double latitude, double longitude);
     void exportFile(QString fileName, QString directory);
+    QString getCacheLocation();
 };
 
 #endif // GMWIDGET_H

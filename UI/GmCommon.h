@@ -5,9 +5,8 @@
 class GmCommon
 {
 public:
+    static QString getCacheLocation();
     static QString getWorkFilePath(QString filename);
-private:
-    GmCommon();
 };
 
 #endif // GMCOMMON_H

@@ -96,7 +96,7 @@ GMWidget::GMWidget(QWidget *parent) :
     view->rootContext()->setContextProperty("gmApp", this);
     view->rootContext()->setContextProperty("locationsModel", m_locationsModel);
 
-    view->setSource(QUrl("qrc:/ScenarioMap.qml"));
+    view->setSource(QUrl("qrc:/ScenarioMapContainer.qml"));
     QWidget *container = QWidget::createWindowContainer(view, this);
     container->setMinimumSize(400, 400);
     container->resize(600, container->height());
@@ -169,11 +169,16 @@ GMWidget::GMWidget(QWidget *parent) :
     editMenu->addAction(m_settingsAction);
     menuBar->addMenu(editMenu);
 
+    QMenu *viewMenu = new QMenu(tr("&View"));
+    QMenu *mapsMenu = viewMenu->addMenu(tr("&Map"));
+    mapsMenu->addAction(m_defaultMapAction);
+    mapsMenu->addAction(m_terrainMapAction);
+    menuBar->addMenu(viewMenu);
+
     QMenu *helpMenu = new QMenu(tr("&Help"));
     helpMenu->addAction(m_aboutAction);
     helpMenu->addAction(m_licenseAction);
     menuBar->addMenu(helpMenu);
-
 
     this->layout()->setMenuBar(menuBar);
     vBoxLayout->addWidget(m_statusBar);
@@ -414,6 +419,13 @@ void GMWidget::setupConnections()
 
     connect(m_exportAction, &QAction::triggered, this, &GMWidget::exportAll);
 
+    connect(m_terrainMapAction, &QAction::triggered, this, [this](){
+        QMetaObject::invokeMethod(m_mapObject, "setTerrainMap");
+    });
+
+    connect(m_defaultMapAction, &QAction::triggered, this, [this](){
+        QMetaObject::invokeMethod(m_mapObject, "setDefaultMap");
+    });
 }
 
 void GMWidget::initAppConfig()
@@ -484,6 +496,9 @@ void GMWidget::initActions()
 
     m_aboutAction = new QAction(tr("A&bout"), this);
     m_licenseAction = new QAction(tr("&License"), this);
+
+    m_defaultMapAction = new QAction(tr("&Default"));
+    m_terrainMapAction = new QAction(tr("Te&rrain"));
 }
 
 void GMWidget::saveAppSettings()
@@ -513,4 +528,9 @@ void GMWidget::exportFile(QString fileName, QString directory)
     QString workFilePath = GmCommon::getWorkFilePath(fileName);
     if(QFileInfo::exists(workFilePath))
         QFile::copy(workFilePath, QDir::cleanPath(directory + QDir::separator() + fileName));
+}
+
+QString GMWidget::getCacheLocation()
+{
+    return GmCommon::getCacheLocation();
 }

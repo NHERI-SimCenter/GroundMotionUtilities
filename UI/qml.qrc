@@ -1,10 +1,11 @@
 <RCC>
     <qresource prefix="/">
-        <file>ScenarioMap.qml</file>
+        <file>ScenarioMapContainer.qml</file>
         <file>SiteMarker.qml</file>
         <file>PointRuptureMarker.qml</file>
         <file>SiteGridMarker.qml</file>
         <file>GridPoints.qml</file>
         <file>SiteResultsView.qml</file>
+        <file>ScenarioMap.qml</file>
     </qresource>
 </RCC>

@@ -2,14 +2,13 @@
 #include <QStandardPaths>
 #include <QDir>
 
-QString GmCommon::getWorkFilePath(QString filename)
+QString GmCommon::getCacheLocation()
 {
-    QString dataDirectory = QStandardPaths::writableLocation(QStandardPaths::StandardLocation::GenericDataLocation);
-    QString workDir = QDir::cleanPath(dataDirectory + QDir::separator() + "SimCenter-EQSS");
-    return QDir::cleanPath(workDir + QDir::separator() + filename);
+    return QStandardPaths::writableLocation(QStandardPaths::StandardLocation::CacheLocation);
 }
 
-GmCommon::GmCommon()
+QString GmCommon::getWorkFilePath(QString filename)
 {
-
+    QString dataDirectory = QStandardPaths::writableLocation(QStandardPaths::StandardLocation::DataLocation);
+    return QDir::cleanPath(dataDirectory + QDir::separator() + filename);
 }
