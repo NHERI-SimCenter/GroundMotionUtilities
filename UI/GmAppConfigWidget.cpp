@@ -2,6 +2,7 @@
 #include <QFormLayout>
 #include <QHBoxLayout>
 #include <QFileDialog>
+#include <QGroupBox>
 
 GmAppConfigWidget::GmAppConfigWidget(GmAppConfig &appConfig, QWidget *parent) : QWidget(parent, Qt::Dialog), m_appConfig(appConfig)
 {
@@ -13,42 +14,54 @@ GmAppConfigWidget::GmAppConfigWidget(GmAppConfig &appConfig, QWidget *parent) : 
     palette.setColor(QPalette::Background, Qt::white);
     this->setPalette(palette);
 
-    QFormLayout* formLayout = new QFormLayout(this);
+    QVBoxLayout* layout = new QVBoxLayout(this);
+
+    QGroupBox* appsBox = new QGroupBox("Applications", this);
+    layout->addWidget(appsBox);
+    appsBox->setStyleSheet("QGroupBox {font-weight: bold}");
+
+    QFormLayout* appsFormLayout = new QFormLayout(appsBox);
 
     QHBoxLayout* eqHazardBoxLayout = new QHBoxLayout();
     m_eqHazardBox = new QLineEdit(this);
     eqHazardBoxLayout->addWidget(m_eqHazardBox, 1);
     m_eqHazardButton = new QPushButton(tr("Browse..."), this);
     eqHazardBoxLayout->addWidget(m_eqHazardButton, 0);
-    formLayout->addRow("EQ Hazard App:", eqHazardBoxLayout);
+    appsFormLayout->addRow("EQ Hazard:", eqHazardBoxLayout);
 
     QHBoxLayout* simulateIMBoxLayout = new QHBoxLayout();
     m_simulateIMBox = new QLineEdit(this);
     simulateIMBoxLayout->addWidget(m_simulateIMBox, 1);
     m_simulateIMButton = new QPushButton(tr("Browse..."), this);
     simulateIMBoxLayout->addWidget(m_simulateIMButton, 0);
-    formLayout->addRow("IM Simulation App:", simulateIMBoxLayout);
+    appsFormLayout->addRow("IM Simulation:", simulateIMBoxLayout);
 
     QHBoxLayout* selectRecordBoxLayout = new QHBoxLayout();
     m_selectRecordBox = new QLineEdit(this);
     selectRecordBoxLayout->addWidget(m_selectRecordBox, 1);
     m_selectRecordButton = new QPushButton(tr("Browse..."), this);
     selectRecordBoxLayout->addWidget(m_selectRecordButton, 0);
-    formLayout->addRow("Record Selection App:", selectRecordBoxLayout);
+    appsFormLayout->addRow("Record Selection:", selectRecordBoxLayout);
+
+    QGroupBox* dbsBox = new QGroupBox("Records Database", this);
+    layout->addWidget(dbsBox);
+    dbsBox->setStyleSheet("QGroupBox {font-weight: bold}");
+
+    QFormLayout* dbsFormLayout = new QFormLayout(dbsBox);
 
     QHBoxLayout* ngaw2DbBoxLayout = new QHBoxLayout();
     m_ngaw2DbBox = new QLineEdit(this);
     ngaw2DbBoxLayout->addWidget(m_ngaw2DbBox, 1);
     m_ngaw2DbButton = new QPushButton(tr("Browse..."), this);
     ngaw2DbBoxLayout->addWidget(m_ngaw2DbButton, 0);
-    formLayout->addRow("NGA West 2 Database:", ngaw2DbBoxLayout);
+    dbsFormLayout->addRow("NGA West 2:", ngaw2DbBoxLayout);
 
     QHBoxLayout* ngaw2DbSubsetBoxLayout = new QHBoxLayout();
     m_ngaw2DbSubsetBox = new QLineEdit(this);
     ngaw2DbSubsetBoxLayout->addWidget(m_ngaw2DbSubsetBox, 1);
     m_ngaw2DbSubsetButton = new QPushButton(tr("Browse..."), this);
     ngaw2DbSubsetBoxLayout->addWidget(m_ngaw2DbSubsetButton, 0);
-    formLayout->addRow("NGA West 2 Subset:", ngaw2DbSubsetBoxLayout);
+    dbsFormLayout->addRow("NGA West 2 Subset:", ngaw2DbSubsetBoxLayout);
 
     //Reading current path
     m_eqHazardBox->setText(m_appConfig.eqHazardPath());
