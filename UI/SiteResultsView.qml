@@ -11,12 +11,12 @@ MapItemView {
         zoomLevel:11
         visible: (gmApp.mode === GMWidget.Results)
         sourceItem: Rectangle {
-            width: 40 * model.display.mean
+            width: 40 * model.display.pgaResult.mean
             height:width
             radius: width/2
             visible: true
             anchors.centerIn: parent
-            color: getcolor(model.display.mean)
+            color: getcolor(model.display.pgaResult.mean)
 
             border.color: "black"
             border.width: 0.5
@@ -29,8 +29,8 @@ MapItemView {
                 ToolTip.text:  String(qsTr("Site\nLocation: (%1, %2)\nMean PGA:%3\nSelected Record Id:%4\nScale Factor:%5"))
                                     .arg(model.display.location.latitude)
                                     .arg(model.display.location.longitude)
-                                    .arg(model.display.mean).arg(model.display.recordId)
-                                    .arg(model.display.scaleFactor)
+                                    .arg(model.display.pgaResult.mean).arg(model.display.recordSelection.recordId)
+                                    .arg(model.display.recordSelection.scaleFactor)
                 ToolTip.timeout: 5000
                 ToolTip.visible: hovered
                 onEntered: hovered = true

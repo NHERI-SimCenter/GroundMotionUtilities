@@ -51,7 +51,10 @@ SOURCES += \
     ../../widgets/Common/FooterWidget.cpp \
     GmAppConfig.cpp \
     GmAppConfigWidget.cpp \
-    GmCommon.cpp
+    GmCommon.cpp \
+    SAResult.cpp \
+    PGAResult.cpp \
+    RecordSelection.cpp
 
 HEADERS += \
         GMWidget.h \
@@ -81,7 +84,10 @@ HEADERS += \
     ../../widgets/Common/FooterWidget.h \
     GmAppConfig.h \
     GmAppConfigWidget.h \
-    GmCommon.h
+    GmCommon.h \
+    SAResult.h \
+    PGAResult.h \
+    RecordSelection.h
 
 FORMS +=
 

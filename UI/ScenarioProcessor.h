@@ -54,8 +54,6 @@ private:
     QProcess m_hazardAnalysisProcess;
     QProcess m_simulationProcess;
     QProcess m_recordSelectionProcess;
-    QString m_workDir;
-    QString getWorkFilePath(QString filename);
     SiteResultsModel m_resultsModel;
     QString m_output;
     QVector<double> m_periods;

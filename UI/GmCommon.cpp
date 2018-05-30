@@ -10,5 +10,7 @@ QString GmCommon::getCacheLocation()
 QString GmCommon::getWorkFilePath(QString filename)
 {
     QString dataDirectory = QStandardPaths::writableLocation(QStandardPaths::StandardLocation::DataLocation);
+    if(!QDir(dataDirectory).exists())
+        QDir().mkdir(dataDirectory);
     return QDir::cleanPath(dataDirectory + QDir::separator() + filename);
 }

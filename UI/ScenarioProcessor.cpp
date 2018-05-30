@@ -6,6 +6,7 @@
 #include <QStandardPaths>
 #include <QDir>
 #include <QRegularExpressionMatch>
+#include "GmCommon.h"
 
 ScenarioProcessor::ScenarioProcessor(GmAppConfig &appconfig, SiteConfig& siteConfig, PointSourceRupture &rupture, GMPE &gmpe,
                                      IntensityMeasure &intensityMeasure, RecordSelectionConfig &selectionConfig, SiteResult& siteResult,
@@ -13,12 +14,6 @@ ScenarioProcessor::ScenarioProcessor(GmAppConfig &appconfig, SiteConfig& siteCon
                                      m_gmpe(gmpe), m_intensityMeasure(intensityMeasure), m_selectionConfig(selectionConfig), m_siteResult(siteResult),
                                      m_appConfig(appconfig)
 {
-    //Init the working directory that will be used by this processor
-    QString dataDirectory = QStandardPaths::writableLocation(QStandardPaths::StandardLocation::GenericDataLocation);
-    m_workDir = QDir::cleanPath(dataDirectory + QDir::separator() + "SimCenter-EQSS");
-    if(!QDir(m_workDir).exists())
-        QDir().mkdir(m_workDir);
-
     setupConnections();
 }
 
@@ -65,7 +60,7 @@ void ScenarioProcessor::startHazardAnalysis()
     scenarioInput.insert("IntensityMeasure", m_intensityMeasure.getJson());
 
     QJsonDocument inputDoc(scenarioInput);
-    QFile inputFile(getWorkFilePath("Scenario.json"));
+    QFile inputFile(GmCommon::getWorkFilePath("Scenario.json"));
     if (!inputFile.open(QIODevice::WriteOnly)) {
         qWarning("Couldn't write scenario input file.");
         return;
@@ -73,8 +68,8 @@ void ScenarioProcessor::startHazardAnalysis()
     inputFile.write(inputDoc.toJson());
     inputFile.close();
 
-    QString inputName = getWorkFilePath("Scenario.json");
-    QString outputName = getWorkFilePath("Scenario_SHA.json");
+    QString inputName =  GmCommon::getWorkFilePath("Scenario.json");
+    QString outputName = GmCommon::getWorkFilePath("Scenario_SHA.json");
     QStringList args;
     args << "-jar" << m_appConfig.eqHazardPath() << inputName << outputName;
 
@@ -98,9 +93,9 @@ void ScenarioProcessor::startSimulation()
     emit statusUpdated("Simulating intensity measure...");
 
     updatePeriods();
-    QString hazardOutputPath = getWorkFilePath("Scenario_SHA.json");
-    QString simConfigPath = getWorkFilePath("SimConfig.json");
-    QString simOutputPath = getWorkFilePath("SimOutput.json");
+    QString hazardOutputPath = GmCommon::getWorkFilePath("Scenario_SHA.json");
+    QString simConfigPath = GmCommon::getWorkFilePath("SimConfig.json");
+    QString simOutputPath = GmCommon::getWorkFilePath("SimOutput.json");
 
     QJsonObject gmConfig;
     gmConfig.insert("File", hazardOutputPath);
@@ -140,9 +135,9 @@ void ScenarioProcessor::startSelection()
     if(m_simulationProcess.exitStatus() == QProcess::ExitStatus::CrashExit || m_simulationProcess.exitCode() != 0)
         return;
 
-    QString selectionConfigPath = getWorkFilePath("SelectionConfig.json");
-    QString simOutputPath = getWorkFilePath("SimOutput.json");
-    QString selectionOutputPath = getWorkFilePath("SelectionOutput.json");
+    QString selectionConfigPath = GmCommon::getWorkFilePath("SelectionConfig.json");
+    QString simOutputPath = GmCommon::getWorkFilePath("SimOutput.json");
+    QString selectionOutputPath = GmCommon::getWorkFilePath("SelectionOutput.json");
 
 
     QJsonObject selectionConfig = m_selectionConfig.getJson();
@@ -199,17 +194,12 @@ void ScenarioProcessor::processSelectionOutput()
     processOutputLines();
 }
 
-QString ScenarioProcessor::getWorkFilePath(QString filename)
-{
-    return QDir::cleanPath(m_workDir + QDir::separator() + filename);
-}
-
 void ScenarioProcessor::startProcessingOutputs()
 {
     emit statusUpdated("Processing outputs...");
 
     //We will open the record selection output
-    QString selectionOutputPath = getWorkFilePath("SelectionOutput.json");
+    QString selectionOutputPath = GmCommon::getWorkFilePath("SelectionOutput.json");
     QFile selectionOutputFile(selectionOutputPath);
     if(!selectionOutputFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -222,7 +212,7 @@ void ScenarioProcessor::startProcessingOutputs()
     QJsonArray selectionResults = selectionOutputDoc.object()["GroundMotions"].toArray();
 
     //We will also open the hazard analysis output to read the site location
-    QString hazardOutputPath = getWorkFilePath("Scenario_SHA.json");
+    QString hazardOutputPath = GmCommon::getWorkFilePath("Scenario_SHA.json");
     QFile hazardOutputFile(hazardOutputPath);
     if(!hazardOutputFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -243,23 +233,33 @@ void ScenarioProcessor::startProcessingOutputs()
         newResult->location().set(location["Latitude"].toDouble(), location["Longitude"].toDouble());
 
         QJsonObject result = selectionResults[i].toObject();
-        newResult->setRecordId(result["Record"].toObject()["Id"].toInt());
-        newResult->setScaleFactor(result["ScaleFactor"].toDouble());
+        newResult->recordSelection().setRecordId(result["Record"].toObject()["Id"].toInt());
+        newResult->recordSelection().setScaleFactor(result["ScaleFactor"].toDouble());
 
-        QVector<double> PGAMean;
-        QJsonValue mean = hazardResults[i].toObject()["PGA"].toObject()["Mean"];
-        PGAMean.append(exp(mean.toDouble()));
-//        QJsonValue mean;
-//        foreach (mean, imMeans)
-//            means.append(exp(mean.toDouble()));
+        //Reading PGA
+        QJsonObject pgaResut = hazardResults[i].toObject()["PGA"].toObject();
+        newResult->pgaResult().setMean(exp(pgaResut["Mean"].toDouble()));
 
-        newResult->setMeans(PGAMean);
+        //Reading SA Mean
+        QJsonObject saResult = hazardResults[i].toObject()["SA"].toObject();
+        QJsonValue saMean;
+        QVector<double> saMeans;
+        foreach (saMean, saResult["Mean"].toArray())
+            saMeans.append(exp(saMean.toDouble()));
+        newResult->saResult().setMeans(saMeans);
+
+        //Reading SA Std Dev
+        QJsonValue saStdDev;
+        QVector<double> saStdDevs;
+        foreach (saStdDev, saResult["TotalStdDev"].toArray())
+            saStdDevs.append(exp(saMean.toDouble()));
+        newResult->saResult().setStdDevs(saStdDevs);
     }
 
     //TODO, single site result
     QJsonObject result = selectionResults[0].toObject();
-    m_siteResult.setRecordId(result["Record"].toObject()["Id"].toInt());
-    m_siteResult.setScaleFactor(result["ScaleFactor"].toDouble());
+    m_siteResult.recordSelection().setRecordId(result["Record"].toObject()["Id"].toInt());
+    m_siteResult.recordSelection().setScaleFactor(result["ScaleFactor"].toDouble());
 
     emit progressUpdated("Finished record selection and scaling");
     emit statusUpdated("Analysis completed successfully!");
@@ -333,7 +333,7 @@ void ScenarioProcessor::processOutputLines()
 
 void ScenarioProcessor::updatePeriods()
 {
-    QString hazardOutputPath = getWorkFilePath("Scenario_SHA.json");
+    QString hazardOutputPath = GmCommon::getWorkFilePath("Scenario_SHA.json");
     QFile hazardOutputFile(hazardOutputPath);
     if(!hazardOutputFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {

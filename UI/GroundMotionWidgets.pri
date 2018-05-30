@@ -22,8 +22,14 @@ SOURCES += \
     $$PWD/SiteConfigWidget.cpp \
     $$PWD/SiteGridWidget.cpp \
     $$PWD/SiteResultsModel.cpp \
-    $$PWD/LocationsListModel.cpp 
-
+    $$PWD/LocationsListModel.cpp \
+	$$PWD/GmAppConfig.cpp \
+    $$PWD/GmAppConfigWidget.cpp \
+    $$PWD/GmCommon.cpp \
+    $$PWD/SAResult.cpp \
+    $$PWD/PGAResult.cpp \
+    $$PWD/RecordSelection.cpp
+	
 HEADERS += \
     $$PWD/Location.h \
     $$PWD/Site.h \
@@ -48,3 +54,9 @@ HEADERS += \
     $$PWD/SiteGridWidget.h \
     $$PWD/SiteResultsModel.h \
     $$PWD/LocationsListModel.h \
+	$$PWD/GmAppConfig.h \
+    $$PWD/GmAppConfigWidget.h \
+    $$PWD/GmCommon.h \
+    $$PWD/SAResult.h \
+    $$PWD/PGAResult.h \
+    $$PWD/RecordSelection.h

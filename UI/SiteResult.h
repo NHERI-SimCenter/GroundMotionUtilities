@@ -3,45 +3,40 @@
 #include <QObject>
 #include <QtCharts/QLineSeries>
 #include <Location.h>
+#include "SAResult.h"
+#include "PGAResult.h"
+#include "RecordSelection.h"
 
 using namespace QtCharts;
 
 class SiteResult: public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(int recordId READ recordId WRITE setRecordId NOTIFY recordChanged)
-    Q_PROPERTY(double scaleFactor READ scaleFactor WRITE setScaleFactor NOTIFY scaleChanged)
     Q_PROPERTY(Location* location READ getLocationPtr CONSTANT)
-    Q_PROPERTY(double mean READ getMean0 NOTIFY meanChanged)
+    Q_PROPERTY(SAResult* saResult READ getSAResultPtr CONSTANT)
+    Q_PROPERTY(PGAResult* pgaResult READ getPGAResultPtr CONSTANT)
+    Q_PROPERTY(RecordSelection* recordSelection READ getRecordSelectionPtr CONSTANT)
 
 public:
     SiteResult(QObject *parent = nullptr);
-
-    int recordId() const;
-    void setRecordId(int recordId);
-
-    double scaleFactor() const;
-    void setScaleFactor(double scaleFactor);
-
-    void setMeans(QVector<double> means);
     Location& location();
+    SAResult& saResult();
+    PGAResult& pgaResult();
+    RecordSelection& recordSelection();
 
 signals:
-    void recordChanged(int newRecordId);
-    void scaleChanged(double newScaleFactor);
-    void meanChanged(double newMean);
 
 private:
     Location m_location;
-    QVector<double> m_means;
-    QVector<double> m_stdDevs;
-    QVector<double> m_interEventStdDevs;
-    QVector<double> m_intraEventStdDevs;
-    int m_recordId;
-    double m_scaleFactor;
+    SAResult m_saResult;
+    PGAResult m_pgaResult;
+    RecordSelection m_recordSelection;
 
     Location* getLocationPtr();
-    double getMean0();
+    SAResult* getSAResultPtr();
+    PGAResult* getPGAResultPtr();
+    RecordSelection* getRecordSelectionPtr();
+
 };
 
 #endif // SITERESULT_H

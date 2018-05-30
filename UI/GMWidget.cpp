@@ -251,7 +251,7 @@ void GMWidget::exportAll()
 
 void GMWidget::setupConnections()
 {    
-    //Connecting button
+    //Connecting the run button
     connect(m_runButton, &QPushButton::released, [this]()
     {
         if(m_appConfig->validate())
