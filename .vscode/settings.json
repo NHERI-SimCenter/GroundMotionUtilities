@@ -41,7 +41,8 @@
         "geometry": "cpp",
         "algorithm": "cpp",
         "iostream": "cpp",
-        "locale": "cpp"
+        "locale": "cpp",
+        "core": "cpp"
     },
     "clang.cflags": [
         "-I/home/elhaddad/SourceTree/SHA/SelectGM/include",
