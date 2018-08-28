@@ -4,7 +4,7 @@
 #include <QPalette>
 #include <QtQuick/QQuickView>
 #include <QQmlContext>
-#include "../../widgets/Common/FooterWidget.h"
+#include "../../SimCenterCommon/Common/FooterWidget.h"
 #include "GmAppConfigWidget.h"
 #include "GmCommon.h"
 
@@ -454,32 +454,32 @@ void GMWidget::initAppConfig()
     //TODO: we need to search for the applications and files automatically (maybe platform dependent)
     if(m_appConfig->eqHazardPath().isEmpty() || !QFile::exists(m_appConfig->eqHazardPath()))
     {
-        if(QFileInfo::exists("../EQScenario/build/EQScenario.jar"))
-            m_appConfig->setEqHazardPath(QFileInfo("../EQScenario/build/EQScenario.jar").absoluteFilePath());
+        if(QFileInfo::exists("../EQHazard/build/EQHazard.jar"))
+            m_appConfig->setEqHazardPath(QFileInfo("../EQHazard/build/EQHazard.jar").absoluteFilePath());
     }
 
     if(m_appConfig->simulateIMPath().isEmpty() || !QFile::exists(m_appConfig->simulateIMPath()))
     {
-        if(QFileInfo::exists("./SimulateGM/Release/SimulateGM.exe"))
-            m_appConfig->setSimulateIMPath(QFileInfo("./SimulateGM/Release/SimulateGM.exe").absoluteFilePath());
+        if(QFileInfo::exists("./SimulateIM/Release/SimulateIM.exe"))
+            m_appConfig->setSimulateIMPath(QFileInfo("./SimulateIM/Release/SimulateIM.exe").absoluteFilePath());
     }
 
     if(m_appConfig->selectRecordPath().isEmpty() || !QFile::exists(m_appConfig->selectRecordPath()))
     {
-        if(QFileInfo::exists("./SelectGM/Release/SelectGM.exe"))
-            m_appConfig->setSelectRecordPath(QFileInfo("./SelectGM/Release/SelectGM.exe").absoluteFilePath());
+        if(QFileInfo::exists("./SelectRecord/Release/SelectRecord.exe"))
+            m_appConfig->setSelectRecordPath(QFileInfo("./SelectRecord/Release/SelectRecord.exe").absoluteFilePath());
     }
 
     if(m_appConfig->NGAW2DbPath().isEmpty() || !QFile::exists(m_appConfig->NGAW2DbPath()))
     {
-        if(QFileInfo::exists("./SelectGM/Release/NGAWest2.csv"))
-            m_appConfig->setNGAW2DbPath(QFileInfo("./SelectGM/Release/NGAWest2.csv").absoluteFilePath());
+        if(QFileInfo::exists("./SelectRecord/Release/NGAWest2.csv"))
+            m_appConfig->setNGAW2DbPath(QFileInfo("./SelectRecord/Release/NGAWest2.csv").absoluteFilePath());
     }
 
     if(m_appConfig->NGAW2SubsetDbPath().isEmpty() || !QFile::exists(m_appConfig->NGAW2SubsetDbPath()))
     {
-        if(QFileInfo::exists("./SelectGM/Release/NGAWest2-1000.csv"))
-            m_appConfig->setNGAW2SubsetDbPath(QFileInfo("./SelectGM/Release/NGAWest2-1000.csv").absoluteFilePath());
+        if(QFileInfo::exists("./SelectRecord/Release/NGAWest2-1000.csv"))
+            m_appConfig->setNGAW2SubsetDbPath(QFileInfo("./SelectRecord/Release/NGAWest2-1000.csv").absoluteFilePath());
     }
 }
 

@@ -1,4 +1,4 @@
-#include "GmAppConfig.h"
+ #include "GmAppConfig.h"
 #include "QFile"
 
 GmAppConfig::GmAppConfig(QObject *parent) : QObject(parent)
