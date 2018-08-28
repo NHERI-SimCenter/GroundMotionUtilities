@@ -111,6 +111,13 @@ GMWidget::GMWidget(QWidget *parent) :
     splitter->setStretchFactor(0, 0);
     splitter->setStretchFactor(1, 1);
 
+    //Adding site results widget
+    m_resultsWidget = new SiteResultsWidget();
+    m_resultsWidget->hide();
+    splitter->addWidget(m_resultsWidget);
+    splitter->setStretchFactor(2, 0);
+    view->rootContext()->setContextProperty("resultsWidget", m_resultsWidget);
+
     vBoxLayout->addWidget(splitter, 1);
     this->resize(1000, this->height());
     this->window()->setWindowTitle(tr("Simcenter - Earthquake Scenario Simulation"));
@@ -257,6 +264,9 @@ void GMWidget::setupConnections()
         if(m_appConfig->validate())
         {
             this->m_scenarioProcessor->startProcessingScenario();
+            //
+            NGARecordsDb& db = NGARecordsDb::getInstance(m_appConfig->NGAW2DbPath());
+            m_resultsWidget->setRecordsDb(&db);
             m_progressBar->setVisible(true);
             m_alertIconWidget->setHidden(true);
             saveAppSettings();

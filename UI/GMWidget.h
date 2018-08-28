@@ -13,6 +13,7 @@
 #include "SiteConfigWidget.h"
 #include "LocationsListModel.h"
 #include "GmAppConfig.h"
+#include "SiteResultsWidget.h"
 
 class GMWidget : public QWidget
 {
@@ -63,6 +64,7 @@ private:
     GmAppConfig* m_appConfig;
     QLabel* m_alertIconWidget;
     QGeoCoordinate m_mapCenter;
+    SiteResultsWidget* m_resultsWidget;
 
     //actions
     QAction* m_saveAction;

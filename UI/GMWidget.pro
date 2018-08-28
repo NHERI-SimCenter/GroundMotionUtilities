@@ -48,13 +48,15 @@ SOURCES += \
     SiteGridWidget.cpp \
     SiteResultsModel.cpp \
     LocationsListModel.cpp \
-    ../../widgets/Common/FooterWidget.cpp \
+    ../../SimCenterCommon/Common/FooterWidget.cpp \
     GmAppConfig.cpp \
     GmAppConfigWidget.cpp \
     GmCommon.cpp \
     SAResult.cpp \
     PGAResult.cpp \
-    RecordSelection.cpp
+    RecordSelection.cpp \
+    SiteResultsWidget.cpp \
+    NGARecordsDb.cpp
 
 HEADERS += \
         GMWidget.h \
@@ -81,17 +83,19 @@ HEADERS += \
     SiteGridWidget.h \
     SiteResultsModel.h \
     LocationsListModel.h \
-    ../../widgets/Common/FooterWidget.h \
+    ../../SimCenterCommon/Common/FooterWidget.h \
     GmAppConfig.h \
     GmAppConfigWidget.h \
     GmCommon.h \
     SAResult.h \
     PGAResult.h \
-    RecordSelection.h
+    RecordSelection.h \
+    SiteResultsWidget.h \
+    NGARecordsDb.h
 
 FORMS +=
 
 RESOURCES += \
     qml.qrc \
     ui.qrc \
-    ../../widgets/Common/images.qrc
+    ../../SimCenterCommon/Common/images.qrc

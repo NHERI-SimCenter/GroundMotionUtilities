@@ -9,6 +9,10 @@ class SAResult : public QObject
     Q_OBJECT
 public:
     explicit SAResult(QObject *parent = nullptr);
+    QVector<double> means() const;
+    QVector<double> stdDevs() const;
+    QVector<double> interEvStdDevs() const;
+    QVector<double> intraEvStdDevs() const;
 
 signals:
     void meansChanged(QVector<double> newMeans);
@@ -17,6 +21,8 @@ signals:
 public slots:
     void setMeans(QVector<double> means);
     void setStdDevs(QVector<double> stdDevs);
+    void setInterEvStdDevs(QVector<double> interEvstdDevs);
+    void setIntraEvStdDevs(QVector<double> intraEvstdDevs);
 
 private:
     QVector<double> m_means;

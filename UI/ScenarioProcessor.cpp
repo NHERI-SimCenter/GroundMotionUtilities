@@ -212,7 +212,7 @@ void ScenarioProcessor::startProcessingOutputs()
     QJsonArray selectionResults = selectionOutputDoc.object()["GroundMotions"].toArray();
 
     //We will also open the hazard analysis output to read the site location
-    QString hazardOutputPath = GmCommon::getWorkFilePath("Scenario_SHA.json");
+    QString hazardOutputPath = GmCommon::getWorkFilePath("SimOutput.json");
     QFile hazardOutputFile(hazardOutputPath);
     if(!hazardOutputFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -222,6 +222,13 @@ void ScenarioProcessor::startProcessingOutputs()
     output = hazardOutputFile.readAll();
     QJsonDocument hazardOutputDoc = QJsonDocument::fromJson(output.toUtf8());
     QJsonArray hazardResults = hazardOutputDoc.object()["GroundMotions"].toArray();
+
+    //reading periods
+    //Reading SA Std Dev
+    QJsonValue period;
+    QVector<double> periods;
+    foreach (period,  hazardOutputDoc.object()["Periods"].toArray())
+        periods.append(period.toDouble());
 
     //Clearing results before adding new ones
     m_resultsModel.clear();
@@ -239,6 +246,9 @@ void ScenarioProcessor::startProcessingOutputs()
         //Reading PGA
         QJsonObject pgaResut = hazardResults[i].toObject()["PGA"].toObject();
         newResult->pgaResult().setMean(exp(pgaResut["Mean"].toDouble()));
+        newResult->pgaResult().setStdDev(pgaResut["TotalStdDev"].toDouble());
+        newResult->pgaResult().setInterEvStdDev(pgaResut["InterEvStdDev"].toDouble());
+        newResult->pgaResult().setIntraEvStdDev(pgaResut["IntraEvStdDev"].toDouble());
 
         //Reading SA Mean
         QJsonObject saResult = hazardResults[i].toObject()["SA"].toObject();
@@ -252,8 +262,41 @@ void ScenarioProcessor::startProcessingOutputs()
         QJsonValue saStdDev;
         QVector<double> saStdDevs;
         foreach (saStdDev, saResult["TotalStdDev"].toArray())
-            saStdDevs.append(exp(saMean.toDouble()));
+            saStdDevs.append(saStdDev.toDouble());
         newResult->saResult().setStdDevs(saStdDevs);
+
+        //Reading SA Inter Event Std Dev
+        QVector<double> saInterEvStdDevs;
+        foreach (saStdDev, saResult["InterEvStdDev"].toArray())
+            saInterEvStdDevs.append(saStdDev.toDouble());
+        newResult->saResult().setInterEvStdDevs(saInterEvStdDevs);
+
+        //Reading SA Intra Event Std Dev
+        QVector<double> saIntraEvStdDevs;
+        foreach (saStdDev, saResult["IntraEvStdDev"].toArray())
+            saIntraEvStdDevs.append(saStdDev.toDouble());
+        newResult->saResult().setIntraEvStdDevs(saIntraEvStdDevs);
+
+        //Reading Simulated Spectrum
+        QJsonValue simulatedSA;
+        QVector<double> simulateSpectrum;
+        foreach (simulatedSA, saResult["Simulations"].toArray()[0].toArray())
+            simulateSpectrum.append(exp(simulatedSA.toDouble()));
+        newResult->setSimulatedSpectrum(simulateSpectrum);
+
+        //setting periods
+        newResult->setPeriods(periods);
+
+        //Reading Site Data
+        QJsonArray siteDataResuts = hazardResults[i].toObject()["SiteData"].toArray();
+        QJsonValue siteDataJson;
+
+        foreach (siteDataJson, siteDataResuts)
+        {
+            QJsonObject siteDataObject = siteDataJson.toObject();
+            newResult->addSiteData(siteDataObject["Type"].toString(), siteDataObject["Value"].toVariant());
+            newResult->addSiteDataSource(siteDataObject["Type"].toString(), siteDataObject["Source"].toVariant());
+        }
     }
 
     //TODO, single site result

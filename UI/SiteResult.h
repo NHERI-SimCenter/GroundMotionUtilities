@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QtCharts/QLineSeries>
 #include <Location.h>
+#include <QHash>
 #include "SAResult.h"
 #include "PGAResult.h"
 #include "RecordSelection.h"
@@ -23,20 +24,35 @@ public:
     SAResult& saResult();
     PGAResult& pgaResult();
     RecordSelection& recordSelection();
+    QVector<double> periods();
+    QVector<double> simulatedSpectrum();
+    void addSiteData(QString name, QVariant value);
+    void addSiteDataSource(QString name, QVariant value);
+    void clearSiteData();
+    void clearSiteDataSource();
+    QHash<QString, QVariant>& siteData();
+    QHash<QString, QVariant>& siteDataSources();
 
 signals:
+
+public slots:
+    void setPeriods(QVector<double> periods);
+    void setSimulatedSpectrum(QVector<double> simulatedSpectrum);
 
 private:
     Location m_location;
     SAResult m_saResult;
     PGAResult m_pgaResult;
     RecordSelection m_recordSelection;
+    QVector<double> m_periods;
+    QVector<double> m_simulatedSpectrum;
+    QHash<QString, QVariant> m_siteData;
+    QHash<QString, QVariant> m_siteDataSources;
 
     Location* getLocationPtr();
     SAResult* getSAResultPtr();
     PGAResult* getPGAResultPtr();
     RecordSelection* getRecordSelectionPtr();
-
 };
 
 #endif // SITERESULT_H

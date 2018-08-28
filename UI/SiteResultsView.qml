@@ -26,7 +26,8 @@ MapItemView {
                 property bool hovered: false
                 anchors.centerIn: parent
                 anchors.fill: parent
-                ToolTip.text:  String(qsTr("Site\nLocation: (%1, %2)\nMean PGA:%3\nSelected Record Id:%4\nScale Factor:%5"))
+                ToolTip.text:  String(qsTr("Site %1\nLocation: (%2, %3)\nMean PGA:%4\nSelected Record Id:%5\nScale Factor:%6\nDouble click for details.."))
+                                    .arg(index)
                                     .arg(model.display.location.latitude)
                                     .arg(model.display.location.longitude)
                                     .arg(model.display.pgaResult.mean).arg(model.display.recordSelection.recordId)
@@ -36,7 +37,12 @@ MapItemView {
                 onEntered: hovered = true
                 onExited: hovered = false
                 hoverEnabled: true
+                onDoubleClicked: {
+                    resultsWidget.setResult(index, model.display);
+                    resultsWidget.show()
+                }
             }
+
         }
 
         coordinate

@@ -25,6 +25,56 @@ RecordSelection &SiteResult::recordSelection()
     return m_recordSelection;
 }
 
+QVector<double> SiteResult::periods()
+{
+    return m_periods;
+}
+
+QVector<double> SiteResult::simulatedSpectrum()
+{
+    return m_simulatedSpectrum;
+}
+
+void SiteResult::addSiteData(QString name, QVariant value)
+{
+    m_siteData[name] = value;
+}
+
+void SiteResult::addSiteDataSource(QString name, QVariant value)
+{
+    m_siteDataSources[name] = value;
+}
+
+void SiteResult::clearSiteData()
+{
+    m_siteData.clear();
+}
+
+void SiteResult::clearSiteDataSource()
+{
+    m_siteDataSources.clear();
+}
+
+QHash<QString, QVariant> &SiteResult::siteData()
+{
+    return m_siteData;
+}
+
+QHash<QString, QVariant> &SiteResult::siteDataSources()
+{
+    return m_siteDataSources;
+}
+
+void SiteResult::setPeriods(QVector<double> periods)
+{
+    m_periods = periods;
+}
+
+void SiteResult::setSimulatedSpectrum(QVector<double> simulatedSpectrum)
+{
+    m_simulatedSpectrum = simulatedSpectrum;
+}
+
 Location *SiteResult::getLocationPtr()
 {
     return &m_location;
