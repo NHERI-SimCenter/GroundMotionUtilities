@@ -40,6 +40,12 @@ int main(int argc, const char **argv)
     if(doc.HasMember("SpatialCorrelation"))
         isCorrelated = doc["SpatialCorrelation"].GetBool();
 
+    int seed =1;
+    if(doc.HasMember("Seed"))
+        seed = doc["Seed"].GetInt();
+
+    GMSimulator::SetSeed(seed);
+    
     std::string outputFileName(argv[2]);
 
     //Now we can run the simulation

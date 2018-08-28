@@ -11,6 +11,8 @@
 #include "rapidjson/prettywriter.h"
 
 using namespace rapidjson;
+int GMSimulator::s_seed = 1;
+
 
 STATUS GMSimulator::SimulateGM(std::string gmFile, std::string OutputFile, bool isCorrelated, int numSimulations)
 {
@@ -175,8 +177,7 @@ double GMSimulator::GetDistance(Location location1, Location location2)
 VectorXd GMSimulator::GetRandnVector(int nRows)
 {
     std::default_random_engine rndEngine;
-    time_t t = time(NULL);
-    rndEngine.seed(t);
+    rndEngine.seed(s_seed++);
 
     std::normal_distribution<> normDist{0, 1};
 
@@ -187,4 +188,9 @@ VectorXd GMSimulator::GetRandnVector(int nRows)
     }
     
     return randnVec;
+}
+
+void GMSimulator::SetSeed(int seed)
+{
+    s_seed = seed;
 }
