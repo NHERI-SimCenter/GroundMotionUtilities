@@ -17,7 +17,7 @@ class SHATests {
 
 	@Test
 	void test() {
-		EQScenarioCalc eqCalc = new EQScenarioCalc();
+		EQHazardCalc eqCalc = new EQHazardCalc();
 		
 		//Define the rupture
 		EqRuptureConfig eqRupCfg = new EqRuptureConfig("USGS/CGS 2002 Adj. Cal. ERF", 0, 0);
@@ -31,7 +31,7 @@ class SHATests {
 		//Define the Site
 		SiteConfig siteCfg = new SiteConfig(new SiteLocation(34.0543, -118.0821));
 
-		EQScenarioConfig scenarioConfig = new EQScenarioConfig(siteCfg, eqRupCfg, gmpeCfg, imCfg);
+		EQHazardConfig scenarioConfig = new EQHazardConfig(siteCfg, eqRupCfg, gmpeCfg, imCfg);
 
 		eqCalc.PerformSHA(scenarioConfig);
 		SHAOutput output = eqCalc.GetOutput();

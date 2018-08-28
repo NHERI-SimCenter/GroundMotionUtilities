@@ -41,7 +41,7 @@ class IMRsTests {
 				"Boore, Joyner & Fumal (1997)");
 		
 		//Create an instance of EQScenario Calculator
-		EQScenarioCalc eqCalc = new EQScenarioCalc();
+		EQHazardCalc eqCalc = new EQHazardCalc();
 		
 		//Loop through a list of the supported IMRs and check if we can create them
 		for(String imrName:imrList)

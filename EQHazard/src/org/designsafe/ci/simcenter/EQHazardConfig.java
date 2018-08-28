@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * @author Wael Elhaddad
  *
  */
-public class EQScenarioConfig {
+public class EQHazardConfig {
 	
 	@SerializedName("Site")
 	private SiteConfig m_Site;
@@ -24,7 +24,7 @@ public class EQScenarioConfig {
 	@SerializedName("IntensityMeasure")
 	private IMConfig m_IntensityMeasure;
 	
-	public EQScenarioConfig(SiteConfig site, EqRuptureConfig rupture, GMPEConfig gmpe, IMConfig im)
+	public EQHazardConfig(SiteConfig site, EqRuptureConfig rupture, GMPEConfig gmpe, IMConfig im)
 	{
 		this.m_Site = site;
 		this.m_EqRupture = rupture;

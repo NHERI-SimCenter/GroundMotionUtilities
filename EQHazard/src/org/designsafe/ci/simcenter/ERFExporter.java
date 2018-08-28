@@ -19,7 +19,7 @@ import com.google.gson.*;
 public class ERFExporter {
 
 	public static void main(String[] args) {
-		EQScenarioCalc eqCalc = new EQScenarioCalc();
+		EQHazardCalc eqCalc = new EQHazardCalc();
 		
 		List<String> erfNames = Arrays.asList("USGS/CGS 2002 Adj. Cal. ERF", "GEM1 CEUS ERF", "Mean UCERF3 FM3.1", "Mean UCERF3 FM3.2", "Mean UCERF3", "WGCEP (2007) UCERF2 - Single Branch", "GEM1 WEUS ERF");
 		

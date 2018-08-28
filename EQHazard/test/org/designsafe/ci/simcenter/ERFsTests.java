@@ -19,7 +19,7 @@ class ERFsTests {
 	@Test
 	void test() {
 		//Create an instance of EQScenario Calculator
-		EQScenarioCalc eqCalc = new EQScenarioCalc();
+		EQHazardCalc eqCalc = new EQHazardCalc();
 		
 		EqRuptureConfig eqRupCfg1 = new EqRuptureConfig("WGCEP (2007) UCERF2 - Single Branch", 0 , 0);
 		EqkRupture eqRup1 = eqCalc.getEqRuptureFromERF(eqRupCfg1);

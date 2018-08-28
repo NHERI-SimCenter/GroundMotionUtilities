@@ -35,13 +35,13 @@ import com.google.gson.*;
 
 import scratch.UCERF3.erf.mean.MeanUCERF3;
 
-public class EQScenarioCalc implements ParameterChangeWarningListener {
+public class EQHazardCalc implements ParameterChangeWarningListener {
 	private HashMap<String, String> imrMap;
 	private SHAOutput output;
 	private OrderedSiteDataProviderList siteDataProviders;
 	public static final double dTol = 1e-3;
 	
-	public EQScenarioCalc()
+	public EQHazardCalc()
 	{
 		MapIMRs();
 		InitSiteDataProviders();
@@ -98,7 +98,7 @@ public class EQScenarioCalc implements ParameterChangeWarningListener {
 			return;
 		}		
 	
-		EQScenarioCalc calc = new EQScenarioCalc();
+		EQHazardCalc calc = new EQHazardCalc();
 		String jsonCfgPath = args[0];
 		File cfgFile = new File(jsonCfgPath);
 		
@@ -111,7 +111,7 @@ public class EQScenarioCalc implements ParameterChangeWarningListener {
 		}
 		
 		Gson gson = new GsonBuilder().create();
-		EQScenarioConfig scenarioConfig = gson.fromJson(cfg, EQScenarioConfig.class);
+		EQHazardConfig scenarioConfig = gson.fromJson(cfg, EQHazardConfig.class);
 		try {
 			calc.PerformSHA(scenarioConfig);
 		}
@@ -139,7 +139,7 @@ public class EQScenarioCalc implements ParameterChangeWarningListener {
 		return output;		
 	}
 	
-	public void PerformSHA(EQScenarioConfig scenarioConfig)
+	public void PerformSHA(EQHazardConfig scenarioConfig)
 	{
 		GMPEConfig GMPECfg = scenarioConfig.GetGMPEConfig();
 		ScalarIMR imr = CreateIMRInstance(GMPECfg.Type());
@@ -414,7 +414,7 @@ public class EQScenarioCalc implements ParameterChangeWarningListener {
 	    System.out.println(", Done! Time Elapsed: " + elapsedTime/1000.0 + " Sec.");
 	}
 	
-	private void WriteOutputs(EQScenarioConfig scenarioConfig, String directory, String file)
+	private void WriteOutputs(EQHazardConfig scenarioConfig, String directory, String file)
 	{
 		System.out.print("Saving Outputs...");
 		long startTime = System.currentTimeMillis();
