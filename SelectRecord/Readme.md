@@ -1,17 +1,17 @@
-# SelectGM
+# SelectRecord
 This application can be used to select and scale ground motion(GM) records from a database of existing records (e.g. NGA-West2). The application will take as an input a target spectrum, a database of records, an error metric and a short-listing criteria. The output would be either a single record or a suite of records. 
 
 Initial version will use NGA-West flat file as a database to carry out selection/scaling. Later versions may include more record sources and automatic retrieval of the records. For the regional earthquake simulation, this application will select a single record to match a single simulated spectrum. The output of this application is the IDs of the selected records, scaling factors and error values for each site.
 
 Optionally, the application can produce outputs in GeoJson format to facilitate visualization in GIS applications. The following figure shows the IDs of selected records using QGIS plotted for a grid over the SF bay area.
 
-![alt text](misc/images/BayAreaGMRsnPlot.png "GeoJson output visualized in QGIS, showing record sequence numbers selected from NGA-West2 database using SelectGM")
+![alt text](misc/images/BayAreaGMRsnPlot.png "GeoJson output visualized in QGIS, showing record sequence numbers selected from NGA-West2 database using SelectRecord")
 
 ## Usage
-SelectGM can be executed as follows:
+SelectRecord can be executed as follows:
 
 ```shell
-SelectGM Config.json Output.json
+SelectRecord Config.json Output.json
 ```
 This tool requires an input config file, to be provided the required information about the target spectrum, the ground motion database, the error metric used in the selection and a shortlisting criteria.
 
@@ -84,7 +84,7 @@ The target for this selection is the resulting output file([Scenario2_SA_Sim.jso
 
 To run the selection and scaling, use this command:
 ```shell
-SelectGM GMSelection.json Scenario2_Records.json
+SelectRecord GMSelection.json Scenario2_Records.json
 ```
 
 The output file([Scenario2_Records.json](examples/Scenario2_Records.json)) is included in the examples folder. The output contains the record id selected for each site and the scaling factor.
