@@ -1,8 +1,8 @@
-# EQScenario
-EQScenario is a console application developed by the Simcenter to facilitate performing seismic hazard analysis(SHA) for regional earthquake simulations. The application makes use of [OpenSHA](http://www.opensha.org/) to perform deterministic SHA[1]. This application is developed using Java to facilitate the use of OpenSHA Java library. It is worth noting that this tool is most suitable for research applications where SHA needs to be performed for many sites given a single earthquake scenario, such as using a grid of sites for regional simulations.
+# EQHazard
+EQHazard is a console application developed by the Simcenter to facilitate performing seismic hazard analysis(SHA) for regional earthquake simulations. The application makes use of [OpenSHA](http://www.opensha.org/) to perform deterministic SHA[1]. This application is developed using Java to facilitate the use of OpenSHA Java library. It is worth noting that this tool is most suitable for research applications where SHA needs to be performed for many sites given a single earthquake scenario, such as using a grid of sites for regional simulations.
 
 ## User's Guide
-The EQScenario tool can be used to obtain ground motion intensity measures(IM), such as peak ground acceleration(PGA) or spectral accelerations(SA), at a specific site or a grid of sites, assuming a scenario earthquake rupture occurring. The application allows computing the intensity measure using different ground motion prediction equations (GMPE) provided by OpenSHA. The tool takes the following as its input:
+The EQHazard tool can be used to obtain ground motion intensity measures(IM), such as peak ground acceleration(PGA) or spectral accelerations(SA), at a specific site or a grid of sites, assuming a scenario earthquake rupture occurring. The application allows computing the intensity measure using different ground motion prediction equations (GMPE) provided by OpenSHA. The tool takes the following as its input:
 
 *	**Earthquake Rupture**: either a point source with magnitude, or a rupture defined in one of the Earthquake Rupture Forecasts(ERF) provided by OpenSHA.
 *	**Site**: a single location or a grid of locations.
@@ -62,16 +62,16 @@ Additionally, the following site providers are used to obtain site data, if avai
 
 It has to be noted that this is an ordered list of the providers according to preference, which is the default setting in OpenSHA library. If no site data is available, then the GMPE default values are used.
 
-The inputs for the EQScenario tool is in json format, and the output can be in json format or comma separated values(csv) format. Optionally, outputs in GeoJson format can be provided as well  to facilitate visualization in GIS application, as shown in the figure.
+The inputs for the EQHazard tool is in json format, and the output can be in json format or comma separated values(csv) format. Optionally, outputs in GeoJson format can be provided as well  to facilitate visualization in GIS application, as shown in the figure.
 
-![alt text](misc/images/BayAreaPGAPlot.png "Sample output of EQScenario, visualized using QGIS, showing the Mean PGA over a grid in the bay area, given a magnitude 7.25 earthquake occurring in Hayward fault")
+![alt text](misc/images/BayAreaPGAPlot.png "Sample output of EQHazard, visualized using QGIS, showing the Mean PGA over a grid in the bay area, given a magnitude 7.25 earthquake occurring in Hayward fault")
 
 Please refer to [OpenSHA documenation](http://www.opensha.org/overview) for more information about the GMPEs, ERFs and site data providers available.
 
 ### Usage
-Using EQScenario is simple, the EQScenario tool is distributed as a jar file and can executed directly using:
+Using EQHazard is simple, the EQHazard tool is distributed as a jar file and can executed directly using:
 ```
-java -jar EQScenario Scenario.json Output.json
+java -jar EQHazard Scenario.json Output.json
 ```
 Scenario.json is the name of the input file and output.json is the name to be used for the resulting output file.
 
@@ -256,7 +256,7 @@ In this example, we will use the tool to calculate the PGA at a single site give
 ```
 The following command can be used to run this example:
 ```shell
-java -jar EQScenario Scenario1.json Scenario1_PGA.json
+java -jar EQHazard Scenario1.json Scenario1_PGA.json
 ```
 
 The resulting output file is:
@@ -380,7 +380,7 @@ The input file ([Scenario2.json](examples/Scenario2.json)) for this example is:
 
 The following command can be used to run this example:
 ```shell
-java -jar EQScenario Scenario2.json Scenario2_SA.json
+java -jar EQHazard Scenario2.json Scenario2_SA.json
 ```
 
 The output files of this example are extensive and are not directly show in this document. They can be viewed from these link:
@@ -398,19 +398,19 @@ Both libraries are included with the source code.
 
 ### Build and debug in Eclipse IDE
 To build the tool from source using Eclipse IDE:
-1. Open the EQScenario folder in Eclipse IDE.
+1. Open the EQHazard folder in Eclipse IDE.
 2. In the package explorer, expand the ant folder.
-3. Right click on EQScenarioBuild.xml and click Run As > Ant Build.
+3. Right click on EQHazardBuild.xml and click Run As > Ant Build.
 4. The resulting jar file will be created in the build folder
 
 To debug the tool:
-1. Open the EQScenario folder in Eclipse IDE.
+1. Open the EQHazard folder in Eclipse IDE.
 2. In the package explorer, expand the src folder.
-3. Right click on `EQScenarioCalc.java` and click Debug As > Java Application.
+3. Right click on `EQHazardCalc.java` and click Debug As > Java Application.
 
 ### Unit Testing
 Unit tests using the JUnit framework are included in the test folder. The following steps can be used to run the all the tests:
-1. Open the EQScenario folder in Eclipse IDE.
+1. Open the EQHazard folder in Eclipse IDE.
 2. Right click on the test folder and click Run As > JUnit Test.
 3. The Junit dialog will show the results of running the tests.
 
@@ -421,7 +421,7 @@ Gson is distributed under the Apache 2.0 license, Copyright 2008 Google Inc.
 
 OpenSHA is distributed under the Apache 2.0 license, Copyright 2010 OpenSHA.org and the University of Southern California (USC).
 
-EQScenario source and executable files are distributed under the included [license](License), Copyright 2018 The Regents of the University of California.
+EQHazard source and executable files are distributed under the included [license](License), Copyright 2018 The Regents of the University of California.
 
 ## TODO
 These are features that are expected to be added in the near future:

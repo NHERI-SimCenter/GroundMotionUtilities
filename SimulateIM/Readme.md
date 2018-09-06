@@ -1,19 +1,19 @@
-# SimulateGM
+# SimulateIM
 
 This application will simulate ground motion intensity measures(IMs) given the mean and standard deviation. For simulation of geographically distributed systems, spatial correlation can be established among the simulated IMs for different sites across a region. The implementation of ground motion correlation is based on Jayaram and Baker(2009) method [1].
 
-One application of this tool is to obtain simulations of spectral accelerations(SAs) at different sites across a region to use it for ground motion selection and scaling. The inputs for this tool, such as mean and standard deviations of SAs can be obtained using EQScenario tool.
+One application of this tool is to obtain simulations of spectral accelerations(SAs) at different sites across a region to use it for ground motion selection and scaling. The inputs for this tool, such as mean and standard deviations of SAs can be obtained using EQHazard tool.
 
 For the regional simulations, the tool can be used to obtain a single simulation of the SAs at each site, to be used to select a single ground motion record.
 
 ## Usage
-SimulateGM can be executed as follows:
+SimulateIM can be executed as follows:
 
 ```shell
-SimulateGM Config.json Output.json
+SimulateIM Config.json Output.json
 ```
 
-SimulateGM requires an input config file that specifies a ground motions file, the number of simulations to be performed and a flag to determine if spatial correlation will be used. An example input is:
+SimulateIM requires an input config file that specifies a ground motions file, the number of simulations to be performed and a flag to determine if spatial correlation will be used. An example input is:
 
 ```json
 {
@@ -114,7 +114,7 @@ The output file will include the same ground motions included in the input, in a
 
 ## Example 1
 ### Single simulation of spatially-correlated response spectra for a grid of sites in SF Bay Area
-In this example, the ground motion is simulated for a grid of sites in SF Bay Area (using outputs from example 2 in [EQScenario documentation](../EQScenario/Readme.md)). The input file is as follows:
+In this example, the ground motion is simulated for a grid of sites in SF Bay Area (using outputs from example 2 in [EQHazard documentation](../EQHazard/Readme.md)). The input file is as follows:
 
 ```json
 {
@@ -127,9 +127,9 @@ In this example, the ground motion is simulated for a grid of sites in SF Bay Ar
 ```
 To run this simulation, in the examples folder execute this command:
 ```shell
-SimulateGM SimGMConfig.json Scenario2_SA_Sim.json
+SimulateIM SimGMConfig.json Scenario2_SA_Sim.json
 ```
-The ground motion file output from EQScenario ([Scenario2_SA.json](examples/Scenario2_SA.json)) is specified in the input config to be used for the simulation. The output of the simulation is shown in this file ([Scenario2_SA_Sim.json](examples/Scenario2_SA_Sim.json)) in the examples folder.
+The ground motion file output from EQHazard ([Scenario2_SA.json](examples/Scenario2_SA.json)) is specified in the input config to be used for the simulation. The output of the simulation is shown in this file ([Scenario2_SA_Sim.json](examples/Scenario2_SA_Sim.json)) in the examples folder.
 
 ## References
 [1] Jayaram N. and Baker J.W. (2009), "Correlation model for spatially-distributed ground-motion intensities," Earthquake Engineering and Structural Dynamics, 38(15), 1687-1708.
