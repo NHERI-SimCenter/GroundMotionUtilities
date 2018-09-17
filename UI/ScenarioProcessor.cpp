@@ -1,3 +1,4 @@
+#include <cmath>
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QFile>
@@ -245,7 +246,7 @@ void ScenarioProcessor::startProcessingOutputs()
 
         //Reading PGA
         QJsonObject pgaResut = hazardResults[i].toObject()["PGA"].toObject();
-        newResult->pgaResult().setMean(exp(pgaResut["Mean"].toDouble()));
+        newResult->pgaResult().setMean(std::exp(pgaResut["Mean"].toDouble()));
         newResult->pgaResult().setStdDev(pgaResut["TotalStdDev"].toDouble());
         newResult->pgaResult().setInterEvStdDev(pgaResut["InterEvStdDev"].toDouble());
         newResult->pgaResult().setIntraEvStdDev(pgaResut["IntraEvStdDev"].toDouble());
@@ -255,7 +256,7 @@ void ScenarioProcessor::startProcessingOutputs()
         QJsonValue saMean;
         QVector<double> saMeans;
         foreach (saMean, saResult["Mean"].toArray())
-            saMeans.append(exp(saMean.toDouble()));
+            saMeans.append(std::exp(saMean.toDouble()));
         newResult->saResult().setMeans(saMeans);
 
         //Reading SA Std Dev
@@ -281,7 +282,7 @@ void ScenarioProcessor::startProcessingOutputs()
         QJsonValue simulatedSA;
         QVector<double> simulateSpectrum;
         foreach (simulatedSA, saResult["Simulations"].toArray()[0].toArray())
-            simulateSpectrum.append(exp(simulatedSA.toDouble()));
+            simulateSpectrum.append(std::exp(simulatedSA.toDouble()));
         newResult->setSimulatedSpectrum(simulateSpectrum);
 
         //setting periods
