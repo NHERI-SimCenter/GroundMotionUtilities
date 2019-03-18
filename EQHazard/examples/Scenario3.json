@@ -1,0 +1,42 @@
+{
+	"Site": {
+		"Type": "SiteList",
+		"SiteList": [{
+				"Location": {
+					"Latitude": 37.8719,
+					"Longitude": -122.2585
+				},
+				"Vs30": 240.0
+			}, {
+				"Location": {
+					"Latitude": 37.86,
+					"Longitude": -122.2585
+				},
+				"Vs30": 750.0
+			}, {
+				"Location": {
+					"Latitude": 37.85,
+					"Longitude": -122.2585
+				}
+			}
+		]
+	},
+	"EqRupture": {
+		"Type": "PointSource",
+		"Magnitude": 7.05,
+		"Location": {
+			"Latitude": 37.9,
+			"Longitude": -122.3,
+			"Depth": 0.0
+		},
+		"AverageRake": 0.0,
+		"AverageDip": 90.0
+	},
+	"GMPE": {
+		"Type": "Campbell & Bozorgnia (2014)"
+	},
+	"IntensityMeasure": {
+		"Type": "All",
+		"EnableJsonOutput": true
+	}
+}

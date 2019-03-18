@@ -211,10 +211,10 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		
 		//Get a list of sites locations ready
 		SiteConfig siteCfg = scenarioConfig.GetSiteConfig();
-		List<SiteLocation> siteLocations = new ArrayList<SiteLocation>();
+		List<SiteSpec> siteSpecs = new ArrayList<SiteSpec>();
 		if(siteCfg.Type().equalsIgnoreCase("SingleLocation"))
 		{
-			siteLocations.add(siteCfg.Location());
+			siteSpecs.add(new SiteSpec(siteCfg.Location()));
 		}
 		else if(siteCfg.Type().equalsIgnoreCase("Grid"))
 		{
@@ -228,9 +228,13 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			{
 				for(double longitude = longitudeCfg.Min(); longitude <= longitudeCfg.Max() + dTol; longitude += longitudeStep)
 				{
-					siteLocations.add(new SiteLocation(latitude, longitude));
+					siteSpecs.add(new SiteSpec(latitude, longitude));
 				}
 			}
+		}
+		else if(siteCfg.Type().equalsIgnoreCase("SiteList"))
+		{
+			siteSpecs.addAll(siteCfg.SiteList());
 		}
 		else
 		{
@@ -254,17 +258,17 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			isSANeeded = true;
 			isPGANeeded = false;
 
-			output = new SHAOutput(siteLocations.size(), imConfig.Periods(), scenarioConfig.GetRuptureConfig());
+			output = new SHAOutput(siteSpecs.size(), imConfig.Periods(), scenarioConfig.GetRuptureConfig());
 		}
 		else if(imConfig.Type().equalsIgnoreCase("PGA"))
 		{
-			output = new SHAOutput(siteLocations.size(), null, scenarioConfig.GetRuptureConfig());
+			output = new SHAOutput(siteSpecs.size(), null, scenarioConfig.GetRuptureConfig());
 			isSANeeded = false;
 			isPGANeeded = true;
 		}
 		else if(imConfig.Type().equalsIgnoreCase("All"))
 		{
-			output = new SHAOutput(siteLocations.size(), imConfig.Periods(), scenarioConfig.GetRuptureConfig());
+			output = new SHAOutput(siteSpecs.size(), imConfig.Periods(), scenarioConfig.GetRuptureConfig());
 			isSANeeded = true;
 			isPGANeeded = true;
 		}
@@ -276,9 +280,9 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		
 		
 		ArrayList<Site> sites = new ArrayList<Site>();
-		for(SiteLocation siteLocation: siteLocations)
+		for(SiteSpec siteSpec: siteSpecs)
 		{
-			Location location = new Location (siteLocation.Latitude(), siteLocation.Longitude());
+			Location location = new Location (siteSpec.Location().Latitude(), siteSpec.Location().Longitude());
 			sites.add(new Site(location));
 		}
 		
@@ -298,11 +302,12 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		SiteTranslator siteTrans = new SiteTranslator();
 		long startTime = System.currentTimeMillis();
 
-		for(int i = 0; i < siteLocations.size(); i++)
+		for(int i = 0; i < siteSpecs.size(); i++)
 		{
 
 			System.out.print("\rProcessing Site " + (i+1));
-			SiteLocation siteLocation = siteLocations.get(i);
+			SiteSpec siteSpec = siteSpecs.get(i);
+			SiteLocation siteLocation = siteSpec.Location();
 			SiteResult result;
 			
 			//set site
@@ -322,7 +327,19 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 				//checking if a provider has the value, otherwise set the default
 				boolean siteDataFound = siteTrans.setParameterValue(newParam, siteDataValues);
 
-				if(siteDataFound)
+				if(newParam.getName().equalsIgnoreCase("Vs30") && siteSpec.hasVs30())
+				{
+					newParam.setValue(siteSpec.Vs30().doubleValue());
+					siteDataResults.add(new SiteDataResult(newParam.getName(),
+									newParam.getValue(), "User Defined"));
+				}
+				else if(newParam.getName().equalsIgnoreCase("Vs30 Type") && siteSpec.hasVs30())
+				{
+					newParam.setValue("Measured");
+					siteDataResults.add(new SiteDataResult(newParam.getName(),
+									newParam.getValue(), "User Defined"));
+				}
+				else if(siteDataFound)
 				{
 					String provider = "Unknown"; 
 

@@ -3,6 +3,8 @@
  */
 package org.designsafe.ci.simcenter;
 
+import java.util.ArrayList;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -19,6 +21,9 @@ public class SiteConfig
 	
 	@SerializedName("Location")
 	private SiteLocation m_Location;
+	
+	@SerializedName("SiteList")
+	private ArrayList<SiteSpec> m_SiteList;
 	
 	public SiteConfig(SiteLocation location)
 	{
@@ -45,5 +50,10 @@ public class SiteConfig
 	public GridSite Grid()
 	{
 		return this.m_Grid;
+	}
+	
+	public ArrayList<SiteSpec> SiteList()
+	{
+		return this.m_SiteList;
 	}
 }
