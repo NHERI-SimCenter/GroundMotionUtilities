@@ -41,6 +41,15 @@ public class EqRuptureConfig
 	@SerializedName("Surface")
 	private ArrayList<RuptureLocation> m_Surface;
 	
+	@SerializedName("ExportGeoJson")
+	private Boolean m_exportGeoJson = null;
+	
+	@SerializedName("MaxDistance")
+	private Double m_maxDistance = null;
+	
+	@SerializedName("MaxSources")
+	private Integer m_maxSources = null;
+	
 	public EqRuptureConfig(RuptureLocation location, double magnitude, double averageDip, double averageRake)
 	{
 		this.m_Type = "PointSource";
@@ -102,6 +111,16 @@ public class EqRuptureConfig
 	public int RuptureIndex()
 	{
 		return this.m_RuptureIndex;
+	}
+	
+	public double MaxDistance()
+	{
+		return this.m_maxDistance;
+	}
+	
+	public int MaxSources()
+	{
+		return this.m_maxSources;
 	}
 	
 	public void SetRupture(double magnitude,  double averageDip, double averageRake,  ArrayList<RuptureLocation> surface)

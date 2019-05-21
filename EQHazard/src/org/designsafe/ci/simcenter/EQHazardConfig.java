@@ -6,6 +6,11 @@ package org.designsafe.ci.simcenter;
 
 import com.google.gson.annotations.SerializedName;
 
+enum ConfigType 
+{ 
+    Scenario, UHS, ERFEXPORTER
+} 
+
 /**
  * @author Wael Elhaddad
  *
@@ -50,5 +55,17 @@ public class EQHazardConfig {
 	public IMConfig GetIMConfig()
 	{
 		return this.m_IntensityMeasure;
+	}
+	
+	public ConfigType getType()
+	{
+		if(this.m_IntensityMeasure == null && this.m_EqRupture.Type().equalsIgnoreCase("ERF"))
+			return ConfigType.ERFEXPORTER;
+			
+		if(this.m_IntensityMeasure.Type().equalsIgnoreCase("UHS"))
+			return ConfigType.UHS;
+				
+		return ConfigType.Scenario;
+		
 	}
 }

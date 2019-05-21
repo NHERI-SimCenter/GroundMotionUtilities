@@ -16,6 +16,15 @@ public class SAResult
 	@SerializedName("IntraEvStdDev")
 	private double[] m_IntraEvStdDev;
 
+	@SerializedName("UHS")
+	private double[] m_UHS;
+	
+	SAResult()
+	{
+		
+	}
+	
+	
 	SAResult(int n, boolean hasIEStats)
 	{
 		this.m_Mean = new double[n];
@@ -38,6 +47,11 @@ public class SAResult
 		SetResult(index, mean, stdDev);
 		this.m_InterEvStdDev[index] = interEvStdDev;
 		this.m_IntraEvStdDev[index] = intraEvStdDev;
+	}
+	
+	public void SetUHS(double[] UHS)
+	{
+		m_UHS = UHS;
 	}
 	
 	public double Size()

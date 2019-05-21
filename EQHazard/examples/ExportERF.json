@@ -1,0 +1,16 @@
+{
+	"Site": {
+		"Type": "SingleLocation",
+		"Location": {
+			"Latitude": 37.8719,
+			"Longitude": -122.2585
+		}
+	},
+	"EqRupture": {
+		"Type": "ERF",
+		"RuptureForecast": "WGCEP (2007) UCERF2 - Single Branch",
+		"ExportGeoJson": true,
+		"MaxDistance": 50,
+		"MaxSources": 100
+	}
+}

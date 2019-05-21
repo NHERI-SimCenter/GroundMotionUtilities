@@ -5,8 +5,12 @@ import java.lang.reflect.*;
 import java.nio.file.Paths;
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
+import org.apache.commons.lang3.ArrayUtils;
 import org.opensha.commons.data.*;
 import org.opensha.commons.data.siteData.*;
+import org.opensha.commons.data.function.*;
 import org.opensha.commons.geo.*;
 import org.opensha.commons.param.*;
 import org.opensha.commons.param.Parameter;
@@ -21,6 +25,7 @@ import org.opensha.sha.earthquake.rupForecastImpl.WGCEP_UCERF1.*;
 import org.opensha.sha.earthquake.rupForecastImpl.WGCEP_UCERF_2_Final.*;
 import org.opensha.sha.earthquake.rupForecastImpl.WGCEP_UCERF_2_Final.MeanUCERF2.*;
 import org.opensha.sha.faultSurface.*;
+import org.opensha.sha.gui.infoTools.IMT_Info;
 import org.opensha.sha.imr.*;
 import org.opensha.sha.imr.attenRelImpl.*;
 import org.opensha.sha.imr.attenRelImpl.ngaw2.*;
@@ -28,6 +33,7 @@ import org.opensha.sha.imr.attenRelImpl.ngaw2.NGAW2_Wrappers.*;
 import org.opensha.sha.imr.param.IntensityMeasureParams.*;
 import org.opensha.sha.imr.param.OtherParams.*;
 import org.opensha.sha.util.*;
+import org.opensha.sha.calc.*;
 
 import com.google.common.base.*;
 import com.google.common.io.*;
@@ -98,6 +104,7 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			return;
 		}		
 	
+
 		EQHazardCalc calc = new EQHazardCalc();
 		String jsonCfgPath = args[0];
 		File cfgFile = new File(jsonCfgPath);
@@ -111,9 +118,29 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		}
 		
 		Gson gson = new GsonBuilder().create();
-		EQHazardConfig scenarioConfig = gson.fromJson(cfg, EQHazardConfig.class);
+		EQHazardConfig config = gson.fromJson(cfg, EQHazardConfig.class);
 		try {
-			calc.PerformSHA(scenarioConfig);
+				
+			if(config.getType() == ConfigType.Scenario)
+				calc.PerformSHA(config);
+			else if(config.getType() == ConfigType.UHS)
+				calc.ComputeUHS(config);
+			else if(config.getType() == ConfigType.ERFEXPORTER)
+			{
+				SiteConfig siteConfig = config.GetSiteConfig();
+				if (!siteConfig.Type().equalsIgnoreCase("SingleLocation"))
+				{
+					System.err.print("Only single location sites are supported for ERF export!");
+					System.exit(-10);
+				}
+				EqRuptureConfig rupconfig = config.GetRuptureConfig();
+				ERF erf = calc.getERF(rupconfig.RuptureForecast());
+				SiteLocation siteLocation = siteConfig.Location();
+				Location location = new Location(siteLocation.Latitude(), siteLocation.Longitude());
+				ERFExporter.ExportToGeoJson(erf, args[1], rupconfig.MaxDistance(), location, rupconfig.MaxSources());
+				
+				System.exit(0);
+			}
 		}
 		catch (Exception e) {
 			System.err.print(e.getMessage());
@@ -125,7 +152,7 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		String directory = outFile.getAbsoluteFile().getParent();
 		String file = outFile.getName();
 
-		calc.WriteOutputs(scenarioConfig, directory, file);
+		calc.WriteOutputs(config, directory, file);
 	}
 
 	@Override
@@ -429,6 +456,148 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		long stopTime = System.currentTimeMillis();
 	    long elapsedTime = stopTime - startTime;
 	    System.out.println(", Done! Time Elapsed: " + elapsedTime/1000.0 + " Sec.");
+	}
+	
+	
+	public void ComputeUHS(EQHazardConfig config)
+	{
+		GMPEConfig GMPECfg = config.GetGMPEConfig();
+		ScalarIMR imr = CreateIMRInstance(GMPECfg.Type());
+		ParameterList ims =imr.getSupportedIntensityMeasures();
+		SA_Param saParam = (SA_Param)ims.getParameter(SA_Param.NAME);
+		List<Double> supportedPeriods = saParam.getPeriodParam().getAllowedDoubles();
+		Collections.sort(supportedPeriods);	
+
+
+		SiteLocation siteLocation = config.GetSiteConfig().Location();
+		Location location = new Location (siteLocation.Latitude(), siteLocation.Longitude());
+		Site site = new Site(location);
+		
+		System.out.print("Obtaining Site Data...");
+		long sdStartTime = System.currentTimeMillis();
+		ArrayList<SiteDataValue<?>> availableSiteData = null;
+		try {
+			availableSiteData = siteDataProviders.getAllAvailableData(location);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
+		}
+		long sdStopTime = System.currentTimeMillis();
+	    long sdElapsedTime = sdStopTime - sdStartTime;
+	    System.out.println("[Time Elapsed: " + sdElapsedTime/1000.0 + " Sec.]");
+		
+	    System.out.print("Processing Rupture Forecast...");
+		long erfStartTime = System.currentTimeMillis();
+		EqRuptureConfig eqRupCfg = config.GetRuptureConfig();
+		ERF erf = getERF(eqRupCfg.RuptureForecast());
+		ParameterList erfParams = erf.getAdjustableParameterList();
+		erfParams.setValue("Background Seismicity", "Exclude");
+		long erfStopTime = System.currentTimeMillis();
+	    long erfElapsedTime = erfStopTime - erfStartTime;
+		System.out.println("[Time Elapsed: " + erfElapsedTime/1000.0 + " Sec.]");
+		
+		ParameterList imrSiteParams = imr.getSiteParams();
+		ArrayList<SiteDataResult> siteDataResults = new ArrayList<SiteDataResult>();
+		SiteTranslator siteTrans = new SiteTranslator();
+		
+		SiteSpec siteSpec = new SiteSpec(siteLocation);
+		for(Parameter siteParam:imrSiteParams)
+		{	
+			Parameter newParam = (Parameter)siteParam.clone();
+			//checking if a provider has the value, otherwise set the default
+			boolean siteDataFound = siteTrans.setParameterValue(newParam, availableSiteData);
+
+			if(newParam.getName().equalsIgnoreCase("Vs30") && siteSpec.hasVs30())
+			{
+				newParam.setValue(siteSpec.Vs30().doubleValue());
+				siteDataResults.add(new SiteDataResult(newParam.getName(),
+								newParam.getValue(), "User Defined"));
+			}
+			else if(newParam.getName().equalsIgnoreCase("Vs30 Type") && siteSpec.hasVs30())
+			{
+				newParam.setValue("Measured");
+				siteDataResults.add(new SiteDataResult(newParam.getName(),
+								newParam.getValue(), "User Defined"));
+			}
+			else if(siteDataFound)
+			{
+				String provider = "Unknown";
+
+				provider = getDataSource(newParam.getName(), availableSiteData);
+				
+				siteDataResults.add(new SiteDataResult(newParam.getName(),
+							newParam.getValue(), provider));
+			}
+			else 
+			{
+				newParam.setValue(siteParam.getDefaultValue());
+				siteDataResults.add(new SiteDataResult(siteParam.getName(),
+						siteParam.getDefaultValue(), "Default"));
+			}
+			site.addParameter(newParam);
+		}
+		
+		SpectrumCalculatorAPI spectrumCalc = new SpectrumCalculator();
+		IMT_Info imtInfo = new IMT_Info();
+		
+		DiscretizedFunc hazFunction = imtInfo.getDefaultHazardCurve(SA_Param.NAME);
+		imr.setIntensityMeasure("SA");
+		double[] periods = new double [supportedPeriods.size()];
+		for (int i = 0; i < supportedPeriods.size(); i++)
+			periods[i] = supportedPeriods.get(i);
+		output = new SHAOutput(1, periods, config.GetRuptureConfig());
+		
+		Thread calcThread = new Thread(new Runnable(){
+			
+			public void run()
+			{
+				DiscretizedFunc spectrum = null;
+
+				try
+				{
+					spectrum = spectrumCalc.getIML_SpectrumCurve(hazFunction, site, imr, erf, 0.05, supportedPeriods);
+				}
+				catch (RuntimeException e) {
+					e.printStackTrace();
+					return;
+				}
+				catch(Exception e)
+				{
+					System.out.print(e.getMessage());
+				}
+				
+				synchronized (output) {
+					SAResult saResult = new SAResult();
+					double[] UHS = new double [spectrum.size()];
+					for (int i = 0; i < spectrum.size(); i++)
+						UHS[i] = Math.log(spectrum.getY(i));
+					saResult.SetUHS(UHS);
+					SiteResult siteResult = new SiteResult(siteLocation, null, null, saResult);
+					output.SetResult(0, siteResult);
+				}
+			}});
+		
+		calcThread.setName("PSHA-thread");
+		calcThread.start();
+		
+		long shaStartTime = System.currentTimeMillis();
+		while(calcThread.isAlive())
+		{
+			try
+			{
+				Thread.sleep(200);
+			}
+			catch (Exception e)
+			{
+				
+			}
+			int current = Math.max(0, spectrumCalc.getCurrRuptures());
+			double percent = (double)current/spectrumCalc.getTotRuptures() * 100;
+			System.out.printf("\rProcessing Rupture %d of %d [%.1f %% Done]", current, spectrumCalc.getTotRuptures(), percent);
+		}
+		long shaStopTime = System.currentTimeMillis();
+	    long shaElapsedTime = shaStopTime - shaStartTime;
+		System.out.println("...[Time Elapsed: " + shaElapsedTime/1000.0 + " Sec.]");		
 	}
 	
 	private void WriteOutputs(EQHazardConfig scenarioConfig, String directory, String file)
