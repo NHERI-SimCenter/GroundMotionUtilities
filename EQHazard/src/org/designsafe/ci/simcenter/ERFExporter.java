@@ -7,11 +7,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.opensha.commons.geo.LocationList;
+import org.opensha.commons.geo.Location;
 import org.opensha.commons.util.FileUtils;
+import org.opensha.sha.cybershake.calc.RuptureProbabilityModifier;
 import org.opensha.sha.earthquake.ERF;
 import org.opensha.sha.earthquake.EqkRupture;
 import org.opensha.sha.earthquake.ProbEqkRupture;
 import org.opensha.sha.earthquake.ProbEqkSource;
+import org.opensha.sha.faultSurface.FaultTrace;
+import org.opensha.sha.faultSurface.PointSurface;
+import org.opensha.sha.faultSurface.RuptureSurface;
 
 import com.google.common.io.*;
 import com.google.gson.*;
@@ -81,7 +86,6 @@ public class ERFExporter {
 			
 			JsonArray locationsJson = new JsonArray();
 			
-
 			
 			JsonObject rupturesJson = new JsonObject();
 			sourceJson.add("Ruptures", rupturesJson);
@@ -105,4 +109,99 @@ public class ERFExporter {
 		FileUtils.save(erf.getName().replace('/', '-') + ".json", jsonString);
 	}
 
+	public static void ExportToGeoJson(ERF erf, String filename, double maxDistance, Location siteLocation, int maxSources)
+	{
+		JsonObject erfGeoJson = new JsonObject();
+		JsonArray featuresJson = new JsonArray();
+		erfGeoJson.add("type", new JsonPrimitive("FeatureCollection"));
+
+		int nSources = erf.getNumSources();
+		int count = 0;
+		for (int i = 0; i < nSources; i++)
+		{
+			if (count >= maxSources)
+				break;
+				
+			ProbEqkSource rupSource = erf.getSource(i);
+			
+			RuptureSurface sourceSurface = rupSource.getSourceSurface();
+			double distanceToRup = sourceSurface.getDistanceRup(siteLocation);
+
+			System.out.print("\rProcessing Source " + (i+1) + " of "+ nSources + " [Found "+ count +" Sources]");
+
+			if(distanceToRup <= maxDistance)
+			{
+				count = count + 1;
+				JsonObject sourceJson = new JsonObject();
+				JsonObject sourceGeometryJson = new JsonObject();
+				JsonObject sourcePropretiesJson = new JsonObject();
+	
+				if (sourceSurface.isPointSurface())
+				{
+					PointSurface pointSurface = (PointSurface)sourceSurface;
+					Location location = pointSurface.getLocation();
+					sourceGeometryJson.add("type", new JsonPrimitive("Point"));
+					JsonArray coordinates = new JsonArray();
+					coordinates.add(location.getLongitude());
+					coordinates.add(location.getLatitude());
+					sourceGeometryJson.add("coordinates", coordinates);
+				}
+				else
+				{
+					sourceGeometryJson.add("type", new JsonPrimitive("LineString"));
+					JsonArray coordinates = new JsonArray();
+					
+					FaultTrace trace;
+					try
+					{
+						trace = sourceSurface.getUpperEdge();
+					}
+					catch(Exception e)
+					{
+						trace = sourceSurface.getEvenlyDiscritizedUpperEdge();
+					}
+					
+					for (Location location : trace)
+					{
+						//TODO: change to corners
+						JsonArray pointCoordinates = new JsonArray();
+						pointCoordinates.add(location.getLongitude());
+						pointCoordinates.add(location.getLatitude());
+						coordinates.add(pointCoordinates);
+					}
+	
+					sourceGeometryJson.add("coordinates", coordinates);
+				}
+				
+	
+				//Reading ruptures magnitude
+				List<ProbEqkRupture> rupList = rupSource.getRuptureList();				
+				JsonArray rupturesMagnitudes = new JsonArray();
+				for(int j = 0; j < rupList.size(); j++)
+				{
+					sourceJson.add("type", new JsonPrimitive("Feature"));				
+					ProbEqkRupture rupture = rupList.get(j);				
+					rupturesMagnitudes.add(rupture.getMag());	
+				}
+				
+				
+				sourcePropretiesJson.add("Name", new JsonPrimitive(rupSource.getName()));
+				sourcePropretiesJson.add("Distance", new JsonPrimitive(distanceToRup));
+				sourcePropretiesJson.add("Magnitudes", rupturesMagnitudes);
+
+				sourceJson.add("geometry", sourceGeometryJson);
+				sourceJson.add("properties", sourcePropretiesJson);
+				featuresJson.add(sourceJson);
+			}
+		}
+		
+		erfGeoJson.add("features", featuresJson);
+
+		
+		//Now we can export
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String jsonString = gson.toJson(erfGeoJson);
+		
+		FileUtils.save(filename, jsonString);
+	}
 }
