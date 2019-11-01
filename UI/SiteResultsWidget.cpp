@@ -3,6 +3,7 @@
 #include <QChartView>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QLegendMarker>
 
 SiteResultsWidget::SiteResultsWidget(QWidget *parent) : QWidget(parent)
 {
@@ -14,24 +15,25 @@ SiteResultsWidget::SiteResultsWidget(QWidget *parent) : QWidget(parent)
 
     m_spectrumChart.setTitle("Response Spectra");
     m_spectrumChart.addSeries(&m_meanSeries);
-    m_spectrumChart.addSeries(&m_lowerSeries);
-    m_spectrumChart.addSeries(&m_upperSeries);
-    m_spectrumChart.addSeries(&m_simulationSeries);
-    m_spectrumChart.addSeries(&m_selectionSeries);
+    //m_spectrumChart.addSeries(&m_lowerSeries);
+    //m_spectrumChart.addSeries(&m_upperSeries);
+    //m_spectrumChart.addSeries(&m_simulationSeries);
+    //m_spectrumChart.addSeries(&m_selectionSeries);
 
-    QPen blackPen;
-    blackPen.setColor(Qt::black);
-    m_meanSeries.setPen(blackPen);
-    blackPen.setStyle(Qt::DotLine);
-    m_lowerSeries.setPen(blackPen);
-    m_upperSeries.setPen(blackPen);
+    QPen targeSpectrumPen;
+    targeSpectrumPen.setColor(Qt::blue);
+    targeSpectrumPen.setWidth(2);
+    m_meanSeries.setPen(targeSpectrumPen);
+    targeSpectrumPen.setStyle(Qt::DotLine);
+    m_lowerSeries.setPen(targeSpectrumPen);
+    m_upperSeries.setPen(targeSpectrumPen);
 
     //Setting names
     m_meanSeries.setName("Mean");
     m_lowerSeries.setName("Mean - Std. Dev.");
     m_upperSeries.setName("Mean + Std. Dev.");
     m_simulationSeries.setName("Simulated");
-    m_selectionSeries.setName("Selected");
+    //m_selectionSeries.setName("Selected");
 
     //Setting x Axis
     xAxis.setTitleText("Time [sec.]");
@@ -44,7 +46,7 @@ SiteResultsWidget::SiteResultsWidget(QWidget *parent) : QWidget(parent)
     m_lowerSeries.attachAxis(&xAxis);
     m_upperSeries.attachAxis(&xAxis);
     m_simulationSeries.attachAxis(&xAxis);
-    m_selectionSeries.attachAxis(&xAxis);
+    //m_selectionSeries.attachAxis(&xAxis);
 
     //Setting y Axis
     yAxis.setTitleText("Spectral Acceleration [g.]");
@@ -55,7 +57,7 @@ SiteResultsWidget::SiteResultsWidget(QWidget *parent) : QWidget(parent)
     m_lowerSeries.attachAxis(&yAxis);
     m_upperSeries.attachAxis(&yAxis);
     m_simulationSeries.attachAxis(&yAxis);
-    m_selectionSeries.attachAxis(&yAxis);
+    //m_selectionSeries.attachAxis(&yAxis);
 
     QChartView* chartView = new QChartView(&m_spectrumChart, this);
     chartView->setRenderHint(QPainter::Antialiasing);
@@ -80,7 +82,7 @@ void SiteResultsWidget::setResult(int id, SiteResult *result)
     m_upperSeries.clear();
     m_lowerSeries.clear();
     m_simulationSeries.clear();
-    m_selectionSeries.clear();
+    selectedSpectraSeries.clear();
 
     QVector<double> periods = result->periods();
     QVector<double> saMeans = result->saResult().means();
@@ -94,13 +96,42 @@ void SiteResultsWidget::setResult(int id, SiteResult *result)
         m_lowerSeries << QPointF(periods[i], exp(log(saMeans[i])  + stdDevs[i]));
         m_simulationSeries << QPointF(periods[i], simulation[i]);
     }
+
     if(NULL != m_recordsDb)
     {
-        QVector<double> recordSAs = m_recordsDb->getSpectrum(result->recordSelection().recordId());
-        QVector<double> recordPeriods = m_recordsDb->getPeriods();
-        for (int i = 0; i < recordPeriods.size(); i++)
+        bool needLegend = true;
+        for (auto selectedSpectrum: result->recordSelection())
         {
-            m_selectionSeries << QPointF(recordPeriods[i], result->recordSelection().scaleFactor() * recordSAs[i]);
+            QSharedPointer<QLineSeries> selectionSeries(new QLineSeries());
+            m_spectrumChart.addSeries(selectionSeries.data());
+            QPen grayPen;
+            grayPen.setColor(Qt::gray);
+            grayPen.setWidth(2);
+            selectionSeries->setPen(grayPen);
+            selectionSeries->setOpacity(0.5);
+
+            selectedSpectraSeries.append(selectionSeries);
+            QVector<double> recordSAs = m_recordsDb->getSpectrum(selectedSpectrum->recordId());
+            QVector<double> recordPeriods = m_recordsDb->getPeriods();
+            for (int i = 0; i < recordPeriods.size(); i++)
+            {
+                *selectionSeries << QPointF(recordPeriods[i], selectedSpectrum->scaleFactor() * recordSAs[i]);
+            }
+            if (needLegend)
+            {
+                selectionSeries->setName("Selected");
+                needLegend = false;
+            }
+            else
+            {
+                auto marker = m_spectrumChart.legend()->markers(selectionSeries.data())[0];
+                marker->setVisible(false);
+            }
+
+            selectionSeries->attachAxis(&xAxis);
+            selectionSeries->attachAxis(&yAxis);
+
+
         }
     }
 
@@ -126,8 +157,31 @@ void SiteResultsWidget::setTree(int id, SiteResult *result)
     m_longitudeItem.setText(1, QString::number(result->location().longitude()));
 
     //Set record selection
-    m_selectedId.setText(1, QString::number(result->recordSelection().recordId()));
-    m_scaleFactor.setText(1, QString::number(result->recordSelection().scaleFactor()));
+    for(int i = 0; i < m_recordSelection.childCount(); i++)
+    {
+        auto recordChild =  m_recordSelection.child(i);
+        m_recordSelection.removeChild(recordChild);
+        auto scaleChild = recordChild->child(0);
+        recordChild->removeChild(scaleChild);
+        delete scaleChild;
+        delete recordChild;
+    }
+
+    for (auto record: result->recordSelection())
+    {
+        auto recordItem  = new QTreeWidgetItem();
+        recordItem->setText(0, "Record Id");
+        recordItem->setText(1, QString::number(record->recordId()));
+
+        auto scaleItem  = new QTreeWidgetItem();
+        scaleItem->setText(0, "Scale Factor");
+        scaleItem->setText(1, QString::number(record->scaleFactor()));
+        recordItem->addChild(scaleItem);
+        m_recordSelection.addChild(recordItem);
+        //recordItem->setExpanded(true);
+    }
+
+
 
     //Set SiteData
     foreach(QTreeWidgetItem* pChild, m_siteDataItem.takeChildren())
@@ -222,14 +276,6 @@ void SiteResultsWidget::initTree()
     m_siteDataItem.setText(0, "Site Data");
     m_resultsTree.addTopLevelItem(&m_siteDataItem);
 
-    //Record Selection
-    m_recordSelection.setText(0, "Ground Motion");
-    m_selectedId.setText(0, "Selected Record");
-    m_recordSelection.addChild(&m_selectedId);
-    m_scaleFactor.setText(0, "Scale Factor");
-    m_recordSelection.addChild(&m_scaleFactor);
-    m_resultsTree.addTopLevelItem(&m_recordSelection);
-
     //Peak Ground Accelerations
     m_pgaItem.setText(0, "Peak Ground Acceleration");
     m_resultsTree.addTopLevelItem(&m_pgaItem);
@@ -258,4 +304,8 @@ void SiteResultsWidget::initTree()
     m_saItem.addChild(&m_saIntraEvStdDevsItem);
 
     m_resultsTree.addTopLevelItem(&m_saItem);
+
+    //Record Selection
+    m_recordSelection.setText(0, "Ground Motion Selection");
+    m_resultsTree.addTopLevelItem(&m_recordSelection);
 }

@@ -20,7 +20,7 @@ PGAResult &SiteResult::pgaResult()
     return m_pgaResult;
 }
 
-RecordSelection &SiteResult::recordSelection()
+QVector<QSharedPointer<RecordSelection>> &SiteResult::recordSelection()
 {
     return m_recordSelection;
 }
@@ -92,5 +92,5 @@ PGAResult *SiteResult::getPGAResultPtr()
 
 RecordSelection *SiteResult::getRecordSelectionPtr()
 {
-    return &m_recordSelection;
+    return m_recordSelection[0].data();
 }

@@ -6,10 +6,52 @@ QComboBox {
     min-width: 6em;
     selection-color: red;
     selection-background-color: blue;
+    font-size: 10pt;
     }
 
+QGroupBox
+{
+    font-size: 12pt;
+    font-weight: bold;
+}
 
+QGroupBox QGroupBox
+{
+    font-size: 12pt;
+    font-weight: normal;
+}
 
+QLabel
+{
+    font-size: 11pt;
+}
+
+QCheckBox
+{
+    font-size: 11pt;
+}
+
+QRadioButton
+{
+    font-size: 11pt;
+}
+QDoubleSpinBox
+{
+    font-size: 11pt;
+}
+QSpinBox
+{
+    font-size: 11pt;
+}
+
+QPushButton
+{
+    font-size: 11pt;
+}
+QTreeWidget
+{
+    font-size: 11pt;
+}
 
 /* QComboBox gets the "on" state when the popup is open */
 

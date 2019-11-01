@@ -37,7 +37,7 @@ void RecordSelectionConfig::setError(const ErrorMetric &error)
 QJsonObject RecordSelectionConfig::getJson()
 {
     QJsonObject target;
-    target.insert("Type", "SimulatedSpectrum");
+    target.insert("Type", "MeanSpectrum");
 
     QJsonObject db;
     db.insert("Type", "CSV");
@@ -46,12 +46,12 @@ QJsonObject RecordSelectionConfig::getJson()
     QJsonObject magnitude;
     QJsonObject distance;
     QJsonObject vs30;
-    magnitude.insert("Min", 6.0);
+    magnitude.insert("Min", 4.0);
     magnitude.insert("Max", 8.0);
     distance.insert("Min", 0.0);
-    distance.insert("Max", 50.0);
-    vs30.insert("Min", 400.0);
-    vs30.insert("Max", 800.0);
+    distance.insert("Max", 100.0);
+    vs30.insert("Min", 150.0);
+    vs30.insert("Max", 1500.0);
 
     criteria.insert("Magnitude", magnitude);
     criteria.insert("Distance", distance);
