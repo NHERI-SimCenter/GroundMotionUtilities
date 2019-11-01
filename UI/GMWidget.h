@@ -75,6 +75,7 @@ private:
     QAction* m_setLAAction;
     QAction* m_setSFAction;
     QAction* m_setSEAAction;
+    QAction* m_setANCAction;
     QAction* m_aboutAction;
     QAction* m_licenseAction;
     QAction* m_defaultMapAction;

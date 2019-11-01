@@ -5,7 +5,6 @@ IntensityMeasureWidget::IntensityMeasureWidget(IntensityMeasure &im, QWidget *pa
     QGridLayout* layout = new QGridLayout();
     QGroupBox* imGroupBox = new QGroupBox(this);
     imGroupBox->setTitle("Intensity Measure");
-    imGroupBox->setStyleSheet("QGroupBox {font-weight: bold;font-size: 10pt; qproperty-flat: true;}");
 
     QFormLayout* formLayout = new QFormLayout();
     m_typeBox = new QComboBox(this);

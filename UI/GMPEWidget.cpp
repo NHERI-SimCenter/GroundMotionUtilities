@@ -5,7 +5,6 @@ GMPEWidget::GMPEWidget(GMPE& gmpe, QWidget *parent): QWidget(parent), m_gmpe(gmp
     QGridLayout* layout = new QGridLayout();
     QGroupBox* gmpeGroupBox = new QGroupBox(this);
     gmpeGroupBox->setTitle("Ground Motion Prediction Equation");
-    gmpeGroupBox->setStyleSheet("QGroupBox {font-weight: bold;font-size: 10pt; qproperty-flat: true;}");
 
     QFormLayout* formLayout = new QFormLayout();
     m_typeBox = new QComboBox(this);
