@@ -22,11 +22,12 @@ pool:
   vmImage: $(imageName)
 
 steps:
-- task: Ant@1
+# Maven
+# Build, test, and deploy with Apache Maven
+- task: Maven@3
   inputs:
-    buildFile: 'EQHazard/ant/EQHazardBuild.xml'
+    mavenPomFile: 'EQHazard/pom.xml' 
+    goals: 'package'
     javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
+    jdkVersionOption: 'default'
     jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
