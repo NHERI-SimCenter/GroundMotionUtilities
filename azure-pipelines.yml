@@ -35,3 +35,10 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: 'default'
     jdkArchitectureOption: 'x64'
+    
+    
+# CMake
+# Build with the CMake cross-platform build system
+- task: CMake@1
+  inputs:
+    workingDirectory: 'build'
