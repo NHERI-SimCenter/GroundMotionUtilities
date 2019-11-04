@@ -1,0 +1,37 @@
+# Ant
+# Build your Java projects and run tests with Apache Ant.
+# Add steps that save build artifacts and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- master
+- azure-pipelines
+
+pr:
+- master
+
+strategy:
+  matrix:
+    linux:
+      imageName: "ubuntu-16.04"
+    macHighSierra:
+      imageName: "macos-10.13"
+    mac:
+      imageName: "macos-10.14"
+    windows:
+      imageName: "vs2017-win2016"
+  maxParallel: 4
+
+pool:
+  vmImage: $(imageName)
+
+steps:
+# Maven
+# Build, test, and deploy with Apache Maven
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'EQHazard/pom.xml' 
+    goals: 'package'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: 'default'
+    jdkArchitectureOption: 'x64'
