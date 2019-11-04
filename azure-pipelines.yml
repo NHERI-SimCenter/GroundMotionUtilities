@@ -5,6 +5,10 @@
 
 trigger:
 - master
+- azure-pipelines
+
+pr:
+- master
 
 strategy:
   matrix:
