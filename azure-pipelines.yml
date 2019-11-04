@@ -40,7 +40,7 @@ steps:
 # CMake
 # Build with the CMake cross-platform build system
 - task: CMake@1
-  displayname: CMake
+  displayName: CMake
   inputs:
     workingDirectory: 'build'
     cmakeArgs: '..'
@@ -48,7 +48,7 @@ steps:
 # CMake
 # Build with the CMake cross-platform build system
 - task: CMake@1
-  displayname: CMake Build
+  displayName: CMake Build
   inputs:
     workingDirectory: 'build'
     cmakeArgs: '--build .'
