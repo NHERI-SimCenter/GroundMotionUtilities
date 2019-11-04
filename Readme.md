@@ -1,3 +1,9 @@
+**Builds Status**
+
+| **Windows** | **Mac** | **Linux**|
+|---|---|---|
+[![Build Status](https://dev.azure.com/el7addad/Ground%20Motion%20Utilities/_apis/build/status/el7addad.GroundMotionUtilities?branchName=master&jobName=Job&configuration=Job%20windows)](https://dev.azure.com/el7addad/Ground%20Motion%20Utilities/_build/latest?definitionId=1&branchName=master)|[![Build Status](https://dev.azure.com/el7addad/Ground%20Motion%20Utilities/_apis/build/status/el7addad.GroundMotionUtilities?branchName=master&jobName=Job&configuration=Job%20mac)](https://dev.azure.com/el7addad/Ground%20Motion%20Utilities/_build/latest?definitionId=1&branchName=master)|[![Build Status](https://dev.azure.com/el7addad/Ground%20Motion%20Utilities/_apis/build/status/el7addad.GroundMotionUtilities?branchName=master&jobName=Job&configuration=Job%20linux)](https://dev.azure.com/el7addad/Ground%20Motion%20Utilities/_build/latest?definitionId=1&branchName=master)|
+
 # Simcenter Ground Motion Utilities
 This repository contains a suite of tools that are developed by the SimCenter to facilitate the use of seismic hazard analysis(SHA) for different research applications.
 
