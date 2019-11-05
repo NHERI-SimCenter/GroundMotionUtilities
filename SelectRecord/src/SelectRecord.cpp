@@ -31,7 +31,7 @@ int main(int argc, const char **argv)
 
     clock_t begin_time = clock();    
     //First, we need to create the database of ground motions
-    if(SUCCESS != selector.PopulateDatabase(config.DatabaseFile()))
+    if(STATUS::SUCCESS != selector.PopulateDatabase(config.DatabaseFile()))
     {
         std::cout << "Failed to read records database file";
         return -1;
@@ -66,7 +66,7 @@ int main(int argc, const char **argv)
 
     std::vector<Point> locations = target.GetLocations();
     //Write Selection Results
-    if(SUCCESS != selector.WriteSelectionResults(argv[2], selectedRecords, locations))
+    if(STATUS::SUCCESS != selector.WriteSelectionResults(argv[2], selectedRecords, locations))
     {
         std::cout << "Failed to write results!";
         return -1;
