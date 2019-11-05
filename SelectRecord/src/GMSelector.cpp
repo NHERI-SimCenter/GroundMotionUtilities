@@ -15,7 +15,7 @@ using namespace rapidjson;
 
 GMSelector::GMSelector()
 {
-    this->m_ErrorMetric = AbsSum;
+    this->m_ErrorMetric = ErrorMetric::AbsSum;
 }
 
 void GMSelector::AddRecord(GMRecord Record)
@@ -99,7 +99,7 @@ STATUS GMSelector::PopulateDatabase(std::string databaseFile)
 
     if (!pHeader) {
         printf("%s\n", CsvParser_getErrorMessage(pCsvParser));
-        return FAIL;
+        return STATUS::FAIL;
     }
 
     //we need to get the periods of the spectrum
@@ -188,7 +188,7 @@ STATUS GMSelector::PopulateDatabase(std::string databaseFile)
     std::cout << std::endl;
     CsvParser_destroy(pCsvParser);
     
-    return SUCCESS;
+    return STATUS::SUCCESS;
 }
 
 STATUS GMSelector::WriteRecords(std::vector<int> recIds)
@@ -247,7 +247,7 @@ STATUS GMSelector::WriteRecords(std::vector<int> recIds)
         PrettyWriter<OStreamWrapper> writer(osw);
         recordJson.Accept(writer);
     }
-    return SUCCESS;
+    return STATUS::SUCCESS;
 }
 
 STATUS GMSelector::ReadRecordTimeSeries(const char* recordFileName, std::vector<double>& timeSeries, double& dT)
@@ -290,7 +290,7 @@ STATUS GMSelector::ReadRecordTimeSeries(const char* recordFileName, std::vector<
         }
     }
     recordStream.close();
-    return SUCCESS;
+    return STATUS::SUCCESS;
 }
 
 STATUS GMSelector::WriteSelectionResults(const char* outputFile, std::vector<SelectionResult>& selectionResults, std::vector<Point>& locations)

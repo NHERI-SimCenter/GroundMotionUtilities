@@ -67,11 +67,11 @@ STATUS GMSimulator::SimulateGM(std::string gmFile, std::string OutputFile, bool 
                     Value::Array phi = GMs[j]["SA"]["IntraEvStdDev"].GetArray();
 
                     if(mu.Size() != periods.Size())
-                        return FAIL;         
+                        return STATUS::FAIL;         
                     if(tau.Size() != periods.Size())
-                        return FAIL;         
+                        return STATUS::FAIL;         
                     if(phi.Size() != periods.Size())
-                        return FAIL;
+                        return STATUS::FAIL;
                     
                     simGM(i,j) = mu[i].GetDouble() + tau[i].GetDouble() * epsilons(0,j) + phi[i].GetDouble() * eta(i);          
                 }
@@ -84,9 +84,9 @@ STATUS GMSimulator::SimulateGM(std::string gmFile, std::string OutputFile, bool 
                     Value::Array sigma = GMs[j]["SA"]["TotalStdDev"].GetArray();
 
                     if(mu.Size() != periods.Size())
-                        return FAIL;         
+                        return STATUS::FAIL;         
                     if(sigma.Size() != periods.Size())
-                        return FAIL;
+                        return STATUS::FAIL;
 
                     simGM(i,j) = mu[i].GetDouble() + sigma[i].GetDouble() * eta(i);
                 }
@@ -122,7 +122,7 @@ STATUS GMSimulator::SimulateGM(std::string gmFile, std::string OutputFile, bool 
     OStreamWrapper osw(ofs);
     PrettyWriter<OStreamWrapper> writer(osw);
     doc.Accept(writer);
-    return SUCCESS;
+    return STATUS::SUCCESS;
 }
 
 MatrixXd GMSimulator::GetEpsilon(std::vector<Location> locations, double period)

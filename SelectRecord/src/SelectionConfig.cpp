@@ -87,11 +87,11 @@ DbType SelectionConfig::ParseDbType(const char* dbType)
 {
     if(0 == strcmp(dbType, "CSV"))
     {
-        return CSV;
+        return DbType::CSV;
     }
     else if(0 == strcmp(dbType, "SQLite"))
     {
-        return SQLite;
+        return DbType::SQLite;
     }
     else
         throw SHAException("Invalid records Db Type!");
@@ -101,11 +101,11 @@ TargetType SelectionConfig::ParseTargetType(const char* targetType)
 {
     if(0 == strcmp(targetType, "MeanSpectrum"))
     {
-        return Mean;
+        return TargetType::Mean;
     }
     else if(0 == strcmp(targetType, "SimulatedSpectrum"))
     {
-        return Simulated;
+        return TargetType::Simulated;
     }
     else
         throw SHAException("Invalid records Db Type!");

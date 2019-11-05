@@ -37,11 +37,11 @@ void SelectionTarget::GetTargetSpectrums(std::string filename)
     {
         DiscretizedFunction targetSpectrum(periods.Size());
         Value targetValue;
-        if(m_Type == Mean)
+        if(m_Type == TargetType::Mean)
         {
             targetValue = GMs[i]["SA"]["Mean"];
         }
-        else if(m_Type == Simulated)
+        else if(m_Type == TargetType::Simulated)
         {
             targetValue = GMs[i]["SA"]["Simulations"].GetArray()[0];
         }

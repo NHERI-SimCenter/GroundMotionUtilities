@@ -4,11 +4,11 @@
 #include <exception>
 #include <string>
 
-enum STATUS {SUCCESS = 0, FAIL = -1};
+enum class STATUS {SUCCESS = 0, FAIL = -1};
 
-enum ErrorMetric {AbsSum = 0, RMS = 1, MAPE = 2, AbsMax = 3};
-enum DbType {CSV = 0, SQLite = 1};
-enum TargetType {Mean = 0, Simulated = 1};
+enum class ErrorMetric {AbsSum = 0, RMS = 1, MAPE = 2, AbsMax = 3};
+enum class DbType {CSV = 0, SQLite = 1};
+enum class TargetType {Mean = 0, Simulated = 1};
 
 class SHAException
 {
