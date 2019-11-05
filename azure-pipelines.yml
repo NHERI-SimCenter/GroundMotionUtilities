@@ -40,7 +40,7 @@ steps:
 # CMake
 # Build with the CMake cross-platform build system
 - task: CMake@1
-  displayName: CMake
+  displayName: CMake Configuration
   inputs:
     workingDirectory: 'build'
     cmakeArgs: '..'
@@ -52,3 +52,10 @@ steps:
   inputs:
     workingDirectory: 'build'
     cmakeArgs: '--build .'
+
+- script: |
+    pip install conan --upgrade
+    pip install conan_package_tools bincrafters_package_tools
+    conan user
+    python build.py
+  displayName: Conan Packaging
