@@ -37,7 +37,7 @@ variables:
   CONAN_CHANNEL: "testing"
   CONAN_UPLOAD: "https://api.bintray.com/conan/nheri-simcenter/simcenter"
   CONAN_UPLOAD_ONLY_WHEN_STABLE: false
-  CONAN_DOCKER_ENTRY_SCRIPT: "sudo apt-get update && sudo apt-get upgrade -f && sudo apt-get -f -y install maven openjdk"
+  CONAN_DOCKER_ENTRY_SCRIPT: "sudo apt-get update && sudo apt-get upgrade -f && sudo apt-get -f -y install maven default-jdk"
   
 steps:
 # Maven
