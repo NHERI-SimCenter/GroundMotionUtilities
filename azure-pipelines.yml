@@ -35,7 +35,6 @@ variables:
   CONAN_LOGIN_USERNAME: "elhaddad"
   CONAN_CHANNEL: "testing"
   CONAN_UPLOAD: "https://api.bintray.com/conan/nheri-simcenter/simcenter"
-  CONAN_PASSWORD: $(ConanPassword)
   CONAN_UPLOAD_ONLY_WHEN_STABLE: false
   
 steps:
@@ -77,7 +76,7 @@ steps:
     conan -v
     conan remote list
     conan remote add simcenter https://api.bintray.com/conan/nheri-simcenter/simcenter
-    conan user -p $(ConanPassword) -r simcenter elhaddad
+    conan user
     conan remote list 
     python build.py
   displayName: Conan Packaging
