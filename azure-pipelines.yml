@@ -70,6 +70,7 @@ steps:
     pip install conan --upgrade
     pip install conan_package_tools bincrafters_package_tools
   displayName: Conan Installation
+  failOnStderr: false
 
 - script: |
     conan -v
@@ -78,3 +79,4 @@ steps:
     conan remote list
     python build.py
   displayName: Conan Packaging
+  failOnStderr: false
