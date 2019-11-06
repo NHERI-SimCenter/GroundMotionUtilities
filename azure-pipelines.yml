@@ -33,6 +33,7 @@ pool:
 variables:
   CONAN_USERNAME: "simcenter"
   CONAN_LOGIN_USERNAME: "elhaddad"
+  CONAN_LOGIN_USERNAME_SIMCENTER: "elhaddad"
   CONAN_CHANNEL: "testing"
   CONAN_UPLOAD: "https://api.bintray.com/conan/nheri-simcenter/simcenter"
 
@@ -65,7 +66,6 @@ steps:
     cmakeArgs: '--build .'
 
 - script: |
-    pip install --upgrade pip
     pip install wheel
     pip install conan --upgrade
     pip install conan_package_tools bincrafters_package_tools
