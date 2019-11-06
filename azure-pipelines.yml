@@ -27,6 +27,7 @@ pool:
 
 variables:
   CONAN_VISUAL_VERSIONS: 15
+  CONAN_USE_DOCKER: 1
 
 steps:
 # Maven
