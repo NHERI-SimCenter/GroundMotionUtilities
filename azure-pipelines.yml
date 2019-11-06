@@ -6,6 +6,8 @@
 trigger:
 - master
 - azure-pipelines
+- release*
+- stable*
 
 pr:
 - master
