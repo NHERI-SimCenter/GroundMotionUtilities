@@ -69,9 +69,12 @@ steps:
     pip install wheel
     pip install conan --upgrade
     pip install conan_package_tools bincrafters_package_tools
+  displayName: Conan Installation
+
+- script: |
     conan -v
     conan remote list
-    conan user -p
+    conan user
     conan remote list
     python build.py
   displayName: Conan Packaging
