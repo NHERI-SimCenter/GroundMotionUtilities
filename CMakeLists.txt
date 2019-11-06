@@ -4,6 +4,3 @@ add_subdirectory(SelectRecord)
 add_subdirectory(SimulateIM)
 
 set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR})
-
-install(TARGETS SimulateIM SelectRecord
-        DESTINATION build/bin)
