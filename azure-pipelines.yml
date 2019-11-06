@@ -25,6 +25,9 @@ strategy:
 pool:
   vmImage: $(imageName)
 
+variables:
+  CONAN_VISUAL_VERSIONS: 15
+
 steps:
 # Maven
 # Build, test, and deploy with Apache Maven
