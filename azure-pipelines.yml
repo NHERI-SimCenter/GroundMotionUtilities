@@ -16,6 +16,7 @@ strategy:
       imageName: "ubuntu-18.04"
       CONAN_GCC_VERSIONS: 7
       CONAN_CLANG_VERSIONS: 6.0
+      CONAN_USE_DOCKER: 1
     macHighSierra:
       imageName: "macos-10.13"
       CONAN_APPLE_CLANG_VERSIONS: 10.0
@@ -36,6 +37,7 @@ variables:
   CONAN_CHANNEL: "testing"
   CONAN_UPLOAD: "https://api.bintray.com/conan/nheri-simcenter/simcenter"
   CONAN_UPLOAD_ONLY_WHEN_STABLE: false
+  CONAN_DOCKER_ENTRY_SCRIPT: sudo apt-get -y install maven
   
 steps:
 # Maven
