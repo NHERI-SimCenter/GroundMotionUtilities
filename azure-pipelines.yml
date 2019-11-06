@@ -15,13 +15,13 @@ strategy:
     linux:
       imageName: "ubuntu-18.04"
       CONAN_GCC_VERSIONS: 7
-      CONAN_CLANG_VERSIONS: 
+      CONAN_CLANG_VERSIONS: 6
     macHighSierra:
       imageName: "macos-10.13"
-      CONAN_CLANG_VERSIONS: 10
+      CONAN_APPLE_CLANG_VERSIONS: 10
     macMojave:
       imageName: "macos-10.14"
-      CONAN_CLANG_VERSIONS: 11
+      CONAN_APPLE_CLANG_VERSIONS: 11
     windows:
       imageName: "vs2017-win2016"
       CONAN_VISUAL_VERSIONS: 15
