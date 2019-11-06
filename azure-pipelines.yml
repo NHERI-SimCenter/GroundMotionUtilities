@@ -35,6 +35,7 @@ variables:
   CONAN_LOGIN_USERNAME: "elhaddad"
   CONAN_CHANNEL: "testing"
   CONAN_UPLOAD: "https://api.bintray.com/conan/nheri-simcenter/simcenter"
+  CONAN_REMOTES: "https://api.bintray.com/conan/nheri-simcenter/simcenter"
   CONAN_NON_INTERACTIVE: 1
 
 steps:
