@@ -75,8 +75,9 @@ steps:
 - script: |
     conan -v
     conan remote list
-    conan user
-    conan remote list
+    conan remote add simcenter https://api.bintray.com/conan/nheri-simcenter/simcenter
+    conan user -p $(ConanPassword) -r simcenter elhaddad
+    conan remote list 
     python build.py
   displayName: Conan Packaging
   failOnStderr: false
