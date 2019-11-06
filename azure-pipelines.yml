@@ -36,7 +36,8 @@ variables:
   CONAN_CHANNEL: "testing"
   CONAN_UPLOAD: "https://api.bintray.com/conan/nheri-simcenter/simcenter"
   CONAN_PASSWORD: $(ConanPassword)
-
+  CONAN_UPLOAD_ONLY_WHEN_STABLE: false
+  
 steps:
 # Maven
 # Build, test, and deploy with Apache Maven
