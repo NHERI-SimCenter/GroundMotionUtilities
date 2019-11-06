@@ -13,7 +13,7 @@ pr:
 strategy:
   matrix:
     linux:
-      imageName: "ubuntu-16.04"
+      imageName: "ubuntu-18.04"
       CONAN_USE_DOCKER: 1
     macHighSierra:
       imageName: "macos-10.13"
