@@ -73,11 +73,7 @@ steps:
   failOnStderr: false
 
 - script: |
-    conan -v
-    conan remote list
-    conan remote add simcenter https://api.bintray.com/conan/nheri-simcenter/simcenter
     conan user
-    conan remote list 
     python build.py
   displayName: Conan Packaging
   failOnStderr: false
