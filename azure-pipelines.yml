@@ -14,16 +14,14 @@ strategy:
   matrix:
     linux:
       imageName: "ubuntu-16.04"
-      variables:
-        CONAN_USE_DOCKER: 1
+      CONAN_USE_DOCKER: 1
     macHighSierra:
       imageName: "macos-10.13"
     mac:
       imageName: "macos-10.14"
     windows:
       imageName: "vs2017-win2016"
-      variables:
-        CONAN_VISUAL_VERSIONS: 15
+      CONAN_VISUAL_VERSIONS: 15
   maxParallel: 4
 
 pool:
