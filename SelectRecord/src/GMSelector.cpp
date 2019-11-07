@@ -11,7 +11,6 @@
 #include "rapidjson/ostreamwrapper.h"
 #include "rapidjson/prettywriter.h"
 #include <unordered_map>
-#include <omp.h>
 
 using namespace rapidjson;
 
@@ -56,19 +55,14 @@ std::vector<SelectionResult> GMSelector::SelectMultipleRecords(DiscretizedFuncti
 	std::map<int, double> scales;
 
 	
-	#pragma omp parallel for
 	for (int i = 0; i < m_Records.size(); i++)
 	{
 		if (this->m_Records[i].CheckCriteria(criteria))
 		{
 			double scaleFactor = 0.0;
 			double cost = this->GetError(target, i, scaleFactor);
-			
-			#pragma omp critical 
-			{
-				errors.push_back(std::make_pair(i, cost));
-				scales.insert(std::make_pair(i, scaleFactor));
-			}
+            errors.push_back(std::make_pair(i, cost));
+            scales.insert(std::make_pair(i, scaleFactor));
 		}
 	}
 
