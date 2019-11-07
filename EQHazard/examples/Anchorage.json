@@ -1,0 +1,28 @@
+{
+	"Site": {
+		"Type": "SingleLocation",
+		"Location": {
+			"Latitude": 37.8719,
+			"Longitude": -122.2585
+		}
+	},
+	"EqRupture": {
+		"Type": "PointSource",
+		"Magnitude": 7.05,
+		"Location": {
+			"Latitude": 37.9,
+			"Longitude": -122.3,
+			"Depth": 0.0
+		},
+		"AverageRake": 0.0,
+		"AverageDip": 90.0
+	},
+	"GMPE": {
+		"Type": "Zhao Et Al. (2006) - Intraslab"
+	},
+	"IntensityMeasure": {
+		"Type": "All",
+		"EnableJsonOutput": true,
+		"EnableGeoJsonOutput": true
+	}
+}

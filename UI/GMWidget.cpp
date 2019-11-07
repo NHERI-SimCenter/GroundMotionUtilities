@@ -172,6 +172,7 @@ GMWidget::GMWidget(QWidget *parent) :
     presetsMenu->addAction(m_setLAAction);
     presetsMenu->addAction(m_setSFAction);
     presetsMenu->addAction(m_setSEAAction);
+    presetsMenu->addAction(m_setANCAction);
     editMenu->addSeparator();
     editMenu->addAction(m_settingsAction);
     menuBar->addMenu(editMenu);
@@ -427,6 +428,25 @@ void GMWidget::setupConnections()
         setMapCenter(47.6325, -122.133);
     });
 
+    connect(m_setANCAction, &QAction::triggered, [this]()
+    {
+        m_siteConfig->siteGrid().setCenter(61.1658, -149.854);
+        m_siteConfig->siteGrid().latitude().set(60.936, 61.337, 40);
+        m_siteConfig->siteGrid().longitude().set(-150.073, -149.045, 25);
+
+        m_siteConfig->site().setLocation(61.1658, -149.854);
+        m_eqRupture->location().set(61.346, -149.955);
+        m_eqRupture->setMagnitude(7.0);
+        m_eqRupture->location().setDepth(46.7);
+        m_siteConfig->siteGrid().latitude().setDivisions(40);
+        m_siteConfig->siteGrid().longitude().setDivisions(40);
+        m_intensityMeasure->setIsCorrelated(false);
+        m_gmpe->setType("Zhao Et Al. (2006) - Intraslab");
+        m_selectionconfig->setDatabase(RecordSelectionConfig::RecordDb::NGAWest2);
+        setMapCenter(61.1658, -149.854);
+    });
+
+
     connect(m_exportAction, &QAction::triggered, this, &GMWidget::exportAll);
 
     connect(m_terrainMapAction, &QAction::triggered, this, [this](){
@@ -501,6 +521,7 @@ void GMWidget::initActions()
     m_setLAAction = new QAction(tr("Los &Angeles"), this);
     m_setSFAction = new QAction(tr("San &Francisco"), this);
     m_setSEAAction = new QAction(tr("Sea&ttle"), this);
+    m_setANCAction = new QAction(tr("An&chorage"), this);
 
     m_settingsAction = new QAction(tr("Settin&gs"), this);
 

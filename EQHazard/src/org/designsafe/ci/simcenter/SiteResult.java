@@ -12,10 +12,10 @@ public class SiteResult
 	@SerializedName("SiteData")
 	ArrayList<SiteDataResult> m_SiteData;
 	
-	@SerializedName("lnSA")
+	@SerializedName("SA")
 	SAResult	m_SA = null;
 	
-	@SerializedName("lnPGA")
+	@SerializedName("PGA")
 	PGAResult	m_PGA = null;
 	
 	public SiteResult(SiteLocation location, ArrayList<SiteDataResult> siteData, SAResult result)

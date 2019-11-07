@@ -7,7 +7,7 @@
 #include "GMRecord.h"
 #include "SelectionCriteria.h"
 #include "SelectionResult.h"
-
+#include <list>
 
 class GMSelector
 {
@@ -15,8 +15,9 @@ class GMSelector
         GMSelector();
 
         SelectionResult SelectSingleRecord(DiscretizedFunction& target, SelectionCriteria& criteria);
+		std::vector<SelectionResult> SelectMultipleRecords(DiscretizedFunction& target, SelectionCriteria& criteria, int n = 1);
         STATUS PopulateDatabase(std::string databaseFile);
-        STATUS WriteSelectionResults(const char* outputFile, std::vector<SelectionResult>& selectedRecords, std::vector<Point>& locations);
+        STATUS WriteSelectionResults(const char* outputFile, std::vector<std::vector<SelectionResult>>& selectedRecords, std::vector<Point>& locations);
         
     private:
         void AddRecord(GMRecord record);

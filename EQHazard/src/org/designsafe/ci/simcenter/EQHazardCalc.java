@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import org.apache.commons.lang3.ArrayUtils;
 import org.opensha.commons.data.*;
 import org.opensha.commons.data.siteData.*;
+import org.opensha.commons.exceptions.ParameterException;
 import org.opensha.commons.data.function.*;
 import org.opensha.commons.geo.*;
 import org.opensha.commons.param.*;
@@ -17,6 +18,9 @@ import org.opensha.commons.param.Parameter;
 import org.opensha.commons.param.constraint.ParameterConstraint;
 import org.opensha.commons.param.event.*;
 import org.opensha.commons.util.*;
+import org.opensha.nshmp2.imr.NSHMP08_SUB_Slab;
+import org.opensha.nshmp2.imr.impl.AB2003_AttenRel;
+import org.opensha.nshmp2.imr.impl.YoungsEtAl_1997_AttenRel;
 import org.opensha.sha.earthquake.*;
 import org.opensha.sha.earthquake.param.*;
 import org.opensha.sha.earthquake.rupForecastImpl.Frankel02.*;
@@ -32,6 +36,7 @@ import org.opensha.sha.imr.attenRelImpl.ngaw2.*;
 import org.opensha.sha.imr.attenRelImpl.ngaw2.NGAW2_Wrappers.*;
 import org.opensha.sha.imr.param.IntensityMeasureParams.*;
 import org.opensha.sha.imr.param.OtherParams.*;
+import org.opensha.sha.imr.param.SiteParams.Vs30_Param;
 import org.opensha.sha.util.*;
 import org.opensha.sha.calc.*;
 
@@ -80,7 +85,10 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		imrMap.put(Campbell_1997_AttenRel.NAME, Campbell_1997_AttenRel.class.getName());
 		imrMap.put(CB_2003_AttenRel.NAME, CB_2003_AttenRel.class.getName());
 		imrMap.put(Field_2000_AttenRel.NAME, Field_2000_AttenRel.class.getName());
-		
+		imrMap.put(AB2003_AttenRel.NAME, AB2003_AttenRel.class.getName());
+		imrMap.put(YoungsEtAl_1997_AttenRel.NAME, YoungsEtAl_1997_AttenRel.class.getName());
+		imrMap.put("Zhao Et Al. (2006) - Intraslab", ZhaoEtAl_2006_AttenRel.class.getName());
+
 		//TODO add the rest of IMRs
 
 	}
@@ -375,6 +383,42 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 					siteDataResults.add(new SiteDataResult(newParam.getName(),
 								newParam.getValue(), provider));
 				}
+				else if(newParam.getName().equalsIgnoreCase(ZhaoEtAl_2006_AttenRel.SITE_TYPE_NAME))
+				{
+					Vs30_Param vs30param = new Vs30_Param();
+					boolean vs30Found = siteTrans.setParameterValue(vs30param, siteDataValues);
+					if(vs30Found)
+					{
+						double vs30 = vs30param.getValue();
+						if(vs30 > 1100)
+							newParam.setValue(ZhaoEtAl_2006_AttenRel.SITE_TYPE_HARD_ROCK);
+						
+						else if(vs30 > 600)
+							newParam.setValue(ZhaoEtAl_2006_AttenRel.SITE_TYPE_ROCK);
+						
+						else if(vs30 > 300)
+							newParam.setValue(ZhaoEtAl_2006_AttenRel.SITE_TYPE_HARD_SOIL);
+						
+						else if(vs30 > 200)
+							newParam.setValue(ZhaoEtAl_2006_AttenRel.SITE_TYPE_MEDIUM_SOIL);
+						
+						else
+							newParam.setValue(ZhaoEtAl_2006_AttenRel.SITE_TYPE_SOFT_SOIL);
+
+					}
+					else
+						newParam.setValue(ZhaoEtAl_2006_AttenRel.SITE_TYPE_DEFAULT);
+					
+					String provider = "Unknown"; 
+
+					provider = getDataSource(vs30param.getName(), siteDataValues);
+					
+					siteDataResults.add(new SiteDataResult(vs30param.getName(),
+							vs30param.getValue(), provider));
+					
+					siteDataResults.add(new SiteDataResult(newParam.getName(),
+							newParam.getValue(), "Mapped from Vs30"));
+				}				
 				else 
 				{
 					newParam.setValue(siteParam.getDefaultValue());
@@ -385,12 +429,20 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			}
 
 			imr.setSite(site);
-		      
-			StdDevTypeParam stdDevParam = (StdDevTypeParam)imr.getParameter(StdDevTypeParam.NAME);
 			
-			boolean hasIEStats = stdDevParam.isAllowed(StdDevTypeParam.STD_DEV_TYPE_INTER) &&
-					stdDevParam.isAllowed(StdDevTypeParam.STD_DEV_TYPE_INTRA);
-			
+			boolean hasIEStats = false;
+			StdDevTypeParam stdDevParam = null;
+			try
+			{
+				stdDevParam = (StdDevTypeParam)imr.getParameter(StdDevTypeParam.NAME);
+				
+				hasIEStats = stdDevParam.isAllowed(StdDevTypeParam.STD_DEV_TYPE_INTER) &&
+						stdDevParam.isAllowed(StdDevTypeParam.STD_DEV_TYPE_INTRA);
+			}
+			catch(ParameterException e)
+			{
+				hasIEStats = false;
+			}
 			double[] periods = imConfig.Periods();
 			
 			PGAResult pgaResult = null;
@@ -406,7 +458,8 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 				{
 					imtParam.getIndependentParameter(PeriodParam.NAME).setValue(periods[j]);
 					double mean = imr.getMean();
-					stdDevParam.setValue(StdDevTypeParam.STD_DEV_TYPE_TOTAL);
+					if(null != stdDevParam)
+						stdDevParam.setValue(StdDevTypeParam.STD_DEV_TYPE_TOTAL);
 					double stdDev = imr.getStdDev();
 					
 					if(hasIEStats)
@@ -429,7 +482,8 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 				imr.setIntensityMeasure("PGA");
 
 				double mean = imr.getMean();
-				stdDevParam.setValue(StdDevTypeParam.STD_DEV_TYPE_TOTAL);
+				if(null != stdDevParam)
+					stdDevParam.setValue(StdDevTypeParam.STD_DEV_TYPE_TOTAL);
 				double stdDev = imr.getStdDev();					
 				
 				if(hasIEStats)
@@ -667,15 +721,33 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		try 
 		{	
 			String imrClassName = imrMap.get(type);
-			Class listenerClass = ParameterChangeWarningListener.class;
-			Object[] paramObjects = new Object[] {this};
-			Class[] params = new Class[] {listenerClass};
+
 			Class imrClass = Class.forName(imrClassName);
-			Constructor ctor = imrClass.getConstructor(params);
-			AttenuationRelationship imr = (AttenuationRelationship) ctor.newInstance(paramObjects);
+			
+			Constructor ctor;
+			AttenuationRelationship imr;
+			
+			if(!type.startsWith("NSHMP"))
+			{
+				Class listenerClass = ParameterChangeWarningListener.class;
+				Object[] paramObjects = new Object[] {this};
+				Class[] params = new Class[] {listenerClass};
+				ctor = imrClass.getConstructor(params);
+				imr = (AttenuationRelationship) ctor.newInstance(paramObjects);
+			}
+			else
+			{
+				ctor = imrClass.getConstructor();
+				imr = (AttenuationRelationship) ctor.newInstance();
+			}
+			
 			
 			//setting the Attenuation with the default parameters
 			imr.setParamDefaults();
+			
+			if(type.endsWith("Intraslab"))
+				imr.getParameter(TectonicRegionTypeParam.NAME).setValue(TectonicRegionType.SUBDUCTION_SLAB.toString());
+
 			return imr;
 		}
 		catch (ClassCastException e) {

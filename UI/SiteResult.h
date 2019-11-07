@@ -23,7 +23,7 @@ public:
     Location& location();
     SAResult& saResult();
     PGAResult& pgaResult();
-    RecordSelection& recordSelection();
+    QVector<QSharedPointer<RecordSelection>>& recordSelection();
     QVector<double> periods();
     QVector<double> simulatedSpectrum();
     void addSiteData(QString name, QVariant value);
@@ -43,7 +43,7 @@ private:
     Location m_location;
     SAResult m_saResult;
     PGAResult m_pgaResult;
-    RecordSelection m_recordSelection;
+    QVector<QSharedPointer<RecordSelection>> m_recordSelection;
     QVector<double> m_periods;
     QVector<double> m_simulatedSpectrum;
     QHash<QString, QVariant> m_siteData;

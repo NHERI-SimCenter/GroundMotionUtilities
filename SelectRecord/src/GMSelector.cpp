@@ -10,6 +10,7 @@
 #include "rapidjson/istreamwrapper.h"
 #include "rapidjson/ostreamwrapper.h"
 #include "rapidjson/prettywriter.h"
+#include <unordered_map>
 
 using namespace rapidjson;
 
@@ -45,6 +46,41 @@ SelectionResult GMSelector::SelectSingleRecord(DiscretizedFunction& target, Sele
         }
     }
     return SelectionResult(this->m_Records[bestRecIndex], selectedScaleFactor);
+}
+
+std::vector<SelectionResult> GMSelector::SelectMultipleRecords(DiscretizedFunction& target, SelectionCriteria& criteria, int n)
+{
+	std::vector<SelectionResult> results;
+	std::list<std::pair<int, double>> errors;
+	std::map<int, double> scales;
+
+	
+	for (int i = 0; i < m_Records.size(); i++)
+	{
+		if (this->m_Records[i].CheckCriteria(criteria))
+		{
+			double scaleFactor = 0.0;
+			double cost = this->GetError(target, i, scaleFactor);
+            errors.push_back(std::make_pair(i, cost));
+            scales.insert(std::make_pair(i, scaleFactor));
+		}
+	}
+
+	errors.sort([](std::pair<int, double>& p1, std::pair<int, double>& p2) {
+		return p1.second <= p2.second;
+	});
+
+	auto resultIt = errors.begin();
+
+	while (results.size() < n && resultIt != errors.end())
+	{
+		auto factor = scales[resultIt->first];
+		auto result = SelectionResult(this->m_Records[resultIt->first], factor);
+		results.push_back(result);
+		resultIt++;
+	}
+
+	return results;
 }
 
 double GMSelector::GetError(DiscretizedFunction& target, int recordIndex, double& scaleFactor)
@@ -293,31 +329,52 @@ STATUS GMSelector::ReadRecordTimeSeries(const char* recordFileName, std::vector<
     return STATUS::SUCCESS;
 }
 
-STATUS GMSelector::WriteSelectionResults(const char* outputFile, std::vector<SelectionResult>& selectionResults, std::vector<Point>& locations)
+STATUS GMSelector::WriteSelectionResults(const char* outputFile, std::vector<std::vector<SelectionResult>>& selectionResults, std::vector<Point>& locations)
 {
     Document output;
     output.SetObject();
     Document::AllocatorType& allocator = output.GetAllocator();
     Value GroundMotions(kArrayType);
 
-    for (int i = 0; i < selectionResults.size(); i++)
-    {
-        Value result(kObjectType);
-        Value selectedRecord(kObjectType);
+    for (auto suite: selectionResults)
+    {			
+		Value resultsJson(kArrayType);
 
-        Value Id(selectionResults[i].Record().GetId());
-        selectedRecord.AddMember("Id", Id, allocator);
+		for (auto selectedRecord : suite)
+		{		
+			Value resultJson(kObjectType);
 
-        Value source;
-        std::string sourceName = selectionResults[i].Record().GetSource();
-        source.SetString(sourceName.c_str(), sourceName.length(), allocator);
-        selectedRecord.AddMember("Source", source, allocator);
+			Value selectedRecordJson(kObjectType);
 
-        result.AddMember("Record", selectedRecord, allocator);
-        
-        result.AddMember("ScaleFactor", selectionResults[i].ScaleFactor(), allocator);
-        
-        GroundMotions.PushBack(result, allocator);
+			Value Id(selectedRecord.Record().GetId());
+			selectedRecordJson.AddMember("Id", Id, allocator);
+
+			Value source;
+			std::string sourceName = selectedRecord.Record().GetSource();
+			source.SetString(sourceName.c_str(), sourceName.length(), allocator);
+			selectedRecordJson.AddMember("Source", source, allocator);
+
+			Value h1;
+			std::string h1Filename = selectedRecord.Record().GetHorizontalFile1();
+			h1.SetString(h1Filename.c_str(), h1Filename.length(), allocator);
+			selectedRecordJson.AddMember("Horizontal1File", h1, allocator);
+
+			Value h2;
+			std::string h2Filename = selectedRecord.Record().GetHorizontalFile2();
+			h2.SetString(h2Filename.c_str(), h2Filename.length(), allocator);
+			selectedRecordJson.AddMember("Horizontal2File", h2, allocator);
+
+			Value v;
+			std::string vFilename = selectedRecord.Record().GetVerticalFile();
+			v.SetString(vFilename.c_str(), vFilename.length(), allocator);
+			selectedRecordJson.AddMember("VerticalFile", v, allocator);
+
+			resultJson.AddMember("Record", selectedRecordJson, allocator);        
+			resultJson.AddMember("ScaleFactor", selectedRecord.ScaleFactor(), allocator);
+			resultsJson.PushBack(resultJson, allocator);
+		}
+
+		GroundMotions.PushBack(resultsJson, allocator);
     }
     output.AddMember("GroundMotions", GroundMotions, allocator);
     std::ofstream ofs(outputFile);
@@ -338,40 +395,40 @@ STATUS GMSelector::WriteSelectionResults(const char* outputFile, std::vector<Sel
     // recIds.erase(last, recIds.end());
     // this->WriteRecords(recIds);
 
-    //Creating GeoJsonOutput
-    Document geoJson;
-    geoJson.SetObject();
-    Document::AllocatorType& geoJsonAllocator = geoJson.GetAllocator();
-    geoJson.AddMember("Type", "FeatureCollection", geoJsonAllocator);
+    ////Creating GeoJsonOutput
+    //Document geoJson;
+    //geoJson.SetObject();
+    //Document::AllocatorType& geoJsonAllocator = geoJson.GetAllocator();
+    //geoJson.AddMember("Type", "FeatureCollection", geoJsonAllocator);
 
-    Value features(kArrayType);
-    for(int i = 0; i < locations.size(); i++)
-    {
-        Value feature(kObjectType);
-        feature.AddMember("Type", "Feature", geoJsonAllocator);
-        
-        Value geometry(kObjectType);
-        geometry.AddMember("Type", "Point", geoJsonAllocator);
+    //Value features(kArrayType);
+    //for(int i = 0; i < locations.size(); i++)
+    //{
+    //    Value feature(kObjectType);
+    //    feature.AddMember("Type", "Feature", geoJsonAllocator);
+    //    
+    //    Value geometry(kObjectType);
+    //    geometry.AddMember("Type", "Point", geoJsonAllocator);
 
-        //add the coordinates
-        Value coordinates(kArrayType);
-        coordinates.PushBack(locations[i].X(), geoJsonAllocator);
-        coordinates.PushBack(locations[i].Y(), geoJsonAllocator);
-        geometry.AddMember("Coordinates", coordinates, geoJsonAllocator);
-        feature.AddMember("Geometry", geometry, geoJsonAllocator);
+    //    //add the coordinates
+    //    Value coordinates(kArrayType);
+    //    coordinates.PushBack(locations[i].X(), geoJsonAllocator);
+    //    coordinates.PushBack(locations[i].Y(), geoJsonAllocator);
+    //    geometry.AddMember("Coordinates", coordinates, geoJsonAllocator);
+    //    feature.AddMember("Geometry", geometry, geoJsonAllocator);
 
-        //add properties
-        Value properties(kObjectType);
-        properties.AddMember("RecordId", selectionResults[i].Record().GetId(), geoJsonAllocator);
-        feature.AddMember("Properties", properties, geoJsonAllocator);
+    //    //add properties
+    //    Value properties(kObjectType);
+    //    properties.AddMember("RecordId", selectionResults[i].Record().GetId(), geoJsonAllocator);
+    //    feature.AddMember("Properties", properties, geoJsonAllocator);
 
-        features.PushBack(feature, geoJsonAllocator);
-    }
-    geoJson.AddMember("Features", features, allocator);
-    std::ofstream geoJsonOfs("SelectionOutput_Geo.json");
-    OStreamWrapper geoJsonOsw(geoJsonOfs);
-    PrettyWriter<OStreamWrapper> geoJsonWriter(geoJsonOsw);
-    geoJson.Accept(geoJsonWriter);
+    //    features.PushBack(feature, geoJsonAllocator);
+    //}
+    //geoJson.AddMember("Features", features, allocator);
+    //std::ofstream geoJsonOfs("SelectionOutput_Geo.json");
+    //OStreamWrapper geoJsonOsw(geoJsonOfs);
+    //PrettyWriter<OStreamWrapper> geoJsonWriter(geoJsonOsw);
+    //geoJson.Accept(geoJsonWriter);
 
 	return STATUS::SUCCESS;
 }
