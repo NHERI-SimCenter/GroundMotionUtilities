@@ -38,7 +38,7 @@ variables:
   CONAN_CHANNEL: "testing"
   CONAN_UPLOAD: "https://api.bintray.com/conan/nheri-simcenter/simcenter"
   CONAN_UPLOAD_ONLY_WHEN_STABLE: false
-  CONAN_STABLE_BRANCH_PATTERN: "release/*,stable/*"
+  CONAN_STABLE_BRANCH_PATTERN: "release/*"
 
 steps:
 # Maven
