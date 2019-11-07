@@ -9,7 +9,7 @@ class GMUConan(ConanFile):
     url = "https://github.com/NHERI-SimCenter/GroundMotionUtilities"
     homepage = "https://github.com/NHERI-SimCenter/GroundMotionUtilities/blob/master/Readme.md"
     license = "BSD"
-    version = "0.1.0"
+    version = "0.2.0"
 
     # Options may need to change depending on the packaged library
     settings = "os", "arch", "compiler", "build_type"
