@@ -50,3 +50,18 @@ bool GMRecord::CheckCriteria(SelectionCriteria& criteria)
 
     return true;
 }
+
+std::string GMRecord::GetHorizontalFile1()
+{
+	return this->m_HzFile1;
+}
+
+std::string GMRecord::GetHorizontalFile2()
+{
+	return this->m_HzFile2;
+}
+
+std::string GMRecord::GetVerticalFile()
+{
+	return this->m_VlFile;
+}

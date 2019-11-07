@@ -5,7 +5,6 @@ RecordSelectionWidget::RecordSelectionWidget(RecordSelectionConfig& selectionCon
     QGridLayout* layout = new QGridLayout();
     QGroupBox* selectionGroupBox = new QGroupBox(this);
     selectionGroupBox->setTitle("Record Selection");
-    selectionGroupBox->setStyleSheet("QGroupBox {font-weight: bold;font-size: 10pt; qproperty-flat: true;}");
 
     QFormLayout* formLayout = new QFormLayout();
     m_dbBox = new QComboBox(this);

@@ -25,6 +25,12 @@ double DiscretizedFunction::InterpolateY(double x)
 {
     for (int i = 0; i < m_Points.size()-1 ; i++)
     {
+		if (x <= m_Points[0].X())
+			return m_Points[0].Y();
+
+		if (x >= m_Points[m_Points.size() - 1].X())
+			return m_Points[m_Points.size() - 1].Y();
+
         if(m_Points[i].X() <= x && m_Points[i+1].X() >= x)
         {
             double d = m_Points[i+1].X() - m_Points[i].X();

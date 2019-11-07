@@ -13,13 +13,13 @@ int SiteResultsModel::rowCount(const QModelIndex &parent) const
 
 QVariant SiteResultsModel::data(const QModelIndex &index, int role) const
 {
-    return QVariant::fromValue<SiteResult*>(m_siteResults.at(index.row()));
+    return QVariant::fromValue<SiteResult*>(m_siteResults.at(index.row()).data());
 }
 
-SiteResult *SiteResultsModel::createNewResult()
+QSharedPointer<SiteResult> SiteResultsModel::createNewResult()
 {
     beginInsertRows(QModelIndex(), m_siteResults.size(), m_siteResults.size());
-    SiteResult* newResult = new SiteResult();
+    QSharedPointer<SiteResult> newResult(new SiteResult());
     m_siteResults.append(newResult);
     endInsertRows();
     return newResult;

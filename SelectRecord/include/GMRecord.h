@@ -11,8 +11,11 @@ class GMRecord
     public:
         std::string             GetSource();
         int                     GetId();
-        double                  GetMagnitude ();
+        double                  GetMagnitude();
         std::vector<double>     GetSpectrum();
+		std::string             GetHorizontalFile1();
+		std::string             GetHorizontalFile2();
+		std::string             GetVerticalFile();
 
         GMRecord(int id, double magnitude, double distance, double vs30, 
                 std::string hzFile1, std::string hzFile2, std::string vlFile, std::vector<double> spectrum);

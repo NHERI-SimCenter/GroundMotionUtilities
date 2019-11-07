@@ -6,7 +6,6 @@
 SiteConfigWidget::SiteConfigWidget(SiteConfig &siteconfig, QWidget *parent) : QWidget(parent), m_siteConfig(siteconfig)
 {
     QGroupBox* siteGroupBox = new QGroupBox(tr("Site"));
-    siteGroupBox->setStyleSheet("QGroupBox {font-weight: bold;font-size: 10pt; qproperty-flat: true;}");
 
     QVBoxLayout* groupLayout = new QVBoxLayout(siteGroupBox);
     //First we need to add type radio buttons

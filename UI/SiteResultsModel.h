@@ -2,6 +2,7 @@
 #define SITERESULTSMODEL_H
 #include <QAbstractListModel>
 #include <SiteResult.h>
+#include <QSharedPointer>
 
 class SiteResultsModel : public QAbstractListModel
 {
@@ -14,11 +15,11 @@ public:
 public:
     int rowCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;
-    SiteResult* createNewResult();
+    QSharedPointer<SiteResult> createNewResult();
     void clear();
 
 private:
-    QList<SiteResult*> m_siteResults;
+    QList<QSharedPointer<SiteResult>> m_siteResults;
 };
 
 #endif // SITERESULTSMODEL_H

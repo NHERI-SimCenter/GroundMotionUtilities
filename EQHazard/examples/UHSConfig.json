@@ -1,0 +1,21 @@
+{
+	"Site": {
+		"Type": "SingleLocation",
+		"Location": {
+			"Latitude": 37.8719,
+			"Longitude": -122.2585
+		}
+	},
+	"EqRupture": {
+		"Type": "ERF",
+		"RuptureForecast": "WGCEP (2007) UCERF2 - Single Branch"
+	},
+	"GMPE": {
+		"Type": "Campbell & Bozorgnia (2014)"
+	},
+	"IntensityMeasure": {
+		"Type": "UHS",
+		"ExceedenceProbability": 0.05,
+		"EnableJsonOutput": true
+	}
+}

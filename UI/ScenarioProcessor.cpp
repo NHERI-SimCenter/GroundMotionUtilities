@@ -231,18 +231,28 @@ void ScenarioProcessor::startProcessingOutputs()
     foreach (period,  hazardOutputDoc.object()["Periods"].toArray())
         periods.append(period.toDouble());
 
+    if(periods[0] < 0.01)
+        periods[0] = 0.01;
+
     //Clearing results before adding new ones
     m_resultsModel.clear();
     for(int i = 0; i < selectionResults.size(); i++)
     {
-        SiteResult* newResult = m_resultsModel.createNewResult();
+        QSharedPointer<SiteResult> newResult = m_resultsModel.createNewResult();
 
         QJsonObject location = hazardResults[i].toObject()["Location"].toObject();
         newResult->location().set(location["Latitude"].toDouble(), location["Longitude"].toDouble());
 
-        QJsonObject result = selectionResults[i].toObject();
-        newResult->recordSelection().setRecordId(result["Record"].toObject()["Id"].toInt());
-        newResult->recordSelection().setScaleFactor(result["ScaleFactor"].toDouble());
+        QJsonArray siteSelectionResults = selectionResults[i].toArray();
+        newResult->recordSelection().clear();
+
+        for (auto selectionResult: siteSelectionResults)
+        {
+            QSharedPointer<RecordSelection> selection(new RecordSelection());
+            selection->setRecordId(selectionResult.toObject()["Record"].toObject()["Id"].toInt());
+            selection->setScaleFactor(selectionResult.toObject()["ScaleFactor"].toDouble());
+            newResult->recordSelection().push_back(selection);
+        }
 
         //Reading PGA
         QJsonObject pgaResut = hazardResults[i].toObject()["PGA"].toObject();
@@ -302,8 +312,10 @@ void ScenarioProcessor::startProcessingOutputs()
 
     //TODO, single site result
     QJsonObject result = selectionResults[0].toObject();
-    m_siteResult.recordSelection().setRecordId(result["Record"].toObject()["Id"].toInt());
-    m_siteResult.recordSelection().setScaleFactor(result["ScaleFactor"].toDouble());
+    QSharedPointer<RecordSelection> selection(new RecordSelection());
+    selection->setRecordId(result["Record"].toObject()["Id"].toInt());
+    selection->setScaleFactor(result["ScaleFactor"].toDouble());
+    m_siteResult.recordSelection().push_back(selection);
 
     emit progressUpdated("Finished record selection and scaling");
     emit statusUpdated("Analysis completed successfully!");
@@ -393,5 +405,8 @@ void ScenarioProcessor::updatePeriods()
     {
         m_periods.append(period.toDouble());
     }
+    if(m_periods[0] < 0.001)
+        m_periods[0] = 0.001;
+
     hazardOutputFile.close();
 }

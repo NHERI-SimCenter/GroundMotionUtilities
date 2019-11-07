@@ -45,11 +45,11 @@ int main(int argc, const char **argv)
     begin_time = clock();
     SelectionTarget target(config);
     elapsedTime = float( clock () - begin_time ) /  CLOCKS_PER_SEC;
-    std::cout << "Spent "<< elapsedTime << " seconds to read target spectrums" << std::endl;
+    std::cout << "Spent "<< elapsedTime << " seconds to read target spectra" << std::endl;
 
     //Now, select records from the database
     begin_time = clock();
-    std::vector<SelectionResult> selectedRecords;
+    std::vector<std::vector<SelectionResult>> selectedRecords;
     selectedRecords.reserve(target.NumTargets());
 
     for(int i = 0 ; i < target.NumTargets(); i++)
@@ -57,7 +57,8 @@ int main(int argc, const char **argv)
         std::cout << "\rSelecting record for target "<< i+1;
         SelectionCriteria critera = config.Criteria();
         DiscretizedFunction targetSpectrum = target.GetSpectrum(i);
-        SelectionResult selectionResult = selector.SelectSingleRecord(targetSpectrum, critera);
+        auto selectionResult = selector.SelectMultipleRecords(targetSpectrum, critera, 10);
+
         selectedRecords.push_back(selectionResult);
     }
     std::cout << std::endl;

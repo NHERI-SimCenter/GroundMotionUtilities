@@ -15,6 +15,7 @@ class SiteResultsWidget : public QWidget
 public:
     explicit SiteResultsWidget(QWidget *parent = nullptr);
     void setRecordsDb(NGARecordsDb* db);
+    void setSelectionSuite();
 
 signals:
 
@@ -27,7 +28,7 @@ private:
     QLineSeries m_lowerSeries;
     QLineSeries m_upperSeries;
     QLineSeries m_simulationSeries;
-    QLineSeries m_selectionSeries;
+    QList<QSharedPointer<QLineSeries>> selectedSpectraSeries;
 
     QTreeWidget m_resultsTree;
 
@@ -41,8 +42,6 @@ private:
     QTreeWidgetItem m_longitudeItem;
 
     QTreeWidgetItem m_recordSelection;
-    QTreeWidgetItem m_selectedId;
-    QTreeWidgetItem m_scaleFactor;
 
     QTreeWidgetItem m_saItem;
     QTreeWidgetItem m_saMeansItem;
