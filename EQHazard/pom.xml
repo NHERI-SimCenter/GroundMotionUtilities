@@ -78,4 +78,11 @@
 
   </dependencies>
 
+<distributionManagement>
+    <repository>
+        <id>bintray-nheri-simcenter-SimCenter-Java</id>
+        <name>nheri-simcenter-SimCenter-Java</name>
+        <url>https://api.bintray.com/maven/nheri-simcenter/SimCenter-Java/EQHazard/;publish=1</url>
+    </repository>
+</distributionManagement>
 </project>

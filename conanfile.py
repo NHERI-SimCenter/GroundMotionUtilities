@@ -32,7 +32,6 @@ class GMUConan(ConanFile):
         self.run("mvn -f EQHazard/pom.xml package")
 
     def package(self):
-        self.copy(pattern="EQHazard/target/EQHazard.jar", dst="bin", keep_path=False)
         self.copy(pattern="build/bin/*", dst="bin", keep_path=False)
         self.copy(pattern="SelectRecord/examples/NGAWest2.csv", dst="data", keep_path=False)
 
