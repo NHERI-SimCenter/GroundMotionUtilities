@@ -31,5 +31,4 @@ class GMUConan(ConanFile):
         
     def package(self):
         self.copy(pattern="build/bin/*", dst="bin", keep_path=False)
-        self.copy(pattern="SelectRecord/examples/NGAWest2.csv", dst="data", keep_path=False)
 
