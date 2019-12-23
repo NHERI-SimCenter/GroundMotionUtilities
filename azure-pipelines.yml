@@ -32,13 +32,8 @@ strategy:
 pool:
   vmImage: $(imageName)
 
-variables:
-  CONAN_USERNAME: "simcenter"
-  CONAN_LOGIN_USERNAME: "elhaddad"
-  CONAN_CHANNEL: "testing"
-  CONAN_UPLOAD: "https://api.bintray.com/conan/nheri-simcenter/simcenter"
-  CONAN_UPLOAD_ONLY_WHEN_STABLE: false
-  CONAN_STABLE_BRANCH_PATTERN: "release/*"
+variables: 
+  - group: ConanVariables
 
 steps:
 # Maven
@@ -89,4 +84,5 @@ steps:
   displayName: Conan Packaging
   failOnStderr: false
   env:
-    CONAN_PASSWORD: $(ConanPassword)
+    CONAN_PASSWORD: $(BintrayAPIKey)
+    CONAN_LOGIN_USERNAME: $(BintrayUsername)
