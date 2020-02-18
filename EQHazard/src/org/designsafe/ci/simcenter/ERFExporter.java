@@ -187,6 +187,9 @@ public class ERFExporter {
 					rupturePropretiesJson.add("Source", new JsonPrimitive(i));
 					rupturePropretiesJson.add("Distance", new JsonPrimitive(distanceToRup));
 					rupturePropretiesJson.add("Magnitude", new JsonPrimitive(rupture.getMag()));
+					rupturePropretiesJson.add("Probability", new JsonPrimitive(rupture.getProbability()));
+
+					
 										
 					ruptureJson.add("type", new JsonPrimitive("Feature"));				
 					ruptureJson.add("geometry", ruptureGeometryJson);
