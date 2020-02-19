@@ -19,6 +19,12 @@ public class EqRuptureConfig
 	
 	@SerializedName("Magnitude")
 	private double	m_Magnitude;
+
+	@SerializedName("Probability")
+	private Double	m_Probability = null;
+	
+	@SerializedName("MeanAnnualRate")
+	private Double	m_MeanAnnualRate = null;
 	
 	@SerializedName("Location")
 	private RuptureLocation	m_Location;
@@ -123,11 +129,13 @@ public class EqRuptureConfig
 		return this.m_maxSources;
 	}
 	
-	public void SetRupture(double magnitude,  double averageDip, double averageRake,  ArrayList<RuptureLocation> surface)
+	public void SetRupture(double magnitude,  double averageDip, double averageRake, double probability, double meanAnnualRate,  ArrayList<RuptureLocation> surface)
 	{
 		this.m_Magnitude = magnitude;
 		this.m_AverageDip = averageDip;
 		this.m_AverageRake = averageRake;
 		this.m_Surface = surface;
+		this.m_Probability = probability;
+		this.m_MeanAnnualRate = meanAnnualRate;
 	}
 }

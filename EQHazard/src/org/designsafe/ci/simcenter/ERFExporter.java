@@ -188,8 +188,9 @@ public class ERFExporter {
 					rupturePropretiesJson.add("Distance", new JsonPrimitive(distanceToRup));
 					rupturePropretiesJson.add("Magnitude", new JsonPrimitive(rupture.getMag()));
 					rupturePropretiesJson.add("Probability", new JsonPrimitive(rupture.getProbability()));
+					double meanAnnualRate = rupture.getMeanAnnualRate(erf.getTimeSpan().getDuration());
+					rupturePropretiesJson.add("MeanAnnualRate", new JsonPrimitive(meanAnnualRate));
 
-					
 										
 					ruptureJson.add("type", new JsonPrimitive("Feature"));				
 					ruptureJson.add("geometry", ruptureGeometryJson);
