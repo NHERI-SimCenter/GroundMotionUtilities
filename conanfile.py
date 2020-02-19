@@ -9,7 +9,7 @@ class GMUConan(ConanFile):
     url = "https://github.com/NHERI-SimCenter/GroundMotionUtilities"
     homepage = "https://github.com/NHERI-SimCenter/GroundMotionUtilities/blob/master/Readme.md"
     license = "BSD"
-    version = "0.2.0"
+    version = "1.2.0"
 
     # Options may need to change depending on the packaged library
     settings = "os", "arch", "compiler", "build_type"
@@ -29,10 +29,6 @@ class GMUConan(ConanFile):
         cmake.build()
         cmake.install()
         
-        self.run("mvn -f EQHazard/pom.xml package")
-
     def package(self):
-        self.copy(pattern="EQHazard/target/EQHazard.jar", dst="bin", keep_path=False)
         self.copy(pattern="build/bin/*", dst="bin", keep_path=False)
-        self.copy(pattern="SelectRecord/examples/NGAWest2.csv", dst="data", keep_path=False)
 
