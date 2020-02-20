@@ -200,7 +200,8 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		{
 		    System.out.print("Creating ERF...");
 			long erfStartTime = System.currentTimeMillis();
-			eqRup = getEqRuptureFromERF(eqRupCfg);
+			TimeSpan timeSpan = new TimeSpan(TimeSpan.NONE, TimeSpan.YEARS);
+			eqRup = getEqRuptureFromERF(eqRupCfg, timeSpan);
 			long erfStopTime = System.currentTimeMillis();
 		    long erfElapsedTime = erfStopTime - erfStartTime;
 		    System.out.println("[Time Elapsed: " + erfElapsedTime/1000.0 + " Sec.]");
@@ -208,6 +209,11 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			double magnitude = eqRup.getMag();
 			double averageDip = eqRup.getRuptureSurface().getAveDip();
 			double averageRake = eqRup.getAveRake();
+			
+			ProbEqkRupture probEqRup = (ProbEqkRupture)eqRup;
+			double probability = probEqRup.getProbability();
+			
+			double meanAnnualRate = probEqRup.getMeanAnnualRate(timeSpan.getDuration());
 			
 			ArrayList<RuptureLocation> eqRupSurface = new ArrayList<RuptureLocation>();
 			RuptureSurface surface = eqRup.getRuptureSurface();
@@ -236,9 +242,9 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			}
 			
 			if(eqRupSurface.isEmpty())
-				eqRupCfg.SetRupture(magnitude, averageDip, averageRake, null);
+				eqRupCfg.SetRupture(magnitude, averageDip, averageRake, probability, meanAnnualRate, null);
 			else
-				eqRupCfg.SetRupture(magnitude, averageDip, averageRake, eqRupSurface);
+				eqRupCfg.SetRupture(magnitude, averageDip, averageRake, probability, meanAnnualRate, eqRupSurface);
 
 		}
 		
@@ -810,8 +816,6 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		switch (erfName) {
 		case "WGCEP (2007) UCERF2 - Single Branch":
 			erf = new MeanUCERF2();
-			erf.getAdjustableParameterList().getParameter(
-					UCERF2.PROB_MODEL_PARAM_NAME).setValue(UCERF2.PROB_MODEL_POISSON);
 			break;
 
 		case "USGS/CGS 2002 Adj. Cal. ERF":
@@ -820,8 +824,6 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			
 		case "WGCEP UCERF 1.0 (2005)":
 			erf = new WGCEP_UCERF1_EqkRupForecast();
-			erf.getAdjustableParameterList().getParameter(
-					WGCEP_UCERF1_EqkRupForecast.TIME_DEPENDENT_PARAM_NAME).setValue(new Boolean(false));
 			break;
 			
 		case "GEM1 CEUS ERF":
@@ -835,21 +837,18 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		case "Mean UCERF3":
 			MeanUCERF3 forecast = new MeanUCERF3();
 			forecast.setPreset(MeanUCERF3.Presets.BOTH_FM_BRANCH_AVG);
-			forecast.setParameter(ProbabilityModelParam.NAME, ProbabilityModelOptions.POISSON);
 			erf = forecast;
 			break;
 			
 		case "Mean UCERF3 FM3.1":
 			MeanUCERF3 forecast31 = new MeanUCERF3();
 			forecast31.setPreset(MeanUCERF3.Presets.FM3_1_BRANCH_AVG);
-			forecast31.setParameter(ProbabilityModelParam.NAME, ProbabilityModelOptions.POISSON);
 			erf = forecast31;
 			break;
 			
 		case "Mean UCERF3 FM3.2":
 			MeanUCERF3 forecast32 = new MeanUCERF3();
 			forecast32.setPreset(MeanUCERF3.Presets.FM3_2_BRANCH_AVG);
-			forecast32.setParameter(ProbabilityModelParam.NAME, ProbabilityModelOptions.POISSON);
 			erf = forecast32;
 			break;
 			
@@ -857,7 +856,6 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			break;
 		}
 		
-		erf.getTimeSpan().setDuration(1.0);
 		if(null != erf)
 		{
 			erf.updateForecast();
@@ -866,13 +864,20 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		
 		return erf;//We failed to find the earthquake rupture forecast
 	}
+	ProbEqkRupture getEqRuptureFromERF(EqRuptureConfig eqRupConfig)
+	{
+		return getEqRuptureFromERF(eqRupConfig, null);
+	}
 	
-	EqkRupture getEqRuptureFromERF(EqRuptureConfig eqRupConfig)
+	ProbEqkRupture getEqRuptureFromERF(EqRuptureConfig eqRupConfig, TimeSpan timeSpan)
 	{
 		ERF erf = getERF(eqRupConfig.RuptureForecast());		
 		
 		if(null != erf)
 		{
+			if(null != timeSpan)
+				timeSpan = erf.getTimeSpan();
+			
 			EqkSource eqSource = erf.getSource(eqRupConfig.SourceIndex());
 			eqSource.getName();
 			if(null != eqSource)
