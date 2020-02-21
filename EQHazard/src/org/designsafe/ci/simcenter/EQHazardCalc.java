@@ -293,11 +293,14 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		//First we need to find the type of IM
 		boolean isSANeeded = false;
 		boolean isPGANeeded = false;
+		boolean isPGVNeeded = false;
+
 
 		if(imConfig.Type().equalsIgnoreCase("SA"))
 		{
 			isSANeeded = true;
 			isPGANeeded = false;
+			isPGVNeeded = false;
 
 			output = new SHAOutput(siteSpecs.size(), imConfig.Periods(), scenarioConfig.GetRuptureConfig());
 		}
@@ -306,12 +309,21 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			output = new SHAOutput(siteSpecs.size(), null, scenarioConfig.GetRuptureConfig());
 			isSANeeded = false;
 			isPGANeeded = true;
+			isPGVNeeded = false;
+		}
+		else if(imConfig.Type().equalsIgnoreCase("PGV"))
+		{
+			output = new SHAOutput(siteSpecs.size(), null, scenarioConfig.GetRuptureConfig());
+			isSANeeded = false;
+			isPGANeeded = false;
+			isPGVNeeded = true;
 		}
 		else if(imConfig.Type().equalsIgnoreCase("All"))
 		{
 			output = new SHAOutput(siteSpecs.size(), imConfig.Periods(), scenarioConfig.GetRuptureConfig());
 			isSANeeded = true;
 			isPGANeeded = true;
+			isPGVNeeded = true;
 		}
 		else
 		{
@@ -453,6 +465,7 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			
 			PGAResult pgaResult = null;
 			SAResult saResult = null;
+			PGVResult pgvResult = null;
 			if(isSANeeded)
 			{	
 				imr.setIntensityMeasure("SA");
@@ -506,10 +519,33 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 				}
 			}
 			
+			if(isPGVNeeded)
+			{
+				imr.setIntensityMeasure("PGV");
+
+				double mean = imr.getMean();
+				if(null != stdDevParam)
+					stdDevParam.setValue(StdDevTypeParam.STD_DEV_TYPE_TOTAL);
+				double stdDev = imr.getStdDev();					
+				
+				if(hasIEStats)
+				{
+					stdDevParam.setValue(StdDevTypeParam.STD_DEV_TYPE_INTER);
+					double interEvStdDev = imr.getStdDev();
+					stdDevParam.setValue(StdDevTypeParam.STD_DEV_TYPE_INTRA);
+					double intraEvStdDev = imr.getStdDev();
+					pgvResult = new PGVResult(mean, stdDev, interEvStdDev, intraEvStdDev);
+				}
+				else
+				{
+					pgvResult = new PGVResult(mean, stdDev);
+				}
+			}
+			
 			if(siteDataValues.isEmpty())
-				result = new SiteResult(siteLocation, null, pgaResult, saResult);
+				result = new SiteResult(siteLocation, null, pgaResult, saResult, pgvResult);
 			else
-				result = new SiteResult(siteLocation, siteDataResults, pgaResult, saResult);
+				result = new SiteResult(siteLocation, siteDataResults, pgaResult, saResult, pgvResult);
 			
 			output.SetResult(i, result);
 		}
@@ -632,7 +668,7 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 					for (int i = 0; i < spectrum.size(); i++)
 						UHS[i] = Math.log(spectrum.getY(i));
 					saResult.SetUHS(UHS);
-					SiteResult siteResult = new SiteResult(siteLocation, null, null, saResult);
+					SiteResult siteResult = new SiteResult(siteLocation, null, null, saResult, null);
 					output.SetResult(0, siteResult);
 				}
 			}});
@@ -700,6 +736,9 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 						feature.AddProperty(propName, result.SA().Mean(i));
 					}
 				}
+				
+				if(null != result.PGV())
+					feature.AddProperty("MeanPGV", result.PGV().Mean());
 				
 				if(null != result.SiteData())
 				{
