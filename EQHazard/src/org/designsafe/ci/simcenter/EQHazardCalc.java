@@ -1,5 +1,6 @@
 package org.designsafe.ci.simcenter;
 
+import java.awt.geom.Point2D;
 import java.io.*;
 import java.lang.reflect.*;
 import java.nio.file.Paths;
@@ -151,7 +152,11 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			}
 		}
 		catch (Exception e) {
-			System.err.print(e.getMessage());
+			e.printStackTrace();
+			String message = e.getMessage();
+			if(message != null && !message.isEmpty())				
+				System.err.println(message);
+
 			System.exit(-2);
 		}
 		
@@ -651,7 +656,7 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 
 				try
 				{
-					spectrum = spectrumCalc.getIML_SpectrumCurve(hazFunction, site, imr, erf, 0.05, supportedPeriods);
+					spectrum = spectrumCalc.getIML_SpectrumCurve(hazFunction, site, imr, erf, config.GetIMConfig().getExceedanceProb(), supportedPeriods);
 				}
 				catch (RuntimeException e) {
 					e.printStackTrace();
@@ -693,7 +698,30 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		}
 		long shaStopTime = System.currentTimeMillis();
 	    long shaElapsedTime = shaStopTime - shaStartTime;
-		System.out.println("...[Time Elapsed: " + shaElapsedTime/1000.0 + " Sec.]");		
+		System.out.println("...[Time Elapsed: " + shaElapsedTime/1000.0 + " Sec.]");
+		
+		HazardCurveCalculatorAPI hazCurveCalc = new HazardCurveCalculator();
+		ArrayList<HazardCurvesResult> hcResults = new ArrayList<HazardCurvesResult>();		
+
+		for (int i = 0; i < supportedPeriods.size(); i++)
+		{
+			DiscretizedFunc hazardCurve = new ArbitrarilyDiscretizedFunc();
+			for (Point2D pt : hazFunction)
+				hazardCurve.set(Math.log(pt.getX()), 0d); // y-value doesn't matter here yet
+			
+			SA_Param.setPeriodInSA_Param(imr.getIntensityMeasure(), supportedPeriods.get(i));
+			hazCurveCalc.getHazardCurve(hazardCurve, site, imr, erf);
+			
+	
+			HazardCurvesResult hcResult = new HazardCurvesResult();
+			hcResult.setCurve(hazardCurve.xValues().toArray(Double[]::new), hazardCurve.yValues().toArray(Double[]::new));
+			hcResults.add(hcResult);
+			hcResult.setIM(imr.getIntensityMeasure().getName());
+			hcResult.setPeriod(supportedPeriods.get(i));
+			System.out.println("Processing Hazard Curve for SA at period " + supportedPeriods.get(i));
+		}
+		output.GetResult(0).setHazardCurves(hcResults);
+		
 	}
 	
 	private void WriteOutputs(EQHazardConfig scenarioConfig, String directory, String file)
@@ -851,6 +879,11 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 	
 	ERF getERF(String erfName)
 	{
+		return getERF(erfName, true);
+	}
+	
+	ERF getERF(String erfName, boolean withUpdate)
+	{
 		ERF erf = null;
 		switch (erfName) {
 		case "WGCEP (2007) UCERF2 - Single Branch":
@@ -895,7 +928,7 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			break;
 		}
 		
-		if(null != erf)
+		if(null != erf && withUpdate)
 		{
 			erf.updateForecast();
 			return erf;

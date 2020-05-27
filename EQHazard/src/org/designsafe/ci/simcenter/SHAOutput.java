@@ -46,4 +46,9 @@ public class SHAOutput
 	{
 		this.m_Results[index] = result;
 	}
+	
+	public SiteResult GetResult(int index)
+	{
+		return this.m_Results[index];
+	}
 }
