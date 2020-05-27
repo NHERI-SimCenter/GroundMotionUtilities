@@ -126,6 +126,7 @@ public class ERFExporter {
 			
 			RuptureSurface sourceSurface = rupSource.getSourceSurface();
 			double distanceToRup = sourceSurface.getDistanceRup(siteLocation);
+			
 
 			System.out.print("\rProcessing Source " + i + " of "+ nSources + " [Found "+ count +" Sources]");
 
@@ -133,6 +134,7 @@ public class ERFExporter {
 			{				
 				count = count + 1;
 				List<ProbEqkRupture> rupList = rupSource.getRuptureList();
+				
 				for(int j = 0; j <  rupList.size(); j ++)
 				{
 					
@@ -186,11 +188,24 @@ public class ERFExporter {
 					rupturePropretiesJson.add("Rupture", new JsonPrimitive(j));
 					rupturePropretiesJson.add("Source", new JsonPrimitive(i));
 					rupturePropretiesJson.add("Distance", new JsonPrimitive(distanceToRup));
+
+					double distanceRup = rupture.getRuptureSurface().getDistanceRup(siteLocation);
+					rupturePropretiesJson.add("DistanceRup", new JsonPrimitive(distanceRup));
+
+					double distanceSeis = rupture.getRuptureSurface().getDistanceSeis(siteLocation);
+					rupturePropretiesJson.add("DistanceSeis", new JsonPrimitive(distanceSeis));
+					
+					double distanceJB = rupture.getRuptureSurface().getDistanceJB(siteLocation);
+					rupturePropretiesJson.add("DistanceJB", new JsonPrimitive(distanceJB));
+					
+					double distanceX = rupture.getRuptureSurface().getDistanceX(siteLocation);
+					rupturePropretiesJson.add("DistanceX", new JsonPrimitive(distanceX));
+
 					rupturePropretiesJson.add("Magnitude", new JsonPrimitive(rupture.getMag()));
 					rupturePropretiesJson.add("Probability", new JsonPrimitive(rupture.getProbability()));
 					double meanAnnualRate = rupture.getMeanAnnualRate(erf.getTimeSpan().getDuration());
 					rupturePropretiesJson.add("MeanAnnualRate", new JsonPrimitive(meanAnnualRate));
-
+			
 										
 					ruptureJson.add("type", new JsonPrimitive("Feature"));				
 					ruptureJson.add("geometry", ruptureGeometryJson);

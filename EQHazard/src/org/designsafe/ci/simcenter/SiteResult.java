@@ -21,6 +21,9 @@ public class SiteResult
 	@SerializedName("PGV")
 	PGVResult	m_PGV = null;
 	
+	@SerializedName("HazardCurves")
+	ArrayList<HazardCurvesResult>	m_HazardCurves = null;
+	
 	public SiteResult(SiteLocation location, ArrayList<SiteDataResult> siteData, SAResult result)
 	{
 		this.m_Location = location;
@@ -74,5 +77,10 @@ public class SiteResult
 	public ArrayList<SiteDataResult> SiteData()
 	{
 		return this.m_SiteData;
+	}
+	
+	public void setHazardCurves(ArrayList<HazardCurvesResult> hazardCurves)
+	{
+		m_HazardCurves = hazardCurves;
 	}
 }

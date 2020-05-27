@@ -26,6 +26,9 @@ public class IMConfig
 	@SerializedName("EnableGeoJsonOutput")
 	private boolean m_hasGeoJsonOutput = true;
 	
+	@SerializedName("ExceedenceProbability")
+	private Double m_exceedanceProb = null;
+	
 	public IMConfig(String type, double[] periods)
 	{
 		this.m_Periods = periods;
@@ -64,5 +67,10 @@ public class IMConfig
 	public void setPeriods(double[] periods)
 	{
 		m_Periods = periods;
+	}
+	
+	public Double getExceedanceProb()
+	{
+		return m_exceedanceProb;
 	}
 }
