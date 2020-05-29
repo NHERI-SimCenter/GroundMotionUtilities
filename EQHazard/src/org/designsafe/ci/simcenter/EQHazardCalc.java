@@ -59,7 +59,6 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		InitSiteDataProviders();
 	}
 	
-	@SuppressWarnings("deprecation")
 	private void MapIMRs()
 	{
 		imrMap = new HashMap<String, String>();
@@ -77,9 +76,6 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		imrMap.put(AS_2008_AttenRel.NAME, AS_2008_AttenRel.class.getName());
 		imrMap.put(CY_2008_AttenRel.NAME, CY_2008_AttenRel.class.getName());
 		
-		imrMap.put(BA_2006_AttenRel.NAME, BA_2006_AttenRel.class.getName());
-		imrMap.put(CY_2006_AttenRel.NAME, CY_2006_AttenRel.class.getName());
-		imrMap.put(CB_2006_AttenRel.NAME, CB_2006_AttenRel.class.getName());
 		
 		imrMap.put(AS_1997_AttenRel.NAME, AS_1997_AttenRel.class.getName());
 		imrMap.put(BJF_1997_AttenRel.NAME, BJF_1997_AttenRel.class.getName());
@@ -115,6 +111,7 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 	
 
 		EQHazardCalc calc = new EQHazardCalc();
+		
 		String jsonCfgPath = args[0];
 		File cfgFile = new File(jsonCfgPath);
 		
@@ -142,11 +139,23 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 					System.err.print("Only single location sites are supported for ERF export!");
 					System.exit(-10);
 				}
-				EqRuptureConfig rupconfig = config.GetRuptureConfig();
-				ERF erf = calc.getERF(rupconfig.RuptureForecast());
+				EqRuptureConfig rupConfig = config.GetRuptureConfig();
+				ERF erf = calc.getERF(rupConfig.RuptureForecast(), false);
+				if(erf == null)
+					System.exit(-200);
+				
+				Map<String, String> erfParams = rupConfig.Parameters();
+				if(erfParams != null)
+					for (Map.Entry<String,String> param : erfParams.entrySet())
+						erf.setParameter(param.getKey(), param.getValue());
+
+				erf.updateForecast();
+
+					
+					
 				SiteLocation siteLocation = siteConfig.Location();
 				Location location = new Location(siteLocation.Latitude(), siteLocation.Longitude());
-				ERFExporter.ExportToGeoJson(erf, args[1], rupconfig.MaxDistance(), location, rupconfig.MaxSources());
+				ERFExporter.ExportToGeoJson(erf, args[1], rupConfig.MaxDistance(), location, rupConfig.MaxSources());
 				
 				System.exit(0);
 			}
@@ -166,6 +175,8 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		String file = outFile.getName();
 
 		calc.WriteOutputs(config, directory, file);
+		
+		System.exit(0);
 	}
 
 	@Override
@@ -923,6 +934,9 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			forecast32.setPreset(MeanUCERF3.Presets.FM3_2_BRANCH_AVG);
 			erf = forecast32;
 			break;
+			
+		case "WGCEP Eqk Rate Model 2 ERF":
+			erf = new UCERF2();
 			
 		default:
 			break;
