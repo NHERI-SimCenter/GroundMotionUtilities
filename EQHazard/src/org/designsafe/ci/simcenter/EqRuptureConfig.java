@@ -58,7 +58,7 @@ public class EqRuptureConfig
 	private Integer m_maxSources = null;
 	
 	@SerializedName("Parameters")
-	private Map<String, String> m_parameters = null;
+	private Map<String, Object> m_parameters = null;
 	
 	
 	public EqRuptureConfig(RuptureLocation location, double magnitude, double averageDip, double averageRake)
@@ -134,7 +134,7 @@ public class EqRuptureConfig
 		return this.m_maxSources;
 	}
 	
-	public Map<String, String> Parameters()
+	public Map<String, Object> Parameters()
 	{
 		return this.m_parameters;
 	}

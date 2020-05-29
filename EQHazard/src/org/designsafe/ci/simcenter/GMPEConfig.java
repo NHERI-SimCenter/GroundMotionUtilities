@@ -4,6 +4,7 @@
 package org.designsafe.ci.simcenter;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -17,7 +18,7 @@ public class GMPEConfig
 	private String 	m_Type;
 	
 	@SerializedName("Parameters")
-	private HashMap<String, String>	m_Parameters = null;
+	private Map<String, Object>	m_Parameters = null;
 	
 	public GMPEConfig(String type)
 	{
@@ -27,5 +28,10 @@ public class GMPEConfig
 	public String Type()
 	{
 		return m_Type;
+	}
+	
+	public Map<String, Object> Parameters()
+	{
+		return m_Parameters;
 	}
 }
