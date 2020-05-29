@@ -116,11 +116,15 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		File cfgFile = new File(jsonCfgPath);
 		
 		String cfg = "";
-		try {
+		try 
+		{
 			cfg = Files.toString(cfgFile, Charsets.UTF_8);
-		} catch (IOException e) {
-			System.out.print(e.getMessage());
-			System.exit(-1);
+		}
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+			System.err.println(ErrorCode.INPUT_FILE_MISSING);
+			System.exit(ErrorCode.INPUT_FILE_MISSING.getCode());
 		}
 		
 		Gson gson = new GsonBuilder().create();
@@ -136,22 +140,23 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 				SiteConfig siteConfig = config.GetSiteConfig();
 				if (!siteConfig.Type().equalsIgnoreCase("SingleLocation"))
 				{
-					System.err.print("Only single location sites are supported for ERF export!");
-					System.exit(-10);
+					System.err.println("Only single location sites are supported for ERF export!");
+					System.exit(ErrorCode.INVALID_INPUT.getCode());
 				}
 				EqRuptureConfig rupConfig = config.GetRuptureConfig();
 				ERF erf = calc.getERF(rupConfig.RuptureForecast(), false);
 				if(erf == null)
-					System.exit(-200);
+				{
+					System.err.println(ErrorCode.INVALID_ERF);
+					System.exit(ErrorCode.INVALID_ERF.getCode());
+				}
 				
-				Map<String, String> erfParams = rupConfig.Parameters();
+				Map<String, Object> erfParams = rupConfig.Parameters();
 				if(erfParams != null)
-					for (Map.Entry<String,String> param : erfParams.entrySet())
+					for (Map.Entry<String,Object> param : erfParams.entrySet())
 						erf.setParameter(param.getKey(), param.getValue());
 
-				erf.updateForecast();
-
-					
+				erf.updateForecast();					
 					
 				SiteLocation siteLocation = siteConfig.Location();
 				Location location = new Location(siteLocation.Latitude(), siteLocation.Longitude());
@@ -165,8 +170,9 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			String message = e.getMessage();
 			if(message != null && !message.isEmpty())				
 				System.err.println(message);
-
-			System.exit(-2);
+			
+			System.err.println(ErrorCode.UNKNOWN_ERROR);
+			System.exit(ErrorCode.UNKNOWN_ERROR.getCode());
 		}
 		
 		String outFilePath = args[1];
@@ -194,7 +200,14 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 	{
 		GMPEConfig GMPECfg = scenarioConfig.GetGMPEConfig();
 		ScalarIMR imr = CreateIMRInstance(GMPECfg.Type());
-		ParameterList ims =imr.getSupportedIntensityMeasures();
+		
+		if (imr == null) 
+		{
+			System.err.println(ErrorCode.INVALID_IMR);
+			System.exit(ErrorCode.INVALID_IMR.getCode());
+		}
+		
+		ParameterList ims = imr.getSupportedIntensityMeasures();
 		SA_Param saParam = (SA_Param)ims.getParameter(SA_Param.NAME);
 		double[] supportedPeriods = saParam.getPeriodParam().getPeriods();
 		Arrays.sort(supportedPeriods);
@@ -222,6 +235,12 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		    long erfElapsedTime = erfStopTime - erfStartTime;
 		    System.out.println("[Time Elapsed: " + erfElapsedTime/1000.0 + " Sec.]");
 
+		    if(eqRup == null)
+		    {
+		    	System.err.println(ErrorCode.INVALID_ERF);
+		    	System.exit(ErrorCode.INVALID_ERF.getCode());
+		    }
+		    
 			double magnitude = eqRup.getMag();
 			double averageDip = eqRup.getRuptureSurface().getAveDip();
 			double averageRake = eqRup.getAveRake();
@@ -265,6 +284,10 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		}
 		
 		imr.setEqkRupture(eqRup);
+		Map<String, Object> imrParams = GMPECfg.Parameters();
+		if(imrParams != null)
+			for (Map.Entry<String,Object> param : imrParams.entrySet())
+				imr.getParameter(param.getKey()).setValue(param.getValue());
 		
 		//Get a list of sites locations ready
 		SiteConfig siteCfg = scenarioConfig.GetSiteConfig();
@@ -803,13 +826,20 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 	{
 		//These classes will be instantiated using reflection
 		try 
-		{	
+		{				
+			AttenuationRelationship imr = null;
+
+			if (!imrMap.containsKey(type))
+			{
+				System.err.println("Failed to find IMR with the name " + type + "!");
+				return imr;
+			}
+				
 			String imrClassName = imrMap.get(type);
 
 			Class imrClass = Class.forName(imrClassName);
 			
 			Constructor ctor;
-			AttenuationRelationship imr;
 			
 			if(!type.startsWith("NSHMP"))
 			{
@@ -961,6 +991,11 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 		
 		if(null != erf)
 		{
+			Map<String, Object> erfParams = eqRupConfig.Parameters();
+			if(erfParams != null)
+				for (Map.Entry<String,Object> param : erfParams.entrySet())
+					erf.setParameter(param.getKey(), param.getValue());
+			
 			if(null != timeSpan)
 				timeSpan = erf.getTimeSpan();
 			
@@ -969,6 +1004,8 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			if(null != eqSource)
 				return eqSource.getRupture(eqRupConfig.RuptureIndex());
 		}
+		
+		System.err.println("Failed to process Earthquake Rupture Forecast!");
 		return null;//We failed to find the earthquake rupture
 	}	
 }
