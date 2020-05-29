@@ -4,6 +4,7 @@
 package org.designsafe.ci.simcenter;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -55,6 +56,10 @@ public class EqRuptureConfig
 	
 	@SerializedName("MaxSources")
 	private Integer m_maxSources = null;
+	
+	@SerializedName("Parameters")
+	private Map<String, String> m_parameters = null;
+	
 	
 	public EqRuptureConfig(RuptureLocation location, double magnitude, double averageDip, double averageRake)
 	{
@@ -127,6 +132,11 @@ public class EqRuptureConfig
 	public int MaxSources()
 	{
 		return this.m_maxSources;
+	}
+	
+	public Map<String, String> Parameters()
+	{
+		return this.m_parameters;
 	}
 	
 	public void SetRupture(double magnitude,  double averageDip, double averageRake, double probability, double meanAnnualRate,  ArrayList<RuptureLocation> surface)
