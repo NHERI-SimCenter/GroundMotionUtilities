@@ -8,11 +8,12 @@ import org.opensha.commons.param.event.ParameterChangeWarningListener;
 import org.opensha.sha.imr.ScalarIMR;
 import org.opensha.sha.imr.attenRelImpl.MultiIMR_Averaged_AttenRel;
 import org.opensha.sha.imr.attenRelImpl.NGAWest_2014_Averaged_AttenRel;
+import org.opensha.sha.imr.attenRelImpl.NGAWest_2014_Averaged_AttenRel.NGAWest_2014_Averaged_AttenRel_NoIdriss;
 
-public class NGAWestAverage extends NGAWest_2014_Averaged_AttenRel {
+public class NGAWestAverage extends NGAWest_2014_Averaged_AttenRel_NoIdriss {
 	List<? extends ScalarIMR> imrs;
 	public NGAWestAverage(ParameterChangeWarningListener listener) {
-		super(listener, true);
+		super(listener);
 		Field imrField;
 		try {
 			imrField = MultiIMR_Averaged_AttenRel.class.getDeclaredField("imrs");
