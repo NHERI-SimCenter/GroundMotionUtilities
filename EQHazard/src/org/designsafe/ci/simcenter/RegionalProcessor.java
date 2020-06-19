@@ -375,12 +375,10 @@ public class RegionalProcessor implements ParameterChangeWarningListener
 
     				means[i] = attenRels[currentThread].getMean();
     				
-    				Parameter stdDevParam = attenRels[currentThread].getParameter(StdDevTypeParam.NAME);
-    				
-    				stdDevParam.setValue(StdDevTypeParam.STD_DEV_TYPE_INTRA);
+    				attenRels[currentThread].setParameter(StdDevTypeParam.NAME, StdDevTypeParam.STD_DEV_TYPE_INTRA);    				
     				intraEventStdDevs[i] = attenRels[currentThread].getStdDev();
     				
-    				stdDevParam.setValue(StdDevTypeParam.STD_DEV_TYPE_INTER);
+    				attenRels[currentThread].setParameter(StdDevTypeParam.NAME, StdDevTypeParam.STD_DEV_TYPE_INTER);    				
     				interEventStdDevs[i] = attenRels[currentThread].getStdDev();
     			}
 			};
