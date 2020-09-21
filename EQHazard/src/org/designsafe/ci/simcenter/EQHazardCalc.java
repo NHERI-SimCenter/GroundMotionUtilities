@@ -25,7 +25,7 @@ import org.opensha.nshmp2.imr.impl.YoungsEtAl_1997_AttenRel;
 import org.opensha.sha.earthquake.*;
 import org.opensha.sha.earthquake.param.*;
 import org.opensha.sha.earthquake.rupForecastImpl.Frankel02.*;
-import org.opensha.sha.earthquake.rupForecastImpl.GEM1.*;
+//import org.opensha.sha.earthquake.rupForecastImpl.GEM1.*; // removed in OpenSHA-1.5.2
 import org.opensha.sha.earthquake.rupForecastImpl.WGCEP_UCERF1.*;
 import org.opensha.sha.earthquake.rupForecastImpl.WGCEP_UCERF_2_Final.*;
 import org.opensha.sha.earthquake.rupForecastImpl.WGCEP_UCERF_2_Final.MeanUCERF2.*;
@@ -939,13 +939,13 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			erf = new WGCEP_UCERF1_EqkRupForecast();
 			break;
 			
-		case "GEM1 CEUS ERF":
-			erf = new GEM1_CEUS_ERF();
-			break;
+		//case "GEM1 CEUS ERF":
+		//	erf = new GEM1_CEUS_ERF();
+		//	break;
 			
-		case "GEM1 WEUS ERF":
-			erf = new GEM1_WEUS_ERF();
-			break;
+		//case "GEM1 WEUS ERF":
+		//	erf = new GEM1_WEUS_ERF();
+		//	break;
 			
 		case "Mean UCERF3":
 			MeanUCERF3 forecast = new MeanUCERF3();
