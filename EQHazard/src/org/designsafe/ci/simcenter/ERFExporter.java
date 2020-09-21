@@ -11,7 +11,7 @@ import org.opensha.commons.geo.LocationList;
 import org.apache.commons.math3.util.Pair;
 import org.opensha.commons.geo.Location;
 import org.opensha.commons.util.FileUtils;
-//import org.opensha.sha.cybershake.calc.RuptureProbabilityModifier;
+import org.opensha.sha.cybershake.calc.RuptureProbabilityModifier;
 import org.opensha.sha.earthquake.ERF;
 import org.opensha.sha.earthquake.EqkRupture;
 import org.opensha.sha.earthquake.ProbEqkRupture;
