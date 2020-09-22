@@ -18,7 +18,7 @@
     <javac srcdir="${dir.workspace}/EQHazard/src" destdir="${dir.workspace}/EQHazard/bin">
    <classpath>
         <pathelement path="${dir.workspace}/EQHazard/lib/gson-2.6.2.jar"/>
-        <pathelement path="${dir.workspace}/EQHazard/lib/OpenSHA-1.4.0.jar"/>
+        <pathelement path="${dir.workspace}/EQHazard/lib/OpenSHA-1.5.2.jar"/>
     </classpath>
 </javac>
 </target>
@@ -30,7 +30,7 @@
             </manifest>
             <fileset dir="${dir.workspace}/EQHazard/bin"/>
             <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/EQHazard/lib/gson-2.6.2.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/EQHazard/lib/OpenSHA-1.4.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/EQHazard/lib/OpenSHA-1.5.2.jar"/>
         </jar>
     </target>
 </project>

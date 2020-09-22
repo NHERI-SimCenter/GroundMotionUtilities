@@ -12,13 +12,13 @@ public class SiteResult
 	@SerializedName("SiteData")
 	ArrayList<SiteDataResult> m_SiteData;
 	
-	@SerializedName("SA")
+	@SerializedName("lnSA")
 	SAResult	m_SA = null;
 	
-	@SerializedName("PGA")
+	@SerializedName("lnPGA")
 	PGAResult	m_PGA = null;
 	
-	@SerializedName("PGV")
+	@SerializedName("lnPGV")
 	PGVResult	m_PGV = null;
 	
 	@SerializedName("HazardCurves")

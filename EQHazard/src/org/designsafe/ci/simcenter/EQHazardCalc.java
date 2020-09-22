@@ -25,7 +25,7 @@ import org.opensha.nshmp2.imr.impl.YoungsEtAl_1997_AttenRel;
 import org.opensha.sha.earthquake.*;
 import org.opensha.sha.earthquake.param.*;
 import org.opensha.sha.earthquake.rupForecastImpl.Frankel02.*;
-import org.opensha.sha.earthquake.rupForecastImpl.GEM1.*;
+//import org.opensha.sha.earthquake.rupForecastImpl.GEM1.*;
 import org.opensha.sha.earthquake.rupForecastImpl.WGCEP_UCERF1.*;
 import org.opensha.sha.earthquake.rupForecastImpl.WGCEP_UCERF_2_Final.*;
 import org.opensha.sha.earthquake.rupForecastImpl.WGCEP_UCERF_2_Final.MeanUCERF2.*;
@@ -560,24 +560,29 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			
 			if(isPGVNeeded)
 			{
-				imr.setIntensityMeasure("PGV");
-
-				double mean = imr.getMean();
-				if(null != stdDevParam)
-					stdDevParam.setValue(StdDevTypeParam.STD_DEV_TYPE_TOTAL);
-				double stdDev = imr.getStdDev();					
-				
-				if(hasIEStats)
-				{
-					stdDevParam.setValue(StdDevTypeParam.STD_DEV_TYPE_INTER);
-					double interEvStdDev = imr.getStdDev();
-					stdDevParam.setValue(StdDevTypeParam.STD_DEV_TYPE_INTRA);
-					double intraEvStdDev = imr.getStdDev();
-					pgvResult = new PGVResult(mean, stdDev, interEvStdDev, intraEvStdDev);
-				}
-				else
-				{
-					pgvResult = new PGVResult(mean, stdDev);
+				// additonal check if PGV is supported by the imr (kuanshi, 09/2020)
+				// e.g., Zhao et al. (2006) does not have PGV predictions
+				try {
+					imr.setIntensityMeasure("PGV");
+					double mean = imr.getMean();
+					if(null != stdDevParam)
+						stdDevParam.setValue(StdDevTypeParam.STD_DEV_TYPE_TOTAL);
+					double stdDev = imr.getStdDev();					
+					
+					if(hasIEStats)
+					{
+						stdDevParam.setValue(StdDevTypeParam.STD_DEV_TYPE_INTER);
+						double interEvStdDev = imr.getStdDev();
+						stdDevParam.setValue(StdDevTypeParam.STD_DEV_TYPE_INTRA);
+						double intraEvStdDev = imr.getStdDev();
+						pgvResult = new PGVResult(mean, stdDev, interEvStdDev, intraEvStdDev);
+					}
+					else
+					{
+						pgvResult = new PGVResult(mean, stdDev);
+					}
+				} catch (Exception e) {
+					isPGVNeeded = false;
 				}
 			}
 			
@@ -748,7 +753,12 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			
 	
 			HazardCurvesResult hcResult = new HazardCurvesResult();
-			hcResult.setCurve(hazardCurve.xValues().toArray(Double[]::new), hazardCurve.yValues().toArray(Double[]::new));
+			// fixing the toArray() warning, kuanshi (09/2020)
+			Double xValues[] = new Double[hazardCurve.xValues().size()];
+			xValues = hazardCurve.xValues().toArray(xValues);
+			Double yValues[] = new Double[hazardCurve.yValues().size()];
+			yValues = hazardCurve.yValues().toArray(yValues);
+			hcResult.setCurve(xValues, yValues);
 			hcResults.add(hcResult);
 			hcResult.setIM(imr.getIntensityMeasure().getName());
 			hcResult.setPeriod(supportedPeriods.get(i));
@@ -939,13 +949,13 @@ public class EQHazardCalc implements ParameterChangeWarningListener {
 			erf = new WGCEP_UCERF1_EqkRupForecast();
 			break;
 			
-		case "GEM1 CEUS ERF":
-			erf = new GEM1_CEUS_ERF();
-			break;
+		//case "GEM1 CEUS ERF":
+		//	erf = new GEM1_CEUS_ERF();
+		//	break;
 			
-		case "GEM1 WEUS ERF":
-			erf = new GEM1_WEUS_ERF();
-			break;
+		//case "GEM1 WEUS ERF":
+		//	erf = new GEM1_WEUS_ERF();
+		//	break;
 			
 		case "Mean UCERF3":
 			MeanUCERF3 forecast = new MeanUCERF3();
